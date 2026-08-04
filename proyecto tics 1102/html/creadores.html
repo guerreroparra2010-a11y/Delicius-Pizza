@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Creadores | La Mejor Pizza en Tocaima</title>
+    <meta name="description" content="Disfruta de la mejor pizza en Tocaima, Cundinamarca. Delicius Pizza te ofrece ingredientes frescos, un sabor inigualable y un ambiente espectacular.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .creators-main {
+            padding: 120px 5% 80px 5%;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0c0c0c 100%);
+            min-height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .creators-title {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-heading);
+            width: 100%;
+        }
+        .creators-title span {
+            color: var(--primary-color);
+        }
+        .creators-subtitle {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: var(--text-light);
+            max-width: 900px;
+            margin: 0 auto 1.2rem auto;
+        }
+        .creators-subtitle span {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1200px;
+            margin: 3rem auto 0 auto;
+        }
+        .member-card {
+            background: rgba(30, 30, 30, 0.45);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 179, 0, 0.1);
+            border-radius: 24px;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 195px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        .member-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(255, 179, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(255, 179, 0, 0.15);
+        }
+        .member-card:hover::before {
+            opacity: 1;
+        }
+        .member-name {
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-family: var(--font-main);
+        }
+        .member-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 179, 0, 0.2);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            margin-bottom: 1.2rem;
+        }
+        .member-card:hover .member-img {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 179, 0, 0.3);
+        }
+        .member-roles {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            font-size: 0.78rem;
+            color: #f8f9fa;
+            font-weight: 500;
+            margin-top: 0.3rem;
+            width: 100%;
+        }
+        .member-roles span {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            white-space: normal;
+            display: inline-block;
+            word-wrap: break-word;
+        }
+        .member-card:hover .member-roles span {
+            background: rgba(255, 179, 0, 0.08);
+            border-color: rgba(255, 179, 0, 0.2);
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="glass-header">
+        <div class="logo">
+            <h1><i class="fa-solid fa-pizza-slice"></i> Delicius <span>Pizza</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="menu.html">Menú</a></li>
+
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="resenas.html">Reseñas</a></li>
+                <li><a href="creadores.html" class="active">Creadores</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+              
+            </ul>
+        </nav>
+        <div class="header-actions">
+
+            
+            <button class="btn-primary desktop-btn" onclick="window.location.href='menu.html'">Pedir Ahora</button>
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <div class="borde-animado-fijo"></div>
+<main class="creators-main">
+    <h1 class="creators-title">Sobre <span>Nosotros</span></h1>
+    
+    <p class="creators-subtitle">
+        Somos estudiantes de grado 11.° 2026 de la <span>I.E.D. Hernán Venegas Carrillo</span> de Tocaima, Cundinamarca.
+    </p>
+    <p class="creators-subtitle">
+        Hacemos parte del área de las TIC y este es el prototipo de nuestro proyecto final.
+    </p>
+
+    <div class="team-grid">
+
+        <div class="member-card">
+            <div class="member-name">Alejandro Parra</div>
+            <img class="member-img" src="../imagen/b0ad5a4a-0e3f-49f0-97e8-1041a412a220.jpg" alt="Alejandro Parra">
+            <div class="member-roles">
+                <span>Líder de Proyecto</span>
+                <span>Diseñador UX</span>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="member-name">Santiago Velasco</div>
+            <img class="member-img" src="../imagen/c333301c-f02a-49fe-a3a7-58c10066970a.jpg" alt="Santiago Velasco">
+            <div class="member-roles">
+                <span>Diseñador UI</span>
+                <span>Desarrollador Frontend</span>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="member-name">Jhon Rodriguez</div>
+            <img class="member-img" src="../imagen/fb3189b0-41ac-4ad7-912a-1dda6f818915.jpg" alt="Jhon Rodriguez">
+            <div class="member-roles">
+                <span>Tester de Calidad</span>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="member-name">Camilo Vallejo</div>
+            <img class="member-img" src="../imagen/b1718148-c302-4c8c-8f25-117cd2826e17.jpg" alt="Camilo Vallejo">
+            <div class="member-roles">
+                <span>Diseñador Gráfico</span>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="member-name">Santiago Calderon</div>
+            <img class="member-img" src="../imagen/233717c5-a57f-4684-924a-21587e6ce440.jpg" alt="Santiago Calderon">
+            <div class="member-roles">
+                <span>Documentador</span>
+                <span>Presentador</span>
+            </div>
+        </div>
+
+    </div>
+</main>
+<footer>
+        <div class="footer-content" id="contacto">
+            <div class="footer-col">
+                <h3>Delicius Pizza</h3>
+                <p>La mejor experiencia culinaria en Tocaima, Cundinamarca.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <p><i class="fa-solid fa-location-dot"></i> Parque principal, al lado de cruz verde, Tocaima Cundinamarca. calle 4# 9:13</p>
+                <p><i class="fa-solid fa-phone"></i> +57 322 906 2173</p>
+                <p><i class="fa-solid fa-envelope"></i> hola@deliciuspizza.com</p>
+            </div>
+            <div class="footer-col">
+                <h3>Horarios</h3>
+                <p>Lunes - Sabado: 3:30 PM - 11:00 PM</p>
+                <p>Domingo: 4:00PM - 11:30PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Delicius Pizza. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

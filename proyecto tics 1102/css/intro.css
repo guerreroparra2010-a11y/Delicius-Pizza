@@ -1,0 +1,150 @@
+:root {
+    --intro-bg: #0a0a0a;
+    --accent-color: #ffd700;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--intro-bg);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Outfit', sans-serif;
+}
+
+.intro-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+}
+
+.logo-wrapper {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: cinematicEntrance 5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.logo-img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.8));
+    mask-image: linear-gradient(to right, transparent, black, transparent);
+    mask-size: 200% 100%;
+    animation: glintEffect 5s linear forwards;
+}
+
+.overlay-text {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+}
+
+/* Animations */
+
+@keyframes cinematicEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
+        filter: blur(10px);
+    }
+    20% {
+        opacity: 1;
+        filter: blur(0px);
+    }
+    80% {
+        opacity: 1;
+        transform: scale(1.1) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.05) translateY(0);
+    }
+}
+
+@keyframes glintEffect {
+    0% {
+        mask-position: 150% 0%;
+    }
+    100% {
+        mask-position: -50% 0%;
+    }
+}
+
+.fly-in-char {
+    display: inline-block;
+    opacity: 0;
+    transform: var(--start-transform) rotate(90deg);
+    animation: flyInChar 1.5s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+}
+
+@keyframes flyInChar {
+    to {
+        opacity: 0.8;
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+/* Particle effect container */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: floatParticle 5s linear infinite;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Transitions for page fade out */
+.fade-out {
+    animation: pageFadeOut 0.8s ease-in-out forwards;
+}
+
+@keyframes pageFadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea tu Pizza | La Mejor Pizza en Tocaima</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Glass Header from main app -->
+    <header class="glass-header">
+        <div class="logo">
+            <h1><i class="fa-solid fa-pizza-slice"></i> Delicius <span>Pizza</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../html/index.html">Inicio</a></li>
+                <li><a href="../html/menu.html">Menú</a></li>
+
+                <li><a href="../html/nosotros.html">Nosotros</a></li>
+                <li><a href="../html/resenas.html">Reseñas</a></li>
+                <li><a href="../html/index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="cart-icon" id="cart-icon" aria-label="Ver carrito">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <button class="btn-primary desktop-btn" onclick="window.location.href='../html/menu.html'">Pedir Ahora</button>
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Tu Pedido</h2>
+            <button class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items se agregaran dinamicamente aqui -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0</span>
+            </div>
+            <button class="btn-primary btn-checkout" id="btn-checkout">Pedir por WhatsApp</button>
+        </div>
+    </div>
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <div class="app-container" style="padding-top: 100px; padding-bottom: 50px;">
+        <!-- Pantalla de Inicio -->
+        <div class="landing-screen active" id="landing-screen">
+            <video class="landing-video" src="../imagen/WhatsApp%20Video%202026-05-19%20at%207.38.47%20PM.mp4" autoplay loop muted playsinline disablepictureinpicture></video>
+            <div class="landing-content">
+                <h1 class="title">Crea tu Pizza</h1>
+                <button class="start-btn" id="start-btn">CREA TU PIZZA</button>
+            </div>
+        </div>
+
+        <!-- Pantalla de Juego (Parte 2: Tamaño y Tipo) -->
+        <div class="game-screen" id="game-screen">
+            <div class="order-type-container">
+                <h2 class="section-title" style="font-size: 2rem;">¿DÓNDE LA DISFRUTARÁS?</h2>
+                <div class="order-type-buttons" style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+                    <button class="type-btn active" data-ordertype="negocio"><i class="fa-solid fa-store"></i> Para el negocio</button>
+                    <button class="type-btn" data-ordertype="llevar"><i class="fa-solid fa-motorcycle"></i> Para llevar</button>
+                </div>
+            </div>
+
+            <h2 class="section-title">ELIGE EL TAMAÑO</h2>
+            <div class="options-container">
+                <button class="option-btn btn-familiar" data-slices="12" data-size="familiar">Familiar</button>
+                <button class="option-btn btn-medium" data-slices="8" data-size="medium">Medium</button>
+                <button class="option-btn btn-junior" data-slices="6" data-size="junior">Junior</button>
+            </div>
+
+            <div class="pizza-wrapper" id="main-pizza-wrapper">
+                <div class="pizza-base" id="pizza-base">
+                    <div class="pizza-slices-overlay" id="slices-overlay"></div>
+                </div>
+            </div>
+
+            <button class="ready-btn" id="ready-btn">LISTO</button>
+        </div>
+
+        <!-- Pantalla de Corte (Parte 3: Corte y Distribución) -->
+        <div class="game-screen" id="cutting-screen">
+            <h2 class="section-title">CORTE Y DISTRIBUCIÓN</h2>
+            <div class="slice-options-container" id="slice-options-container">
+                <!-- Los botones de porciones se generarán aquí dinámicamente -->
+            </div>
+            <div class="pizza-preview-area" id="cutting-pizza-container">
+                <!-- La pizza se moverá aquí temporalmente -->
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 1rem;">
+                <button class="ready-btn" id="cutting-ready-btn" style="display: none;">LISTO PARA SABORES</button>
+            </div>
+        </div>
+
+        <!-- Pantalla de Sabores (Parte 4: Sabores) -->
+        <div class="flavors-screen" id="flavors-screen">
+            <div class="flavors-layout">
+                <div class="pizza-preview-container" id="pizza-preview-container">
+                    <div class="flavor-rule">MÁXIMO 3 SABORES</div>
+                    <!-- Aquí se moverá la pizza configurada -->
+                </div>
+                
+                <div class="flavors-selection">
+                    <h2 class="section-title" style="font-size: 1.8rem; margin-top: 0;">ELIGE TUS SABORES</h2>
+                    
+                    <div class="portions-summary">
+                        Porciones restantes: <span class="remaining-count" id="remaining-count">0</span> / <span id="total-portions">0</span>
+                    </div>
+
+                    <div class="flavors-grid" id="flavors-grid">
+                        <!-- Sabores generados dinámicamente -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flavors-footer">
+                <button class="back-btn" id="back-to-slices">Volver</button>
+                <button class="ready-btn show" id="finish-btn">FINALIZAR PEDIDO</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

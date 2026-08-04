@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encargos Especiales | Delicius Pizza</title>
+    <meta name="description" content="Nuestros combos familiares y ruedas de pizza gigantes ideales para tus fiestas y eventos especiales en Tocaima.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header class="glass-header">
+        <div class="logo">
+            <h1><i class="fa-solid fa-pizza-slice"></i> Delicius <span>Pizza</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="resenas.html">Reseñas</a></li>
+                <li><a href="creadores.html">Creadores</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="cart-icon" id="cart-icon" aria-label="Ver carrito">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <button class="btn-primary desktop-btn" onclick="window.location.href='menu.html'">Pedir Ahora</button>
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main style="padding-top: 80px;">
+        <section id="menu" class="menu-section" style="background-color: var(--bg-dark);">
+            <div class="section-title">
+                <h2>Encargos Especiales</h2>
+                <p>Combos gigantes para compartir en tus celebraciones</p>
+                <div class="important-note" style="margin-top: 1.5rem; background: rgba(255, 179, 0, 0.1); border: 1px solid var(--primary-color); padding: 1rem; border-radius: 12px; display: inline-block; max-width: 800px;">
+                    <p style="color: var(--primary-color); margin: 0; font-weight: 600; font-size: 1.1rem;">
+                        <i class="fa-solid fa-circle-info"></i> NOTA: Los encargos se preparan bajo pedido especial para garantizar su frescura en eventos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="menu-grid">
+                <!-- Porción Tentación -->
+                <div class="menu-card">
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/Porcion%20tentacion.jpg')"></div>
+                    <div class="menu-card-content">
+                        <h3>Porción Tentación</h3>
+                        <p>Chocolate, fresas, banano y queso. Una delicia dulce sobre masa artesanal. Solo por encargo con 2 días de anticipación.</p>
+                        <div class="price-action">
+                            <span class="price">$10.000 (COP)</span>
+                            <button class="btn-primary add-to-cart-btn" data-name="Porción Tentación" data-price="10000">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panzeroti -->
+                <div class="menu-card">
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/Panzerotis.jpg')"></div>
+                    <div class="menu-card-content">
+                        <h3>Panzeroti</h3>
+                        <p>Masa crujiente rellena de queso mozzarella fundido y el ingrediente de tu elección. Perfecto para compartir.</p>
+                        <div class="price-action">
+                            <span class="price">$6.000 (COP)</span>
+                            <button class="btn-primary add-to-cart-btn" data-name="Panzeroti" data-price="6000">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avena Cubana -->
+                <div class="menu-card">
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/Avena%20cubana.jpg')"></div>
+                    <div class="menu-card-content">
+                        <h3>Avena Cubana</h3>
+                        <p>Deliciosa avena cremosa y fría con el toque tradicional y refrescante de la casa.</p>
+                        <div class="price-action">
+                            <span class="price">$5.000 (COP)</span>
+                            <button class="btn-primary add-to-cart-btn" data-name="Avena Cubana" data-price="5000">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content" id="contacto">
+            <div class="footer-col">
+                <h3>Delicius Pizza</h3>
+                <p>La mejor experiencia culinaria en Tocaima, Cundinamarca.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <p><i class="fa-solid fa-location-dot"></i> Parque principal, al lado de cruz verde, Tocaima Cundinamarca. calle 4# 9:13</p>
+                <p><i class="fa-solid fa-phone"></i> +57 322 906 2173</p>
+                <p><i class="fa-solid fa-envelope"></i> hola@deliciuspizza.com</p>
+            </div>
+            <div class="footer-col">
+                <h3>Horarios</h3>
+                <p>Lunes - Sábado: 3:30 PM - 11:00 PM</p>
+                <p>Domingo: 4:00 PM - 11:30 PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Delicius Pizza. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/573219062173?text=Hola%20Delicius%20Pizza,%20me%20gustar%C3%ADa%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" aria-label="Chatear por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Tu Pedido</h2>
+            <button class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items se agregarán dinámicamente aquí -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0</span>
+            </div>
+            <button class="btn-primary btn-checkout" id="btn-checkout">Pedir por WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
