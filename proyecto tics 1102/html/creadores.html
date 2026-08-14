@@ -14,6 +14,110 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/styles.css">
     <style>
+
+        /* ---- PANTALLA DE INTRO ---- */
+        #intro-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, #000 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #intro-screen.oculto {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .intro-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            animation: pulsarIcono 2s ease-in-out infinite;
+        }
+
+        @keyframes pulsarIcono {
+            0%, 100% { transform: scale(1);   filter: drop-shadow(0 0 10px #FFB300); }
+            50%       { transform: scale(1.15); filter: drop-shadow(0 0 30px #FFB300); }
+        }
+
+        .intro-titulo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: #fff;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .intro-titulo span {
+            color: var(--primary-color);
+        }
+
+        /* Botón brillante */
+        #btn-revelar {
+            position: relative;
+            background: linear-gradient(135deg, #FFB300, #FF6F00);
+            color: #000;
+            border: none;
+            padding: 1.1rem 2.8rem;
+            border-radius: 50px;
+            font-family: var(--font-main);
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(255, 179, 0, 0.5);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        #btn-revelar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: rgba(255,255,255,0.25);
+            transform: skewX(-20deg);
+            animation: brilloBtn 2.5s ease-in-out infinite;
+        }
+
+        @keyframes brilloBtn {
+            0%   { left: -60%; }
+            100% { left: 130%; }
+        }
+
+        #btn-revelar:hover {
+            transform: scale(1.07);
+            box-shadow: 0 0 40px rgba(255, 179, 0, 0.8);
+        }
+
+        #btn-revelar i {
+            margin-right: 0.6rem;
+        }
+
+        /* ---- CONTENIDO PRINCIPAL (oculto hasta que se pulse el botón) ---- */
+        #contenido-creadores {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+            pointer-events: none;
+        }
+
+        #contenido-creadores.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        /* ---- ESTILOS DE LA SECCIÓN ---- */
         .creators-main {
             padding: 120px 5% 80px 5%;
             background: linear-gradient(180deg, var(--bg-dark) 0%, #0c0c0c 100%);
@@ -167,6 +271,21 @@
     </header>
 
     <div class="borde-animado-fijo"></div>
+
+    <!-- ✨ PANTALLA DE INTRO ✨ -->
+    <div id="intro-screen">
+        <div class="intro-icon">
+            <i class="fa-solid fa-users"></i>
+        </div>
+        <p class="intro-titulo">Delicius <span>Pizza</span></p>
+        <button id="btn-revelar">
+            <i class="fa-solid fa-door-open"></i>
+            CREADORES DE LA PÁGINA
+        </button>
+    </div>
+
+    <!-- CONTENIDO (se revela al pulsar el botón) -->
+    <div id="contenido-creadores">
 <main class="creators-main">
     <h1 class="creators-title">Sobre <span>Nosotros</span></h1>
     
@@ -251,6 +370,22 @@
             <p>&copy; 2026 Delicius Pizza. Todos los derechos reservados.</p>
         </div>
     </footer>
+    </div><!-- fin #contenido-creadores -->
+
+    <script>
+        const btnRevelar = document.getElementById('btn-revelar');
+        const introScreen = document.getElementById('intro-screen');
+        const contenido = document.getElementById('contenido-creadores');
+
+        btnRevelar.addEventListener('click', () => {
+            // Ocultar la pantalla de intro
+            introScreen.classList.add('oculto');
+            // Mostrar el contenido con animación
+            setTimeout(() => {
+                contenido.classList.add('visible');
+            }, 400);
+        });
+    </script>
 
 </body>
 </html>
