@@ -1,11 +1,4 @@
-(function() {
-    try {
-        const navEntries = performance.getEntriesByType("navigation");
-        if ((navEntries.length > 0 && navEntries[0].type === "reload") || performance.navigation.type === 1) {
-            window.location.href = '../index.html';
-        }
-    } catch (e) {}
-})();
+// Redirección al intro eliminada: el usuario puede recargar la página libremente.
 
 document.addEventListener('DOMContentLoaded', () => {
     // Header scroll effect
@@ -257,19 +250,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = btn.getAttribute('data-name');
             const rawPrice = btn.getAttribute('data-price');
             const price = parseInt(rawPrice);
+            const img = btn.getAttribute('data-img'); // optional image path
             
             if (!name || isNaN(price)) {
                 console.error("Error: Producto sin nombre o precio inválido", name, rawPrice);
                 return;
             }
-
+            
             cart = loadCart();
             const existingItem = cart.find(item => item.name === name);
             
             if (existingItem) {
                 existingItem.quantity += 1;
+                // preserve existing image if not already set
+                if (!existingItem.img && img) existingItem.img = img;
             } else {
-                cart.push({ name, price, quantity: 1 });
+                const newItem = { name, price, quantity: 1 };
+                if (img) newItem.img = img;
+                cart.push(newItem);
             }
             
             updateCartUI();
@@ -326,16 +324,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 itemElement.classList.add('cart-item');
                 itemElement.innerHTML = `
                     <div class="cart-item-info" style="flex: 1;">
-                        <h4 style="margin: 0; font-size: 1rem; color: #333;">${displayName}</h4>
-                        ${details ? `<p style="font-size: 0.8rem; color: #666; margin: 3px 0; font-style: italic;">${details}</p>` : ''}
-                        <p style="font-size: 0.9rem; margin: 5px 0 0 0; color: #555;">
+                        <h4 style="margin: 0; font-size: 1rem; color: var(--text-light);">${displayName}</h4>
+                        ${details ? `<p style="font-size: 0.8rem; color: var(--text-muted); margin: 3px 0; font-style: italic;">${details}</p>` : ''}
+                        ${item.img ? `<img src="${item.img}" alt="${displayName}" style="max-width: 80px; border-radius: 8px; margin: 5px 0;"/>` : ''}
+                        <p style="font-size: 0.9rem; margin: 5px 0 0 0; color: var(--text-muted);">
                             $${item.price.toLocaleString('es-CO')} x ${item.quantity} = 
                             <strong style="color: var(--primary-color);">$${subtotal.toLocaleString('es-CO')} COP</strong>
                         </p>
                     </div>
                     <div class="cart-item-actions" style="display: flex; align-items: center; gap: 8px;">
                         <button class="qty-btn minus" data-name="${item.name}" style="padding: 5px 10px;">-</button>
-                        <span style="font-weight: bold; min-width: 20px; text-align: center;">${item.quantity}</span>
+                        <span style="font-weight: bold; min-width: 20px; text-align: center; color: var(--text-light);">${item.quantity}</span>
                         <button class="qty-btn plus" data-name="${item.name}" style="padding: 5px 10px;">+</button>
                         <button class="remove-item" data-name="${item.name}" style="color: #ff5252; background: none; border: none; padding: 5px; margin-left: 5px; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
                     </div>
@@ -483,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
             message += `%0A💰 *TOTAL DEL PEDIDO: $${total.toLocaleString('es-CO')} COP*%0A`;
             message += `_(Recuerda que el domicilio se cobra por separado)_`;
             
-            const waUrl = `https://wa.me/573219062173?text=${message}`;
+            const waUrl = `https://wa.me/573229062173?text=${message}`;
             window.open(waUrl, '_blank');
         });
     }
@@ -588,7 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //
     // ============================================================
 
-    const PHONE    = "573219906789"; // Número destino
+    const PHONE    = "573229062173"; // Número destino
     const SERVICIO = "wame";         // <-- CAMBIA ESTO por la opción que prefieras
 
     // Configuración CallMeBot
