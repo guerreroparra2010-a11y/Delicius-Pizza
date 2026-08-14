@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros | Delicius Pizza</title>
+    <meta name="description" content="Conoce nuestra historia y pasión por la pizza en Tocaima.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header class="glass-header">
+        <div class="logo">
+            <h1><i class="fa-solid fa-pizza-slice"></i> Delicius <span>Pizza</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="menu.html">Menú</a></li>
+
+                <li><a href="nosotros.html" class="active">Nosotros</a></li>
+                <li><a href="resenas.html">Reseñas</a></li>
+                <li><a href="creadores.html">Creadores</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                
+            </ul>
+        </nav>
+        <div class="header-actions">
+
+            <div class="cart-icon" id="cart-icon" aria-label="Ver carrito">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <button class="btn-primary desktop-btn" onclick="window.location.href='pizzas.html'">Pedir Ahora</button>
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main style="padding-top: 80px;">
+        <section id="nosotros" class="about-section" style="background-color: var(--bg-dark);">
+            <div class="about-content">
+                <h2>Orgullosamente de <span>Tocaima</span></h2>
+                <p>En Delicius Pizza, combinamos la tradición culinaria italiana con el calor y la alegría de Tocaima. Nuestro compromiso es ofrecer pizzas de la más alta calidad, hechas a mano con amor y dedicación todos los días.</p>
+                <ul class="features">
+                    <li><i class="fa-solid fa-fire-burner"></i> Horno de gas</li>
+                    <li><i class="fa-solid fa-leaf"></i> Ingredientes 100% frescos y naturales</li>
+                    <li><i class="fa-solid fa-motorcycle"></i> Entregas rápidas y seguras en todo el pueblo</li>
+                </ul>
+                <div class="mision-vision" style="margin-top: 2rem;">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 style="color: var(--primary); font-family: var(--font-heading); margin-bottom: 0.5rem;"><i class="fa-solid fa-bullseye"></i> MISIÓN</h3>
+                        <p style="font-size: 0.95rem; line-height: 1.6;">Brindar a nuestros clientes una variedad de alimentos de alta calidad, destacándonos principalmente en la elaboración de pizzas con una receta tradicional que nos ha caracterizado por más de 20 años. Ofrecemos además productos como hamburguesas, salchipapas, perros calientes, costillas y bebidas, garantizando siempre un servicio amable, ágil y confiable para personas de todas las edades, generando experiencias agradables que motiven a nuestros clientes a regresar.</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); font-family: var(--font-heading); margin-bottom: 0.5rem;"><i class="fa-solid fa-eye"></i> VISIÓN</h3>
+                        <p style="font-size: 0.95rem; line-height: 1.6;">Ser una marca reconocida a nivel regional por la calidad y variedad de nuestros productos, especialmente nuestras pizzas, así como por nuestro excelente servicio al cliente, logrando expandirnos mediante la apertura de nuevos puntos de venta sin perder nuestra esencia familiar y el compromiso con la satisfacción de nuestros clientes y familias.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image" style="display: flex; justify-content: center; align-items: center;">
+                <video src="../imagen/WhatsApp%20Video%202026-05-05%20at%205.22.56%20PM.mp4" autoplay muted loop playsinline style="width: 100%; max-width: 350px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); object-fit: cover; border: 4px solid var(--primary-color); pointer-events: none;"></video>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content" id="contacto">
+            <div class="footer-col">
+                <h3>Delicius Pizza</h3>
+                <p>La mejor experiencia culinaria en Tocaima, Cundinamarca.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <p><i class="fa-solid fa-location-dot"></i> Parque principal, al lado de cruz verde, Tocaima Cundinamarca. calle 4# 9:13</p>
+                <p><i class="fa-solid fa-phone"></i> +57 322 906 2173</p>
+                <p><i class="fa-solid fa-envelope"></i> hola@deliciuspizza.com</p>
+            </div>
+            <div class="footer-col">
+                <h3>Horarios</h3>
+                <p>Lunes - Sabado: 3:30 PM - 11:00 PM</p>
+                <p>Domingo: 4:00PM - 11:30PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Delicius Pizza. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/573229062173?text=Hola%20Delicius%20Pizza,%20me%20gustar%C3%ADa%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" aria-label="Chatear por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+
+
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Tu Pedido</h2>
+            <button class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items se agregaran dinamicamente aqui -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0</span>
+            </div>
+            <button class="btn-primary btn-checkout" id="btn-checkout">Pedir por WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

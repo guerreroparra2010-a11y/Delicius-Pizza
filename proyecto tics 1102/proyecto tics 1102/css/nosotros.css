@@ -1,0 +1,36 @@
+/* Configuración para que el borde no mueva el contenido */
+body {
+    position: relative;
+    margin: 0;
+    padding: 20px; /* Espacio para que el texto no toque el borde azul */
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* El truco del borde en movimiento */
+.borde-animado-pagina {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Hace que puedas hacer clic a través del borde sin problemas */
+    z-index: 9999; /* Lo mantiene siempre visible por encima del fondo */
+    
+    /* Creamos un borde usando un degradado de tonos azules */
+    border: 6px solid transparent;
+    border-image: linear-gradient(90deg, #007bff, #00d2ff, #0044ff, #007bff) 1;
+    
+    /* Activamos la animación: durará 4 segundos y será infinita */
+    animation: moverBorde 4s linear infinite;
+}
+
+/* La magia de la animación: hace que los colores del degradado giren */
+@keyframes moverBorde {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}

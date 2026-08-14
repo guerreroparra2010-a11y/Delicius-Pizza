@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú | Delicius Pizza</title>
+    <meta name="description" content="Explora nuestro menú de pizzas artesanales y bebidas refrescantes.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .menu-section {
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .category-card {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 450px;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 179, 0, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .category-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .category-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: rgba(255, 179, 0, 0.4);
+            box-shadow: 0 30px 60px rgba(255, 179, 0, 0.15), 0 0 20px rgba(255, 179, 0, 0.1);
+        }
+
+        .category-img-container {
+            width: 100%;
+            height: 65%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .category-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-card:hover .category-img {
+            transform: scale(1.15) rotate(2deg);
+        }
+
+        .category-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            background: linear-gradient(to top, rgba(20, 20, 20, 0.95), rgba(20, 20, 20, 0.8));
+            position: relative;
+            z-index: 3;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .category-title {
+            color: #fff;
+            font-size: 2.5rem;
+            font-family: var(--font-heading);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .category-card:hover .category-title {
+            color: var(--primary-color);
+        }
+
+        .category-subtitle {
+            color: #aaa;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .category-card:hover .category-subtitle {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-btn {
+            background: transparent;
+            color: var(--primary-color);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .category-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover .category-btn {
+            background: var(--primary-color);
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 179, 0, 0.4);
+        }
+
+        .category-card:hover .category-btn i {
+            transform: translateX(5px);
+        }
+
+        /* Badge/Insignia para categorías especiales */
+        .category-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--primary-color);
+            color: #000;
+            padding: 5px 40px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transform: rotate(45deg);
+            z-index: 10;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive fixes */
+        @media (max-width: 768px) {
+            .category-card {
+                height: 400px;
+            }
+            .category-subtitle {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="glass-header">
+        <div class="logo">
+            <h1><i class="fa-solid fa-pizza-slice"></i> Delicius <span>Pizza</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="menu.html" class="active">Menú</a></li>
+
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="resenas.html">Reseñas</a></li>
+                <li><a href="creadores.html">Creadores</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+                
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="cart-icon" id="cart-icon" aria-label="Ver carrito">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <button class="btn-primary desktop-btn" onclick="window.location.href='pizzas.html'">Pedir Ahora</button>
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main style="padding-top: 120px;">
+        <section class="menu-section">
+            <div class="section-title">
+                <p>Nuestra Especialidad</p>
+                <h2>¿Qué se te antoja hoy?</h2>
+            </div>
+            
+            <div class="category-grid">
+                <!-- Tarjeta de Pizzas -->
+                <a href="pizzas.html" class="category-card">
+                    <div class="category-badge">Favoritas</div>
+                    <div class="category-img-container">
+                        <img src="../imagen/pzz.jpg" alt="Pizzas" class="category-img">
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Pizzas</h3>
+                        <p class="category-subtitle">Artesanales y deliciosas</p>
+                        <span class="category-btn">Explorar <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+                
+                <!-- Tarjeta de Bebidas -->
+                <a href="bebidas.html" class="category-card">
+                    <div class="category-img-container" style="background: #fff; padding: 1rem;">
+                        <img src="../imagen/Coca-Cola vidrio 350ml.jpg" alt="Bebidas" class="category-img" style="object-fit: contain;">
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Bebidas</h3>
+                        <p class="category-subtitle">Refrescantes y frías</p>
+                        <span class="category-btn">Ver Opciones <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <!-- Tarjeta de Encargos -->
+                <a href="pedidoencargo.html" class="category-card">
+                    <div class="category-img-container">
+                        <img src="../imagen/764d1009-25b6-477b-96ec-b14b24e8337d.jpg" alt="Encargos" class="category-img">
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Encargos</h3>
+                        <p class="category-subtitle">Para eventos y reuniones</p>
+                        <span class="category-btn">Hacer Pedido <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content" id="contacto">
+            <div class="footer-col">
+                <h3>Delicius Pizza</h3>
+                <p>La mejor experiencia culinaria en Tocaima, Cundinamarca.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <p><i class="fa-solid fa-location-dot"></i> Parque principal, al lado de cruz verde, Tocaima Cundinamarca. calle 4# 9:13</p>
+                <p><i class="fa-solid fa-phone"></i> +57 322 906 2173</p>
+                <p><i class="fa-solid fa-envelope"></i> hola@deliciuspizza.com</p>
+            </div>
+            <div class="footer-col">
+                <h3>Horarios</h3>
+             <p>Lunes - Sabado: 3:30 PM - 11:00 PM</p>
+                <p>Domingo: 4:00PM - 11:30PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Delicius Pizza. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/573229062173?text=Hola%20Delicius%20Pizza,%20me%20gustar%C3%ADa%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" aria-label="Chatear por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Tu Pedido</h2>
+            <button class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items se agregaran dinamicamente aqui -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0</span>
+            </div>
+            <button class="btn-primary btn-checkout" id="btn-checkout">Pedir por WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+</body>
+</html>
