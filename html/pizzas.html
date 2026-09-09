@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+
+
+<head>
+    <link rel="icon" href="../imagen/favicon.ico" type="image/x-icon">
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pizzas | Delicius Pizza</title>
+
+    <meta name="description" content="Descubre nuestra deliciosa variedad de pizzas artesanales.">
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+
+        rel="stylesheet">
+
+    <!-- FontAwesome for icons -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+</head>
+
+
+
+<body>
+
+    <header class="glass-header">
+
+        <div class="logo">
+
+            <h1><i class="fa-solid fa-pizza-slice"></i> Delicius <span>Pizza</span></h1>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li><a href="../index.html">Inicio</a></li>
+
+                <li><a href="menu.html">Menú</a></li>
+
+
+
+                <li><a href="nosotros.html">Nosotros</a></li>
+
+                <li><a href="resenas.html">Reseñas</a></li>
+
+                <li><a href="creadores.html">Creadores</a></li>
+
+                <li><a href="#contacto">Contacto</a></li>
+
+               
+
+            </ul>
+
+        </nav>
+
+        <div class="header-actions">
+
+
+
+            <div class="cart-icon" id="cart-icon" aria-label="Ver carrito">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span class="cart-count" id="cart-count">0</span>
+
+            </div>
+
+            <button class="btn-primary desktop-btn" onclick="window.location.href='menu.html'">Pedir Ahora</button>
+
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+
+        </div>
+
+    </header>
+
+    
+
+
+
+    <main style="padding-top: 80px;"> <!-- Padding for fixed header since no hero section here -->
+
+        <section id="menu" class="menu-section">
+
+            <div class="section-title">
+
+                <h2>Nuestro Menú de Pizzas</h2>
+
+                <p>Descubre nuestras especialidades o atrévete a ser el chef</p>
+
+            </div>
+
+
+
+            <!-- Banner Crea tu Pizza -->
+
+            <div class="create-pizza-banner" style="margin: 0 auto 4rem auto; max-width: 1200px; padding: 0 20px;">
+
+                <div style="background: linear-gradient(135deg, var(--primary-color) 0%, #ff8c00 100%); border-radius: 20px; padding: 4rem 2rem; text-align: center; box-shadow: 0 10px 30px rgba(255, 179, 0, 0.4); position: relative; overflow: hidden;">
+
+                    <div style="position: relative; z-index: 2;">
+
+                        <h3 style="font-size: 3.5rem; font-family: var(--font-heading); color: #000; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(255,255,255,0.5); text-transform: uppercase;">¡Crea tu rueda de pizza!</h3>
+
+                        <p style="font-size: 1.2rem; color: #000; margin-bottom: 2rem; font-weight: 600;">Elige el tamaño, córtala a tu gusto y selecciona hasta 3 sabores diferentes.</p>
+
+                        <a href="../pizza/index.html" class="btn-primary" style="background-color: #000; color: #fff; font-size: 1.5rem; padding: 1rem 3rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; display: inline-block; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: transform 0.3s;">
+
+                            Crea tu pizza <i class="fa-solid fa-pizza-slice" style="margin-left: 10px;"></i>
+
+                        </a>
+
+                    </div>
+
+                    <!-- Decoración de fondo -->
+
+                    <i class="fa-solid fa-pizza-slice" style="position: absolute; font-size: 15rem; color: rgba(255,255,255,0.2); right: -20px; bottom: -40px; transform: rotate(-15deg); z-index: 1;"></i>
+
+                    <i class="fa-solid fa-pizza-slice" style="position: absolute; font-size: 10rem; color: rgba(255,255,255,0.2); left: -10px; top: -20px; transform: rotate(15deg); z-index: 1;"></i>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Sección de Porciones -->
+
+            <div class="section-title" style="margin-top: 4rem; text-align: center;">
+
+                <h2>Nuestras Porciones</h2>
+
+                <p>Las mejores porciones listas para disfrutar</p>
+
+            </div>
+
+
+
+            <div class="menu-grid">
+
+                <!-- Porciones de Pizza -->
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/porcion-peperoni.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Porción Pepperoni</h3>
+
+                        <p>Queso mozzarella premium y abundante pepperoni curado.</p>
+
+                        <div class="price-action">
+
+                            <span class="price">$9.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Porción Pepperoni" data-price="9000" data-img="../imagen/porcion-peperoni.jpg">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/porcion-hawaiana.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Porción Hawaiana</h3>
+
+                        <p>Jamón seleccionado y piña dulce sobre base de queso fundido.</p>
+
+                        <div class="price-action">
+
+                            <span class="price">$9.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Porción Hawaiana" data-price="9000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/porcion-carnes.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Porción Carnes</h3>
+
+                        <p>Tocineta, pepperoni, jamón y carne molida con sazón de la casa.</p>
+
+                        <div class="price-action">
+
+                            <span class="price">$9.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Porción Carnes" data-price="9000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/porcion-mexicana.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Porción Mexicana</h3>
+
+                        <p>Carne molida, frijol, jalapeños selectos y maíz tierno tostado.</p>
+
+                        <div class="price-action">
+
+                            <span class="price">$9.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Porción Mexicana" data-price="9000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/porcion-ranchera.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Porción Ranchera</h3>
+
+                        <p>Salchicha ranchera, maíz tierno, tocineta crujiente y salsa BBQ especial.</p>
+
+                        <div class="price-action">
+
+                            <span class="price">$9.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Porción Ranchera" data-price="9000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/porcion-tropical.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Porción Tropical</h3>
+
+                        <p>Jamón premium, piña dulce, cerezas y queso gratinado.</p>
+
+                        <div class="price-action">
+
+                            <span class="price">$9.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Porción Tropical" data-price="9000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/porcion-carbonara.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Porción Carbonara</h3>
+
+                        <p>Exquisita salsa carbonara a la crema, champiñones y tocineta.</p>
+
+                        <div class="price-action">
+
+                            <span class="price">$9.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Porción Carbonara" data-price="9000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/porcion-napolitana.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Porción Napolitana</h3>
+
+                        <p>Tomate natural, albahaca de nuestro huerto, orégano y aceite de oliva.</p>
+
+                        <div class="price-action">
+
+                            <span class="price">$9.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Porción Napolitana" data-price="9000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/porcion-criolla.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Porción Criolla</h3>
+
+                        <p>Sabor tradicional con carne desmechada, maíz tierno tostado, cebolla y cilantro fresco.</p>
+
+                        <div class="price-action">
+
+                            <span class="price">$9.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Porción Criolla" data-price="9000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </section>
+
+    </main>
+
+
+
+    <footer>
+
+        <div class="footer-content" id="contacto">
+
+            <div class="footer-col">
+
+                <h3>Delicius Pizza</h3>
+
+                <p>La mejor experiencia culinaria en Tocaima, Cundinamarca.</p>
+
+                <div class="social-links">
+
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+
+                    <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+                </div>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h3>Contacto</h3>
+
+                <p><i class="fa-solid fa-location-dot"></i> Parque principal, al lado de cruz verde, Tocaima
+
+                    Cundinamarca. calle 4# 9:13</p>
+
+                <p><i class="fa-solid fa-phone"></i> +57 322 906 2173</p>
+
+                <p><i class="fa-solid fa-envelope"></i> hola@deliciuspizza.com</p>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h3>Horarios</h3>
+
+                <p>Lunes - Sabado: 3:30 PM - 11:00 PM</p>
+
+                <p>Domingo: 4:00PM - 11:30PM</p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>&copy; 2026 Delicius Pizza. Todos los derechos reservados.</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- WhatsApp Floating Button -->
+
+    <a href="https://wa.me/573229062173?text=Hola%20Delicius%20Pizza,%20me%20gustar%C3%ADa%20hacer%20un%20pedido"
+
+        class="whatsapp-float" target="_blank" aria-label="Chatear por WhatsApp">
+
+        <i class="fa-brands fa-whatsapp"></i>
+
+    </a>
+
+
+
+
+
+
+
+
+
+    <!-- Cart Sidebar -->
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+
+        <div class="cart-header">
+
+            <h2>Tu Pedido</h2>
+
+            <button class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+
+        </div>
+
+        <div class="cart-items" id="cart-items">
+
+            <!-- Items se agregaran dinamicamente aqui -->
+
+        </div>
+
+        <div class="cart-footer">
+
+            <div class="cart-total">
+
+                <span>Total:</span>
+
+                <span id="cart-total-price">$0</span>
+
+            </div>
+
+            <button class="btn-primary btn-checkout" id="btn-checkout">Pedir por WhatsApp</button>
+
+        </div>
+
+    </div>
+
+    
+
+
+
+    <!-- Toast Notification Container -->
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Custom JS -->
+
+    <script src="../js/main.js"></script>
+
+</body>
+
+
+
+</html>
+

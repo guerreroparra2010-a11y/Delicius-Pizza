@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <link rel="icon" href="../imagen/favicon.ico" type="image/x-icon">
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bebidas | Delicius Pizza</title>
+
+    <meta name="description" content="Refrescantes bebidas para acompañar tu pizza en diferentes presentaciones.">
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome for icons -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+
+        /* Reemplazar la línea blanca por un patrón de cebra naranja y negro */
+
+        .menu-card .price-action {
+
+            border-top: none !important; /* Quita la línea blanca */
+
+            position: relative;
+
+            padding-top: 1.5rem;
+
+        }
+
+        
+
+        .menu-card .price-action::before {
+
+            content: '';
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 6px; /* Grosor de la línea de cebra */
+
+            background: repeating-linear-gradient(
+
+                45deg,
+
+                var(--primary-color),
+
+                var(--primary-color) 10px,
+
+                #000000 10px,
+
+                #000000 20px
+
+            );
+
+            border-radius: 3px;
+
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header class="glass-header">
+
+        <div class="logo">
+
+            <h1><i class="fa-solid fa-pizza-slice"></i> Delicius <span>Pizza</span></h1>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li><a href="../index.html">Inicio</a></li>
+
+                <li><a href="pizzas.html">Pizzas</a></li>
+
+                <li><a href="bebidas.html" class="active">Bebidas</a></li>
+
+
+
+                <li><a href="nosotros.html">Nosotros</a></li>
+
+                <li><a href="resenas.html">Reseñas</a></li>
+
+                <li><a href="#creadores.html">Creadores</a></li>
+
+                <li><a href="#contacto">Contacto</a></li>
+
+                
+
+            </ul>
+
+        </nav>
+
+        <div class="header-actions">
+
+            <div class="cart-icon" id="cart-icon" aria-label="Ver carrito">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span class="cart-count" id="cart-count">0</span>
+
+            </div>
+
+            <button class="btn-primary desktop-btn" onclick="window.location.href='menu.html'">Pedir Ahora</button>
+
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+
+        </div>
+
+    </header>
+
+
+
+    <main style="padding-top: 80px;">
+
+        <section id="bebidas" class="menu-section" style="background-color: #0a0a0a;">
+
+            <div class="section-title">
+
+                <h2>NUESTRAS BEBIDAS</h2>
+
+                <p>Ordenadas por tamaño para tu comodidad</p>
+
+                <div class="important-note" style="margin-top: 1.5rem; background: rgba(255, 179, 0, 0.1); border: 1px solid var(--primary-color); padding: 1rem; border-radius: 12px; display: inline-block; max-width: 800px;">
+
+                    <p style="color: var(--primary-color); margin: 0; font-weight: 600; font-size: 1.1rem;">
+
+                        <i class="fa-solid fa-circle-info"></i> IMPORTANTE: Las bebidas de vidrio son solo para el negocio, no para llevar.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SECTION 250ml - 280ml -->
+
+            <div class="section-title" style="margin-top: 3rem; text-align: left; padding-left: 5%;">
+
+                <h3 style="color: var(--primary-color); font-size: 1.8rem; border-left: 4px solid var(--primary-color); padding-left: 15px;">Pequeñas (250ml - 280ml)</h3>
+
+            </div>
+
+            <div class="menu-grid">
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/coca-cola-250ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Coca-Cola 250ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$2.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Coca-Cola 250ml" data-price="2500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/coca-cola-vidrio-280ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Coca-Cola 280ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$2.800 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Coca-Cola 280ml" data-price="2800">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/sprite-vidrio-280ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Sprite 280ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$2.800 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Sprite 280ml" data-price="2800">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SECTION 330ml - 350ml -->
+
+            <div class="section-title" style="margin-top: 4rem; text-align: left; padding-left: 5%;">
+
+                <h3 style="color: var(--primary-color); font-size: 1.8rem; border-left: 4px solid var(--primary-color); padding-left: 15px;">Medianas (330ml - 350ml)</h3>
+
+            </div>
+
+            <div class="menu-grid">
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/pony-malta-330ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Pony Malta 330ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Pony Malta 330ml" data-price="3000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/kola-sol-335ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Kola Sol 335ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Kola Sol 335ml" data-price="3000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/agua-brisa.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Agua Brisa</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Agua Brisa" data-price="3000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/agua-con-gas-brisa.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Agua con gas Brisa</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Agua con gas Brisa" data-price="3000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/coca-cola-0-vidrio-350ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Coca-Cola 0 350ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Coca-Cola 0 350ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/coca-cola-vidrio-350ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Coca-Cola 350ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Coca-Cola 350ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/colombiana-vidrio-350ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Colombiana 350ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Colombiana 350ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/freskola-vidrio-350ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Freskola 350ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Freskola 350ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/manzana-vidrio-350ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Manzana 350ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Manzana 350ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/quatro-vidrio-350ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Quatro 350ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Quatro 350ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/soda-vidrio-350ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Soda 350ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Soda 350ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/sprite-vidrio-350ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Sprite 350ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Sprite 350ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/uva-vidrio-350ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Uva 350ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Uva 350ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SECTION 400ml -->
+
+            <div class="section-title" style="margin-top: 4rem; text-align: left; padding-left: 5%;">
+
+                <h3 style="color: var(--primary-color); font-size: 1.8rem; border-left: 4px solid var(--primary-color); padding-left: 15px;">Grandes (400ml)</h3>
+
+            </div>
+
+            <div class="menu-grid">
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/coca-cola-400ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Coca-Cola 400ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$4.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Coca-Cola 400ml" data-price="4000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/coca-cola-0-400ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Coca-Cola 0 400ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$4.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Coca-Cola 0 400ml" data-price="4000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/colombiana-400ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Colombiana 400ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Colombiana 400ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/ginger-400ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Ginger 400ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$4.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Ginger 400ml" data-price="4000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/manzana-400ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Manzana 400ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Manzana 400ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/sprite-400ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Sprite 400ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$4.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Sprite 400ml" data-price="4000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/valle-400ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Valle 400ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$3.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Valle 400ml" data-price="3500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SECTION 600ml -->
+
+            <div class="section-title" style="margin-top: 4rem; text-align: left; padding-left: 5%;">
+
+                <h3 style="color: var(--primary-color); font-size: 1.8rem; border-left: 4px solid var(--primary-color); padding-left: 15px;">Especiales (600ml)</h3>
+
+            </div>
+
+            <div class="menu-grid">
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/fuzetea-durasno-600ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Fuzetea Durazno 600ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$4.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Fuzetea Durazno 600ml" data-price="4500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/fuzetea-limon-600ml.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Fuzetea Limon 600ml</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$4.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Fuzetea Limon 600ml" data-price="4500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SECTION FAMILIARES -->
+
+            <div class="section-title" style="margin-top: 4rem; text-align: left; padding-left: 5%;">
+
+                <h3 style="color: var(--primary-color); font-size: 1.8rem; border-left: 4px solid var(--primary-color); padding-left: 15px;">Familiares (1L - 2.25L)</h3>
+
+            </div>
+
+            <div class="menu-grid">
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/coca-cola-1l.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Coca-Cola 1L</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$5.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Coca-Cola 1L" data-price="5500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/kola-sol-1l.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Kola Sol 1L</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$5.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Kola Sol 1L" data-price="5000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/coca-cola-15l.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Coca-Cola 1.5L</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$7.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Coca-Cola 1.5L" data-price="7000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/ginger-15l.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Ginger 1.5L</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$7.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Ginger 1.5L" data-price="7000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/quatro-15l.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Quatro 1.5L</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$7.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Quatro 1.5L" data-price="7000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/sprite-15l.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Sprite 1.5L</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$7.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Sprite 1.5L" data-price="7000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/kola-sol-2l.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Kola Sol 2L</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$8.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Kola Sol 2L" data-price="8500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/coca-cola-225l.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Coca-Cola 2.25L</h3>
+
+                        <div class="price-action">
+
+                            <span class="price">$9.500 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Coca-Cola 2.25L" data-price="9500">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <footer>
+
+        <div class="footer-content" id="contacto">
+
+            <div class="footer-col">
+
+                <h3>Delicius Pizza</h3>
+
+                <p>La mejor experiencia culinaria en Tocaima, Cundinamarca.</p>
+
+                <div class="social-links">
+
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+
+                    <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+                </div>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h3>Contacto</h3>
+
+                <p><i class="fa-solid fa-location-dot"></i> Parque principal, al lado de cruz verde, Tocaima Cundinamarca. calle 4# 9:13</p>
+
+                <p><i class="fa-solid fa-phone"></i> +57 322 906 2173</p>
+
+                <p><i class="fa-solid fa-envelope"></i> hola@deliciuspizza.com</p>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h3>Horarios</h3>
+
+              <p>Lunes - Sabado: 3:30 PM - 11:00 PM</p>
+
+                <p>Domingo: 4:00PM - 11:30PM</p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>&copy; 2026 Delicius Pizza. Todos los derechos reservados.</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- WhatsApp Floating Button -->
+
+    <a href="https://wa.me/573229062173?text=Hola%20Delicius%20Pizza,%20me%20gustar%C3%ADa%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" aria-label="Chatear por WhatsApp">
+
+        <i class="fa-brands fa-whatsapp"></i>
+
+    </a>
+
+
+
+    <!-- Cart Sidebar -->
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+
+        <div class="cart-header">
+
+            <h2>Tu Pedido</h2>
+
+            <button class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+
+        </div>
+
+        <div class="cart-items" id="cart-items">
+
+            <!-- Items se agregaran dinamicamente aqui -->
+
+        </div>
+
+        <div class="cart-footer">
+
+            <div class="cart-total">
+
+                <span>Total:</span>
+
+                <span id="cart-total-price">$0</span>
+
+            </div>
+
+            <button class="btn-primary btn-checkout" id="btn-checkout">Pedir por WhatsApp</button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Toast Notification Container -->
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Custom JS -->
+
+    <script src="../js/main.js"></script>
+
+    <script>
+        // Agrega la Torre de Pisa como fondo detrás de cada botella
+        document.querySelectorAll('.menu-card-img.contain').forEach(function(el) {
+            var bottleImg = el.style.backgroundImage;
+            el.style.backgroundImage = bottleImg + ', url("../imagen/torre-pisa-bg.jpg")';
+        });
+    </script>
+
+</body>
+
+</html>
+
