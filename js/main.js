@@ -580,6 +580,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h4 style="margin: 0; font-size: 1rem; color: var(--text-light);">${displayName}</h4>
                         ${details ? `<p style="font-size: 0.8rem; color: var(--text-muted); margin: 3px 0; font-style: italic;">${details}</p>` : ''}
                         ${item.img ? `<img src="${item.img}" alt="${displayName}" style="max-width: 80px; border-radius: 8px; margin: 5px 0;"/>` : ''}
+
                         <p style="font-size: 0.9rem; margin: 5px 0 0 0; color: var(--text-muted);">
                             $${item.price.toLocaleString('es-CO')} x ${item.quantity} = 
                             <strong style="color: var(--primary-color);">$${subtotal.toLocaleString('es-CO')} COP</strong>
