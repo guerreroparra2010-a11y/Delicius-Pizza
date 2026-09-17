@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/intro.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FFB300">
 </head>
 <body>
     <div class="intro-container">
@@ -21,5 +23,10 @@
     </div>
 
     <script src="js/intro.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js');
+        }
+    </script>
 </body>
 </html>

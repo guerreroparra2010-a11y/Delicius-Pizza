@@ -1,8 +1,8 @@
-﻿{
+{
   "name": "Delicius Pizza Tocaima",
   "short_name": "Delicius Pizza",
   "description": "La mejor pizza en Tocaima, Cundinamarca. Pide online y diseña tu pizza personalizada.",
-  "start_url": "./html/index.html",
+  "start_url": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#121212",

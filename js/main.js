@@ -698,6 +698,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const cartFooter = document.querySelector('.cart-footer');
+    if (cartFooter && !document.getElementById('customer-info-form')) {
+        // Formulario de datos del cliente
+        const customerForm = document.createElement('div');
+        customerForm.id = 'customer-info-form';
+        customerForm.style = 'margin-bottom: 12px;';
+        customerForm.innerHTML = `
+            <div class="cart-customer-field">
+                <label for="customer-name"><i class="fa-solid fa-user"></i> Tu nombre</label>
+                <input type="text" id="customer-name" placeholder="Ej: María García" autocomplete="name" maxlength="60" />
+            </div>
+            <div class="cart-customer-field">
+                <label for="customer-phone"><i class="fa-solid fa-phone"></i> Tu número</label>
+                <input type="tel" id="customer-phone" placeholder="Ej: 3001234567" autocomplete="tel" maxlength="15" inputmode="tel" />
+            </div>
+        `;
+        if (btnCheckout) cartFooter.insertBefore(customerForm, btnCheckout);
+        else cartFooter.appendChild(customerForm);
+    }
+
     if (cartFooter && !document.getElementById('delivery-note')) {
         const deliveryNote = document.createElement('p');
         deliveryNote.id = 'delivery-note';
@@ -715,8 +734,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Tu carrito está vacío. ¡Añade algunas pizzas o bebidas primero!');
                 return;
             }
+
+            // Leer datos del cliente
+            const nameInput  = document.getElementById('customer-name');
+            const phoneInput = document.getElementById('customer-phone');
+            const customerName  = nameInput  ? nameInput.value.trim()  : '';
+            const customerPhone = phoneInput ? phoneInput.value.trim() : '';
+
+            // Validar que los campos estén llenos
+            if (!customerName) {
+                if (nameInput) {
+                    nameInput.focus();
+                    nameInput.classList.add('cart-field-error');
+                    setTimeout(() => nameInput.classList.remove('cart-field-error'), 2000);
+                }
+                alert('⚠️ Por favor ingresa tu nombre antes de enviar el pedido.');
+                return;
+            }
+            if (!customerPhone) {
+                if (phoneInput) {
+                    phoneInput.focus();
+                    phoneInput.classList.add('cart-field-error');
+                    setTimeout(() => phoneInput.classList.remove('cart-field-error'), 2000);
+                }
+                alert('⚠️ Por favor ingresa tu número de teléfono antes de enviar el pedido.');
+                return;
+            }
             
             let message = '🍕 *Hola Delicius Pizza, me gustaría hacer este pedido:*%0A%0A';
+
+            // Datos del cliente al inicio
+            message += `👤 *Cliente:* ${customerName}%0A`;
+            message += `📞 *Teléfono:* ${customerPhone}%0A%0A`;
+
             let total = 0;
             
             cart.forEach(item => {

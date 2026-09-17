@@ -1,5 +1,5 @@
-﻿// Service Worker para Delicius Pizza (Capacidad PWA multiplataforma)
-const CACHE_NAME = 'delicius-pizza-v1';
+// Service Worker para Delicius Pizza (Capacidad PWA multiplataforma)
+const CACHE_NAME = 'delicius-pizza-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -10,11 +10,10 @@ const ASSETS_TO_CACHE = [
   './html/nosotros.html',
   './html/resenas.html',
   './html/creadores.html',
-  './pizza/index.html',
-  './pizza/style.css',
-  './pizza/script.js',
   './css/styles.css',
+  './css/intro.css',
   './js/main.js',
+  './js/intro.js',
   './manifest.json'
 ];
 
@@ -59,7 +58,7 @@ self.addEventListener('fetch', (event) => {
       }
       return fetch(event.request).catch(() => {
         // En caso de estar sin conexión
-        return caches.match('./html/index.html');
+        return caches.match('./index.html');
       });
     })
   );

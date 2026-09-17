@@ -997,6 +997,70 @@ footer {
     margin-bottom: 1.5rem;
 }
 
+/* Campos de datos del cliente en el carrito */
+#customer-info-form {
+    margin-bottom: 12px;
+}
+
+.cart-customer-field {
+    margin-bottom: 10px;
+}
+
+.cart-customer-field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.cart-customer-field label i {
+    color: var(--primary-color);
+    margin-right: 5px;
+    font-size: 0.8rem;
+}
+
+.cart-customer-field input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.65rem 0.9rem;
+    color: var(--text-light);
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    outline: none;
+}
+
+.cart-customer-field input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+    font-style: italic;
+}
+
+.cart-customer-field input:focus {
+    border-color: var(--primary-color);
+    background: rgba(255, 179, 0, 0.05);
+    box-shadow: 0 0 0 3px rgba(255, 179, 0, 0.15);
+}
+
+/* Estado de error con animación shake */
+.cart-customer-field input.cart-field-error {
+    border-color: var(--secondary-color) !important;
+    box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2) !important;
+    animation: shakeError 0.4s ease;
+}
+
+@keyframes shakeError {
+    0%, 100% { transform: translateX(0); }
+    20%       { transform: translateX(-6px); }
+    40%       { transform: translateX(6px); }
+    60%       { transform: translateX(-4px); }
+    80%       { transform: translateX(4px); }
+}
+
 .btn-checkout {
     width: 100%;
     display: block;
