@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         document.body.classList.add('fade-out');
         setTimeout(() => {
+            // Mark intro as shown so html/index.html doesn't loop back
+            sessionStorage.setItem('introShown', 'true');
             // Redirect to the actual index page
             window.location.href = 'html/index.html';
         }, 800);
