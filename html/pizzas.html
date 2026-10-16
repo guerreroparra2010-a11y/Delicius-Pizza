@@ -76,8 +76,6 @@
 
                 <li><a href="#contacto">Contacto</a></li>
 
-               
-
             </ul>
 
         </nav>
@@ -132,11 +130,11 @@
 
                         <p style="font-size: 1.2rem; color: #000; margin-bottom: 2rem; font-weight: 600;">Elige el tamaño, córtala a tu gusto y selecciona hasta 3 sabores diferentes.</p>
 
-                        <a href="../pizza/index.html" class="btn-primary" style="background-color: #000; color: #fff; font-size: 1.5rem; padding: 1rem 3rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; display: inline-block; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: transform 0.3s;">
+                        <button type="button" id="btn-open-custom-rueda" class="btn-primary" style="background-color: #000; color: #fff; font-size: 1.5rem; padding: 1rem 3rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; display: inline-block; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: transform 0.3s; border: none; cursor: pointer;">
 
-                            Crea tu pizza <i class="fa-solid fa-pizza-slice" style="margin-left: 10px;"></i>
+                            Crea tu rueda de pizza <i class="fa-solid fa-pizza-slice" style="margin-left: 10px;"></i>
 
-                        </a>
+                        </button>
 
                     </div>
 
@@ -150,7 +148,21 @@
 
             </div>
 
+            <!-- Sección de Ruedas de Pizza (Pizzas Completas) -->
 
+            <div class="section-title" style="margin-top: 1rem; text-align: center;">
+
+                <h2>Ruedas de Pizza (Pizzas Completas)</h2>
+
+                <p>Nuestras pizzas enteras recién horneadas para compartir en familia y con amigos</p>
+
+            </div>
+
+            <div class="menu-grid" id="ruedas-grid">
+
+                <!-- Ruedas de pizza renderizadas dinámicamente -->
+
+            </div>
 
             <!-- Sección de Porciones -->
 
@@ -162,9 +174,7 @@
 
             </div>
 
-
-
-            <div class="menu-grid">
+            <div class="menu-grid" id="pizzas-grid">
 
                 <!-- Porciones de Pizza -->
 
@@ -496,7 +506,284 @@
 
     <div id="toast-container" class="toast-container"></div>
 
-    <!-- Custom JS -->
+    <!-- Products Manager & Custom JS -->
+
+    <script src="../js/products-manager.js"></script>
+
+    <!-- Modal: Crea tu Rueda de Pizza Personalizada -->
+    <div id="custom-rueda-modal" style="
+        display: none; position: fixed; inset: 0; z-index: 99999;
+        background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(8px);
+        align-items: center; justify-content: center; padding: 1rem;
+        animation: ruedaFadeIn 0.3s ease;
+    ">
+        <div style="
+            background: linear-gradient(145deg, #1e1e24 0%, #141419 100%);
+            border: 1px solid rgba(255, 179, 0, 0.35);
+            border-radius: 24px; max-width: 560px; width: 100%;
+            max-height: 90vh; overflow-y: auto; padding: 2rem;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 30px rgba(255,179,0,0.15);
+            position: relative; animation: ruedaSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            color: #fff; font-family: 'Outfit', sans-serif;
+        ">
+            <button id="btn-close-rueda-modal" type="button" style="
+                position: absolute; top: 16px; right: 20px;
+                background: none; border: none; color: #aaa;
+                font-size: 28px; cursor: pointer; line-height: 1;
+                transition: color 0.2s;
+            " onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='#aaa'">&times;</button>
+
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <div style="
+                    width: 58px; height: 58px; border-radius: 50%;
+                    background: linear-gradient(135deg, var(--primary-color) 0%, #ff8c00 100%);
+                    display: flex; align-items: center; justify-content: center;
+                    margin: 0 auto 12px; font-size: 1.8rem; color: #000;
+                    box-shadow: 0 6px 20px rgba(255,179,0,0.35);
+                ">
+                    <i class="fa-solid fa-pizza-slice"></i>
+                </div>
+                <h3 style="font-size: 1.8rem; font-family: var(--font-heading); color: #fff; margin: 0 0 6px;">¡Crea tu Rueda de Pizza!</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">Selecciona el tamaño y combina hasta 3 sabores a tu gusto.</p>
+            </div>
+
+            <!-- Paso 1: Tamaño de la Rueda -->
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-color); margin-bottom: 0.8rem;">
+                    1. Elige el Tamaño
+                </label>
+                <div id="rueda-size-selector" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(115px, 1fr)); gap: 10px;">
+                    <!-- Se inyectan dinámicamente con precios actualizados -->
+                </div>
+            </div>
+
+            <!-- Paso 2: Sabores (hasta 3) -->
+            <div style="margin-bottom: 1.8rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                    <label style="font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-color); margin: 0;">
+                        2. Elige los Sabores
+                    </label>
+                    <span id="flavor-count-badge" style="font-size: 0.8rem; background: rgba(255,255,255,0.08); padding: 2px 10px; border-radius: 50px; color: #ccc;">Máx. 3 sabores</span>
+                </div>
+                <div id="rueda-flavors-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;">
+                    <!-- Checkbox chips de sabores -->
+                </div>
+            </div>
+
+            <!-- Resumen y Acción -->
+            <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.2rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="display: block; font-size: 0.85rem; color: var(--text-muted);">Total a Pagar:</span>
+                    <strong id="custom-rueda-total-price" style="font-size: 1.6rem; color: var(--primary-color); font-family: var(--font-heading);">$45.000 COP</strong>
+                </div>
+                <div style="text-align: right;">
+                    <span id="custom-rueda-summary-size" style="display: block; font-size: 0.85rem; color: #fff; font-weight: 600;">Rueda Familiar</span>
+                    <span id="custom-rueda-summary-flavors" style="display: block; font-size: 0.75rem; color: var(--text-muted);">Sin sabores seleccionados</span>
+                </div>
+            </div>
+
+            <button type="button" id="btn-add-custom-rueda-to-cart" class="btn-primary" style="
+                width: 100%; padding: 1rem; font-size: 1.1rem; font-weight: 700;
+                border: none; border-radius: 50px; cursor: pointer; text-transform: uppercase;
+                letter-spacing: 1.5px; box-shadow: 0 8px 25px rgba(255, 179, 0, 0.4);
+                display: flex; align-items: center; justify-content: center; gap: 10px;
+                transition: all 0.3s;
+            ">
+                <i class="fa-solid fa-cart-plus"></i> Agregar Rueda al Carrito
+            </button>
+        </div>
+    </div>
+    <style>
+        @keyframes ruedaFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes ruedaSlideUp { from { opacity: 0; transform: translateY(30px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .rueda-size-option {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px; padding: 10px 8px; text-align: center;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .rueda-size-option:hover {
+            border-color: rgba(255, 179, 0, 0.5);
+            background: rgba(255, 179, 0, 0.05);
+        }
+        .rueda-size-option.active {
+            border-color: var(--primary-color);
+            background: rgba(255, 179, 0, 0.15);
+            box-shadow: 0 0 15px rgba(255, 179, 0, 0.2);
+        }
+        .rueda-flavor-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px; padding: 8px 12px; font-size: 0.88rem;
+            cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+        }
+        .rueda-flavor-chip:hover {
+            border-color: rgba(255, 179, 0, 0.4);
+        }
+        .rueda-flavor-chip.selected {
+            border-color: var(--primary-color);
+            background: rgba(255, 179, 0, 0.15);
+            color: #fff; font-weight: 600;
+        }
+    </style>
+
+    <script>
+        // Renderizar Ruedas y Porciones dinámicamente desde el gestor de productos
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.ProductsManager) {
+                window.ProductsManager.renderRuedas('#ruedas-grid');
+                window.ProductsManager.renderPizzas('#pizzas-grid');
+            }
+
+            // --- LÓGICA DEL MODAL "CREA TU RUEDA DE PIZZA" ---
+            const btnOpenModal = document.getElementById('btn-open-custom-rueda');
+            const modal = document.getElementById('custom-rueda-modal');
+            const btnCloseModal = document.getElementById('btn-close-rueda-modal');
+            const sizeSelector = document.getElementById('rueda-size-selector');
+            const flavorsGrid = document.getElementById('rueda-flavors-grid');
+            const totalPriceEl = document.getElementById('custom-rueda-total-price');
+            const summarySizeEl = document.getElementById('custom-rueda-summary-size');
+            const summaryFlavorsEl = document.getElementById('custom-rueda-summary-flavors');
+            const btnAddToCart = document.getElementById('btn-add-custom-rueda-to-cart');
+
+            const FLAVORS = [
+                'Pepperoni', 'Hawaiana', 'Carnes', 'Mexicana', 
+                'Ranchera', 'Tropical', 'Carbonara', 'Napolitana', 'Criolla'
+            ];
+
+            let selectedSizeKey = 'familiar';
+            let selectedFlavors = ['Pepperoni', 'Hawaiana'];
+
+            const renderSizeOptions = () => {
+                if (!sizeSelector || !window.ProductsManager) return;
+                const prices = window.ProductsManager.getRuedaPrices();
+                const sizes = [
+                    { key: 'personal', name: 'Personal', porc: '4 Porc.', price: prices.personal?.price || 18000 },
+                    { key: 'mediana',  name: 'Mediana',  porc: '6 Porc.', price: prices.mediana?.price || 32000 },
+                    { key: 'familiar', name: 'Familiar', porc: '8 Porc.', price: prices.familiar?.price || 45000 },
+                    { key: 'gigante',  name: 'Gigante',  porc: '12 Porc.', price: prices.gigante?.price || 58000 }
+                ];
+
+                sizeSelector.innerHTML = sizes.map(s => `
+                    <div class="rueda-size-option ${s.key === selectedSizeKey ? 'active' : ''}" data-size-key="${s.key}" data-price="${s.price}" data-name="${s.name}">
+                        <div style="font-size: 0.72rem; color: var(--text-muted);">${s.porc}</div>
+                        <div style="font-weight: 700; font-size: 0.95rem; margin: 2px 0;">${s.name}</div>
+                        <div style="color: var(--primary-color); font-weight: 600; font-size: 0.85rem;">$${Number(s.price).toLocaleString('es-CO')}</div>
+                    </div>
+                `).join('');
+
+                sizeSelector.querySelectorAll('.rueda-size-option').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        selectedSizeKey = opt.getAttribute('data-size-key');
+                        renderSizeOptions();
+                        updateSummary();
+                    });
+                });
+            };
+
+            const renderFlavors = () => {
+                if (!flavorsGrid) return;
+                flavorsGrid.innerHTML = FLAVORS.map(flavor => {
+                    const isSelected = selectedFlavors.includes(flavor);
+                    return `
+                        <div class="rueda-flavor-chip ${isSelected ? 'selected' : ''}" data-flavor="${flavor}">
+                            <i class="fa-solid ${isSelected ? 'fa-check' : 'fa-pizza-slice'}" style="font-size: 0.75rem; color: ${isSelected ? 'var(--primary-color)' : '#777'}"></i>
+                            <span>${flavor}</span>
+                        </div>
+                    `;
+                }).join('');
+
+                flavorsGrid.querySelectorAll('.rueda-flavor-chip').forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        const flavor = chip.getAttribute('data-flavor');
+                        if (selectedFlavors.includes(flavor)) {
+                            selectedFlavors = selectedFlavors.filter(f => f !== flavor);
+                        } else {
+                            if (selectedFlavors.length >= 3) {
+                                selectedFlavors.shift(); // Reemplazar el más antiguo si ya van 3
+                            }
+                            selectedFlavors.push(flavor);
+                        }
+                        renderFlavors();
+                        updateSummary();
+                    });
+                });
+            };
+
+            const updateSummary = () => {
+                const prices = window.ProductsManager.getRuedaPrices();
+                const curPrice = prices[selectedSizeKey]?.price || 45000;
+                const sizeNames = {
+                    personal: 'Rueda Personal (4 Porciones)',
+                    mediana: 'Rueda Mediana (6 Porciones)',
+                    familiar: 'Rueda Familiar (8 Porciones)',
+                    gigante: 'Rueda Gigante (12 Porciones)'
+                };
+
+                if (totalPriceEl) totalPriceEl.textContent = `$${Number(curPrice).toLocaleString('es-CO')} COP`;
+                if (summarySizeEl) summarySizeEl.textContent = sizeNames[selectedSizeKey] || 'Rueda Familiar';
+                if (summaryFlavorsEl) {
+                    summaryFlavorsEl.textContent = selectedFlavors.length > 0 
+                        ? `Sabores: ${selectedFlavors.join(' + ')}` 
+                        : 'Sin sabores seleccionados';
+                }
+            };
+
+            if (btnOpenModal && modal) {
+                btnOpenModal.addEventListener('click', () => {
+                    renderSizeOptions();
+                    renderFlavors();
+                    updateSummary();
+                    modal.style.display = 'flex';
+                });
+            }
+
+            if (btnCloseModal && modal) {
+                btnCloseModal.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+            }
+
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) modal.style.display = 'none';
+                });
+            }
+
+            if (btnAddToCart) {
+                btnAddToCart.addEventListener('click', () => {
+                    if (selectedFlavors.length === 0) {
+                        alert('Por favor selecciona al menos un sabor para tu rueda de pizza.');
+                        return;
+                    }
+
+                    const prices = window.ProductsManager.getRuedaPrices();
+                    const curPrice = prices[selectedSizeKey]?.price || 45000;
+                    const sizeNames = {
+                        personal: 'Rueda Personal (4 Porc.)',
+                        mediana: 'Rueda Mediana (6 Porc.)',
+                        familiar: 'Rueda Familiar (8 Porc.)',
+                        gigante: 'Rueda Gigante (12 Porc.)'
+                    };
+
+                    const productName = `${sizeNames[selectedSizeKey]} - Sabores: ${selectedFlavors.join(' / ')}`;
+                    const imgPath = '../imagen/rueda-de-pizza-familiar.jpg';
+
+                    // Crear un botón fantasma para aprovechar la lógica completa de main.js
+                    const fakeBtn = document.createElement('button');
+                    fakeBtn.className = 'add-to-cart-btn';
+                    fakeBtn.setAttribute('data-name', productName);
+                    fakeBtn.setAttribute('data-price', curPrice);
+                    fakeBtn.setAttribute('data-img', imgPath);
+                    document.body.appendChild(fakeBtn);
+                    fakeBtn.click();
+                    fakeBtn.remove();
+
+                    if (modal) modal.style.display = 'none';
+                });
+            }
+        });
+    </script>
 
     <script src="../js/main.js"></script>
 

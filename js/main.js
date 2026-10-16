@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Animación de letras voladoras para el título del inicio
     const heroH2 = document.querySelector('.hero h2');
     if (heroH2) {
-        const nodes = Array.from(heroH2.childNodes);
+        // Guardamos el HTML original para procesarlo palabra por palabra
+        const originalHTML = heroH2.innerHTML;
         heroH2.innerHTML = '';
         let charIndex = 0;
-        
+
         const setRandomDirection = (span, index) => {
             const directions = [
                 'translate(-100vw, -100vh)',
@@ -33,25 +34,47 @@ document.addEventListener('DOMContentLoaded', () => {
             span.style.animationDelay = `${0.5 + (index * 0.03)}s`;
         };
 
-        nodes.forEach(node => {
+        // Función para animar el texto de un nodo agrupando por palabras
+        const animateText = (text, isHighlight) => {
+            // Separar por espacios manteniendo los espacios
+            const words = text.split(/(\s+)/);
+            words.forEach(word => {
+                if (!word) return;
+                if (/^\s+$/.test(word)) {
+                    // Es un espacio — agregarlo como texto normal
+                    heroH2.appendChild(document.createTextNode('\u00A0'));
+                    return;
+                }
+                // Crear un wrapper por palabra con white-space: nowrap
+                const wordWrapper = document.createElement('span');
+                wordWrapper.style.whiteSpace = 'nowrap';
+                wordWrapper.style.display = 'inline-block';
+
+                word.split('').forEach(char => {
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.className = isHighlight
+                        ? 'fly-in-char-main highlight-text'
+                        : 'fly-in-char-main';
+                    setRandomDirection(span, charIndex++);
+                    wordWrapper.appendChild(span);
+                });
+                heroH2.appendChild(wordWrapper);
+            });
+        };
+
+        // Parsear el HTML original manteniendo <span> y <br>
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = originalHTML;
+        tempDiv.childNodes.forEach(node => {
             if (node.nodeType === Node.TEXT_NODE) {
-                const chars = node.textContent.split('');
-                chars.forEach(char => {
-                    const span = document.createElement('span');
-                    span.textContent = char === ' ' ? '\u00A0' : char;
-                    span.className = 'fly-in-char-main';
-                    setRandomDirection(span, charIndex++);
-                    heroH2.appendChild(span);
-                });
-            } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName.toLowerCase() === 'span') {
-                const chars = node.textContent.split('');
-                chars.forEach(char => {
-                    const span = document.createElement('span');
-                    span.textContent = char === ' ' ? '\u00A0' : char;
-                    span.className = 'fly-in-char-main highlight-text';
-                    setRandomDirection(span, charIndex++);
-                    heroH2.appendChild(span);
-                });
+                animateText(node.textContent, false);
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                if (node.tagName.toLowerCase() === 'span') {
+                    animateText(node.textContent, true);
+                } else if (node.tagName.toLowerCase() === 'br') {
+                    heroH2.appendChild(document.createElement('br'));
+                }
             }
         });
     }
@@ -489,60 +512,60 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 850);
     };
 
-    // 4. Agregar ítems (Bebidas, Porciones, Encargos externos al juego)
-    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-    addToCartButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const name = btn.getAttribute('data-name');
-            const rawPrice = btn.getAttribute('data-price');
-            const price = parseInt(rawPrice);
-            const img = btn.getAttribute('data-img'); // optional image path
-            
-            if (!name || isNaN(price)) {
-                console.error("Error: Producto sin nombre o precio inválido", name, rawPrice);
-                return;
-            }
-            
-            // Disparar animación de imagen rota hacia el carrito
-            const card = btn.closest('.menu-card');
-            const imgSource = card ? (card.querySelector('.menu-card-img') || card.querySelector('img')) : null;
-            if (imgSource) {
-                animateShatterToCart(imgSource);
-            }
+    // 4. Agregar ítems (Bebidas, Porciones, Encargos externos al juego) - Soporte delegado para elementos estáticos y dinámicos
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.add-to-cart-btn');
+        if (!btn) return;
 
+        const name = btn.getAttribute('data-name');
+        const rawPrice = btn.getAttribute('data-price');
+        const price = parseInt(rawPrice);
+        const img = btn.getAttribute('data-img'); // optional image path
+        
+        if (!name || isNaN(price)) {
+            console.error("Error: Producto sin nombre o precio inválido", name, rawPrice);
+            return;
+        }
+        
+        // Disparar animación de imagen rota hacia el carrito
+        const card = btn.closest('.menu-card');
+        const imgSource = card ? (card.querySelector('.menu-card-img') || card.querySelector('img')) : null;
+        if (imgSource) {
+            animateShatterToCart(imgSource);
+        }
+
+        cart = loadCart();
+        const existingItem = cart.find(item => item.name === name);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+            // preserve existing image if not already set
+            if (!existingItem.img && img) existingItem.img = img;
+        } else {
+            const newItem = { name, price, quantity: 1 };
+            if (img) newItem.img = img;
+            cart.push(newItem);
+        }
+        
+        updateCartUI();
+        
+        showToast(`¡${name} agregado al carrito!`, () => {
             cart = loadCart();
-            const existingItem = cart.find(item => item.name === name);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-                // preserve existing image if not already set
-                if (!existingItem.img && img) existingItem.img = img;
-            } else {
-                const newItem = { name, price, quantity: 1 };
-                if (img) newItem.img = img;
-                cart.push(newItem);
-            }
-            
-            updateCartUI();
-            
-            showToast(`¡${name} agregado al carrito!`, () => {
-                cart = loadCart();
-                const index = cart.findIndex(item => item.name === name);
-                if (index !== -1) {
-                    if (cart[index].quantity > 1) {
-                        cart[index].quantity -= 1;
-                    } else {
-                        cart.splice(index, 1);
-                    }
-                    updateCartUI();
+            const index = cart.findIndex(item => item.name === name);
+            if (index !== -1) {
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity -= 1;
+                } else {
+                    cart.splice(index, 1);
                 }
-            });
-            
-            if (cartIcon) {
-                cartIcon.style.transform = 'scale(1.2)';
-                setTimeout(() => cartIcon.style.transform = 'scale(1)', 200);
+                updateCartUI();
             }
         });
+        
+        if (cartIcon) {
+            cartIcon.style.transform = 'scale(1.2)';
+            setTimeout(() => cartIcon.style.transform = 'scale(1)', 200);
+        }
     });
     
     // 5. Motor de Renderizado del Carrito
@@ -993,4 +1016,189 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- ACCESOS SECRETOS A ADMINISTRACIÓN (Sin enlace visible) ---
+
+    // Modal de seguridad para verificar credenciales antes de entrar al panel
+    const showAdminLoginModal = () => {
+        // Evitar duplicados
+        if (document.getElementById('admin-security-modal')) return;
+
+        const modalHTML = `
+        <div id="admin-security-modal" style="
+            position: fixed; inset: 0; z-index: 99999;
+            background: rgba(10,10,20,0.85);
+            backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+            animation: adminFadeIn 0.3s ease;
+        ">
+            <div style="
+                background: linear-gradient(145deg, #1a1a2e, #16213e);
+                border: 1px solid rgba(232,93,47,0.35);
+                border-radius: 18px;
+                padding: 40px 36px 32px;
+                width: 100%; max-width: 400px;
+                box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 40px rgba(232,93,47,0.12);
+                position: relative;
+                animation: adminSlideUp 0.35s cubic-bezier(0.34,1.56,0.64,1);
+            ">
+                <button id="admin-modal-close" style="
+                    position: absolute; top: 14px; right: 18px;
+                    background: none; border: none; color: #aaa;
+                    font-size: 22px; cursor: pointer; line-height:1;
+                    transition: color 0.2s;
+                " onmouseover="this.style.color='#e85d2f'" onmouseout="this.style.color='#aaa'">&times;</button>
+
+                <div style="text-align:center; margin-bottom: 28px;">
+                    <div style="
+                        width: 56px; height: 56px; border-radius: 50%;
+                        background: linear-gradient(135deg, #e85d2f, #c94a1f);
+                        display: flex; align-items: center; justify-content: center;
+                        margin: 0 auto 14px;
+                        box-shadow: 0 8px 24px rgba(232,93,47,0.35);
+                    ">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h2 style="color:#fff; font-size:1.35rem; margin:0 0 4px; font-family:'Inter',sans-serif; font-weight:700;">Acceso Seguro</h2>
+                    <p style="color:#888; font-size:0.85rem; margin:0;">Panel de Administración</p>
+                </div>
+
+                <form id="admin-modal-form" autocomplete="off">
+                    <div style="margin-bottom:16px;">
+                        <label style="display:block; color:#ccc; font-size:0.8rem; margin-bottom:6px; font-family:'Inter',sans-serif; letter-spacing:0.04em;">CORREO ELECTRÓNICO</label>
+                        <input id="admin-modal-email" type="email" placeholder="correo@ejemplo.com" style="
+                            width:100%; box-sizing:border-box;
+                            background: rgba(255,255,255,0.06);
+                            border: 1px solid rgba(255,255,255,0.12);
+                            border-radius: 10px; padding: 12px 14px;
+                            color: #fff; font-size: 0.95rem;
+                            outline: none; transition: border 0.2s;
+                            font-family: 'Inter', sans-serif;
+                        " onfocus="this.style.borderColor='rgba(232,93,47,0.7)'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+                    </div>
+                    <div style="margin-bottom:22px;">
+                        <label style="display:block; color:#ccc; font-size:0.8rem; margin-bottom:6px; font-family:'Inter',sans-serif; letter-spacing:0.04em;">CONTRASEÑA</label>
+                        <input id="admin-modal-password" type="password" placeholder="••••••••" style="
+                            width:100%; box-sizing:border-box;
+                            background: rgba(255,255,255,0.06);
+                            border: 1px solid rgba(255,255,255,0.12);
+                            border-radius: 10px; padding: 12px 14px;
+                            color: #fff; font-size: 0.95rem;
+                            outline: none; transition: border 0.2s;
+                            font-family: 'Inter', sans-serif;
+                        " onfocus="this.style.borderColor='rgba(232,93,47,0.7)'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+                    </div>
+                    <div id="admin-modal-error" style="
+                        display:none; background:rgba(220,50,50,0.15);
+                        border:1px solid rgba(220,50,50,0.4);
+                        border-radius:8px; padding:10px 14px;
+                        color:#ff7070; font-size:0.85rem;
+                        margin-bottom:16px; font-family:'Inter',sans-serif;
+                        text-align:center;
+                    ">❌ Correo o contraseña incorrectos</div>
+                    <button type="submit" style="
+                        width:100%; padding:13px;
+                        background: linear-gradient(135deg, #e85d2f, #c94a1f);
+                        border:none; border-radius:10px;
+                        color:#fff; font-size:1rem; font-weight:700;
+                        cursor:pointer; font-family:'Inter',sans-serif;
+                        letter-spacing:0.03em;
+                        box-shadow: 0 6px 20px rgba(232,93,47,0.4);
+                        transition: transform 0.15s, box-shadow 0.15s;
+                    "
+                    onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 28px rgba(232,93,47,0.55)'"
+                    onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 6px 20px rgba(232,93,47,0.4)'"
+                    >Ingresar al Panel</button>
+                </form>
+            </div>
+        </div>
+        <style>
+            @keyframes adminFadeIn { from { opacity:0; } to { opacity:1; } }
+            @keyframes adminSlideUp { from { opacity:0; transform:translateY(30px) scale(0.96); } to { opacity:1; transform:translateY(0) scale(1); } }
+        </style>`;
+
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        const modal = document.getElementById('admin-security-modal');
+        const form  = document.getElementById('admin-modal-form');
+        const closeBtn = document.getElementById('admin-modal-close');
+        const errorDiv = document.getElementById('admin-modal-error');
+
+        // Cerrar modal al hacer clic fuera
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+        });
+        closeBtn.addEventListener('click', () => modal.remove());
+
+        // Limpiar hash para evitar re-apertura
+        if (window.location.hash.toLowerCase() === '#admin') {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('admin-modal-email').value.trim();
+            const password = document.getElementById('admin-modal-password').value;
+
+            const ADMIN_EMAIL = 'guerreroparra2010@gmail.com';
+            const ADMIN_PASS  = 'chuchogay';
+
+            if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
+                sessionStorage.setItem('adminAuth', 'true');
+                modal.remove();
+                const isInHtmlFolder = window.location.pathname.includes('/html/') || window.location.pathname.endsWith('/html');
+                window.location.href = isInHtmlFolder ? 'admin.html' : 'html/admin.html';
+            } else {
+                errorDiv.style.display = 'block';
+                document.getElementById('admin-modal-password').value = '';
+                document.getElementById('admin-modal-password').focus();
+                setTimeout(() => { errorDiv.style.display = 'none'; }, 3500);
+            }
+        });
+
+        // Foco automático en el campo de correo
+        setTimeout(() => { document.getElementById('admin-modal-email').focus(); }, 100);
+    };
+
+    // 1. Acceso por URL Hash: tudominio.com/#admin
+    if (window.location.hash.toLowerCase() === '#admin') {
+        showAdminLoginModal();
+    }
+    window.addEventListener('hashchange', () => {
+        if (window.location.hash.toLowerCase() === '#admin') {
+            showAdminLoginModal();
+        }
+    });
+
+    // 2. Acceso por combinación de teclas: Ctrl + Alt + A  o  Ctrl + Shift + A
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && (e.altKey || e.shiftKey) && (e.key === 'a' || e.key === 'A')) {
+            e.preventDefault();
+            showAdminLoginModal();
+        }
+    });
+
+    // 3. Acceso por triple clic en el logo del encabezado
+    const logoEl = document.querySelector('.logo');
+    if (logoEl) {
+        let logoClicks = 0;
+        let logoTimer = null;
+        logoEl.addEventListener('click', (e) => {
+            logoClicks++;
+            clearTimeout(logoTimer);
+            if (logoClicks >= 3) {
+                e.preventDefault();
+                showAdminLoginModal();
+                logoClicks = 0;
+            } else {
+                logoTimer = setTimeout(() => {
+                    logoClicks = 0;
+                }, 600);
+            }
+        });
+    }
 });
+

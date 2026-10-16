@@ -118,7 +118,7 @@
 
 
 
-            <div class="menu-grid">
+            <div class="menu-grid" id="encargos-grid">
 
                 <!-- Porción Tentación -->
 
@@ -312,7 +312,17 @@
 
     <div id="toast-container" class="toast-container"></div>
 
-    <!-- Custom JS -->
+    <!-- Products Manager & Custom JS -->
+
+    <script src="../js/products-manager.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.ProductsManager) {
+                window.ProductsManager.renderEncargos('#encargos-grid');
+            }
+        });
+    </script>
 
     <script src="../js/main.js"></script>
 

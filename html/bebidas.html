@@ -118,11 +118,9 @@
 
                 <li><a href="resenas.html">Reseñas</a></li>
 
-                <li><a href="#creadores.html">Creadores</a></li>
+                <li><a href="creadores.html">Creadores</a></li>
 
                 <li><a href="#contacto">Contacto</a></li>
-
-                
 
             </ul>
 
@@ -180,7 +178,7 @@
 
             </div>
 
-            <div class="menu-grid">
+            <div class="menu-grid" id="bebidas-grid-250">
 
                 <div class="menu-card">
 
@@ -254,7 +252,7 @@
 
             </div>
 
-            <div class="menu-grid">
+            <div class="menu-grid" id="bebidas-grid-350">
 
                 <div class="menu-card">
 
@@ -528,7 +526,7 @@
 
             </div>
 
-            <div class="menu-grid">
+            <div class="menu-grid" id="bebidas-grid-400">
 
                 <div class="menu-card">
 
@@ -682,7 +680,7 @@
 
             </div>
 
-            <div class="menu-grid">
+            <div class="menu-grid" id="bebidas-grid-600">
 
                 <div class="menu-card">
 
@@ -736,7 +734,7 @@
 
             </div>
 
-            <div class="menu-grid">
+            <div class="menu-grid" id="bebidas-grid-familiar">
 
                 <div class="menu-card">
 
@@ -900,6 +898,14 @@
 
             </div>
 
+            <!-- Sección dinámica para otras bebidas agregadas desde Admin -->
+            <div id="bebidas-section-extra" style="display: none;">
+                <div class="section-title" style="margin-top: 4rem; text-align: left; padding-left: 5%;">
+                    <h3 style="color: var(--primary-color); font-size: 1.8rem; border-left: 4px solid var(--primary-color); padding-left: 15px;">Otras Bebidas</h3>
+                </div>
+                <div class="menu-grid" id="bebidas-grid-extra"></div>
+            </div>
+
         </section>
 
     </main>
@@ -1014,7 +1020,17 @@
 
     <div id="toast-container" class="toast-container"></div>
 
-    <!-- Custom JS -->
+    <!-- Products Manager & Custom JS -->
+
+    <script src="../js/products-manager.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.ProductsManager) {
+                window.ProductsManager.renderBebidas();
+            }
+        });
+    </script>
 
     <script src="../js/main.js"></script>
 
@@ -1022,7 +1038,9 @@
         // Agrega la Torre de Pisa como fondo detrás de cada botella
         document.querySelectorAll('.menu-card-img.contain').forEach(function(el) {
             var bottleImg = el.style.backgroundImage;
-            el.style.backgroundImage = bottleImg + ', url("../imagen/torre-pisa-bg.jpg")';
+            if (bottleImg && !bottleImg.includes('torre-pisa-bg')) {
+                el.style.backgroundImage = bottleImg + ', url("../imagen/torre-pisa-bg.jpg")';
+            }
         });
     </script>
 

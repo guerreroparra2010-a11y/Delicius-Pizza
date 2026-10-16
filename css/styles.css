@@ -364,8 +364,9 @@ nav ul li a.active {
     font-size: 4.5rem;
     line-height: 1.1;
     margin-bottom: 1.5rem;
-    display: flex;
-    flex-wrap: wrap;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    hyphens: none;
 }
 
 .fly-in-char-main {
@@ -1200,7 +1201,9 @@ footer {
     }
 
     .hero h2 {
-        font-size: 3rem;
+        font-size: 2.8rem;
+        word-break: keep-all;
+        overflow-wrap: normal;
     }
 
     .about-section {
@@ -1291,7 +1294,10 @@ footer {
     }
 
     .hero h2 {
-        font-size: 2.6rem;
+        font-size: 2rem;
+        word-break: keep-all;
+        overflow-wrap: normal;
+        hyphens: none;
     }
 
     .hero p {
