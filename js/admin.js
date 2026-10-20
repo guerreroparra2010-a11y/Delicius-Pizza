@@ -27,12 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Métricas
     const kpiTotal = document.getElementById('kpi-total-count');
     const kpiPizzas = document.getElementById('kpi-pizzas-count');
-    const kpiRuedas = document.getElementById('kpi-ruedas-count');
     const kpiBebidas = document.getElementById('kpi-bebidas-count');
     const kpiEncargos = document.getElementById('kpi-encargos-count');
 
-    // Precios de Ruedas
-    const btnSaveRuedaPrices = document.getElementById('btn-save-rueda-prices');
+    // Precios de Porciones
+    const btnSavePorcionPrice = document.getElementById('btn-save-porcion-price');
 
     // Controles y Grid
     const productsGrid = document.getElementById('admin-products-grid');
@@ -188,60 +187,75 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- DASHBOARD: MÉTRICAS Y LISTADO ---
     const updateKPIs = (products) => {
         if (kpiTotal) kpiTotal.textContent = products.length;
-        if (kpiPizzas) kpiPizzas.textContent = products.filter(p => p.category === 'pizzas' && p.subcategory !== 'ruedas').length;
-        if (kpiRuedas) kpiRuedas.textContent = products.filter(p => p.category === 'ruedas' || p.subcategory === 'ruedas').length;
+        if (kpiPizzas) kpiPizzas.textContent = products.filter(p => p.category === 'pizzas').length;
         if (kpiBebidas) kpiBebidas.textContent = products.filter(p => p.category === 'bebidas').length;
         if (kpiEncargos) kpiEncargos.textContent = products.filter(p => p.category === 'encargos').length;
     };
 
-    // Carga los precios actuales de las Ruedas de Pizza en los inputs del panel
+    // Carga precios actuales de Ruedas en los inputs del panel
     const loadRuedaPricesInputs = () => {
-        if (!window.ProductsManager || typeof window.ProductsManager.getRuedaPrices !== 'function') return;
+        if (!window.ProductsManager) return;
         const prices = window.ProductsManager.getRuedaPrices();
+        const inputJunior = document.getElementById('price-rueda-junior');
+        const inputMedium = document.getElementById('price-rueda-medium');
+        const inputFamiliar = document.getElementById('price-rueda-familiar');
 
-        // Junior
-        const juniorLocal  = document.getElementById('price-junior-local');
-        const juniorLlevar = document.getElementById('price-junior-llevar');
-        if (juniorLocal)  juniorLocal.value  = prices.junior?.priceLocal  || 20000;
-        if (juniorLlevar) juniorLlevar.value = prices.junior?.priceLlevar || 22000;
-
-        // Medium
-        const mediumLocal  = document.getElementById('price-medium-local');
-        const mediumLlevar = document.getElementById('price-medium-llevar');
-        if (mediumLocal)  mediumLocal.value  = prices.medium?.priceLocal  || 32000;
-        if (mediumLlevar) mediumLlevar.value = prices.medium?.priceLlevar || 34000;
-
-        // Familiar
-        const familiarLocal  = document.getElementById('price-familiar-local');
-        const familiarLlevar = document.getElementById('price-familiar-llevar');
-        if (familiarLocal)  familiarLocal.value  = prices.familiar?.priceLocal  || 45000;
-        if (familiarLlevar) familiarLlevar.value = prices.familiar?.priceLlevar || 48000;
+        if (inputJunior) inputJunior.value = prices.junior?.price || prices.junior?.priceLlevar || 22000;
+        if (inputMedium) inputMedium.value = prices.medium?.price || prices.medium?.priceLlevar || 34000;
+        if (inputFamiliar) inputFamiliar.value = prices.familiar?.price || prices.familiar?.priceLlevar || 48000;
     };
 
-    // Guardar precios de Ruedas de Pizza desde la tarjeta rápida
-    if (btnSaveRuedaPrices) {
-        btnSaveRuedaPrices.addEventListener('click', () => {
-            const jLocal  = parseInt(document.getElementById('price-junior-local')?.value)  || 20000;
-            const jLlevar = parseInt(document.getElementById('price-junior-llevar')?.value) || 22000;
-            const mLocal  = parseInt(document.getElementById('price-medium-local')?.value)  || 32000;
-            const mLlevar = parseInt(document.getElementById('price-medium-llevar')?.value) || 34000;
-            const fLocal  = parseInt(document.getElementById('price-familiar-local')?.value)  || 45000;
-            const fLlevar = parseInt(document.getElementById('price-familiar-llevar')?.value) || 48000;
+    // Guardar precios de ruedas (se sincronizan con el juego y el catálogo)
+    const btnSaveRuedasPrices = document.getElementById('btn-save-ruedas-prices');
+    if (btnSaveRuedasPrices) {
+        btnSaveRuedasPrices.addEventListener('click', () => {
+            const pJunior = parseInt(document.getElementById('price-rueda-junior')?.value) || 22000;
+            const pMedium = parseInt(document.getElementById('price-rueda-medium')?.value) || 34000;
+            const pFamiliar = parseInt(document.getElementById('price-rueda-familiar')?.value) || 48000;
 
-            const current = window.ProductsManager.getRuedaPrices();
             const updated = {
-                junior:   { ...current.junior,   priceLocal: jLocal, priceLlevar: jLlevar, price: jLlevar },
-                medium:   { ...current.medium,   priceLocal: mLocal, priceLlevar: mLlevar, price: mLlevar },
-                familiar: { ...current.familiar, priceLocal: fLocal, priceLlevar: fLlevar, price: fLlevar }
+                junior: { id: "rueda-junior", name: "Rueda Junior", badge: "Junior", priceLocal: Math.max(0, pJunior - 2000), priceLlevar: pJunior, price: pJunior },
+                medium: { id: "rueda-medium", name: "Rueda Medium", badge: "Medium", priceLocal: Math.max(0, pMedium - 2000), priceLlevar: pMedium, price: pMedium },
+                familiar: { id: "rueda-familiar", name: "Rueda Familiar", badge: "Familiar", priceLocal: Math.max(0, pFamiliar - 3000), priceLlevar: pFamiliar, price: pFamiliar }
             };
 
-            const success = window.ProductsManager.saveRuedaPrices(updated);
-            if (success) {
-                showToast('¡Precios de Ruedas de Pizza actualizados y sincronizados!', 'success');
-                renderDashboard();
-            } else {
-                showToast('Error al guardar los precios de ruedas', 'error');
+            window.ProductsManager.saveRuedaPrices(updated);
+            showToast('¡Precios de Ruedas de Pizza actualizados con éxito!', 'success');
+            renderDashboard();
+        });
+    }
+
+    // Carga el precio actual de las porciones en el input del panel
+    const loadPorcionPriceInput = () => {
+        if (!window.ProductsManager) return;
+        const porciones = window.ProductsManager.getAll().filter(
+            p => p.category === 'pizzas' && p.subcategory === 'porciones'
+        );
+        const input = document.getElementById('price-porcion');
+        if (input && porciones.length > 0) {
+            input.value = porciones[0].price;
+        }
+    };
+
+    // Guardar precio de porciones: actualiza todas las 10 porciones al mismo tiempo
+    if (btnSavePorcionPrice) {
+        btnSavePorcionPrice.addEventListener('click', () => {
+            const nuevoPrice = parseInt(document.getElementById('price-porcion')?.value);
+            if (!nuevoPrice || nuevoPrice <= 0) {
+                showToast('Por favor ingresa un precio válido', 'error');
+                return;
             }
+
+            const porciones = window.ProductsManager.getAll().filter(
+                p => p.category === 'pizzas' && p.subcategory === 'porciones'
+            );
+
+            porciones.forEach(p => {
+                window.ProductsManager.update(p.id, { ...p, price: nuevoPrice });
+            });
+
+            showToast(`¡Precio de porciones actualizado a $${nuevoPrice.toLocaleString('es-CO')} COP!`, 'success');
+            renderDashboard();
         });
     }
 
@@ -250,16 +264,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const allProducts = window.ProductsManager.getAll();
         updateKPIs(allProducts);
         loadRuedaPricesInputs();
+        loadPorcionPriceInput();
 
         // Filtrado por categoría y búsqueda
         const filtered = allProducts.filter(item => {
             let matchesCategory = false;
             if (currentCategory === 'all') {
                 matchesCategory = true;
-            } else if (currentCategory === 'pizzas') {
-                matchesCategory = (item.category === 'pizzas' && item.subcategory !== 'ruedas');
-            } else if (currentCategory === 'ruedas') {
-                matchesCategory = (item.category === 'ruedas' || item.subcategory === 'ruedas');
             } else {
                 matchesCategory = (item.category === currentCategory);
             }

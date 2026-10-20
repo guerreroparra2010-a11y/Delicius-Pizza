@@ -173,15 +173,6 @@
                         </div>
                     </div>
 
-                    <div class="kpi-card">
-                        <div class="kpi-icon" style="color: #ff9f43; background: rgba(255, 159, 67, 0.15);">
-                            <i class="fa-solid fa-circle-dot"></i>
-                        </div>
-                        <div class="kpi-info">
-                            <h3 id="kpi-ruedas-count">0</h3>
-                            <p>Ruedas de Pizza</p>
-                        </div>
-                    </div>
 
                     <div class="kpi-card">
                         <div class="kpi-icon" style="color: #00d2d3; background: rgba(0, 210, 211, 0.15);">
@@ -204,50 +195,38 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta de Gestión Rápida: Precios de Ruedas de Pizza -->
-                <div class="rueda-prices-card">
+                <!-- Tarjeta de Gestión Rápida: Precios de Ruedas de Pizza (Juego y Web) -->
+                <div class="rueda-prices-card" style="margin-bottom: 1.5rem;">
                     <div class="rueda-prices-header">
                         <div class="rueda-prices-title">
-                            <div class="rueda-icon-wrap">
-                                <i class="fa-solid fa-pizza-slice"></i>
+                            <div class="rueda-icon-wrap" style="color: #ff9f43; background: rgba(255, 159, 67, 0.15);">
+                                <i class="fa-solid fa-circle-dot"></i>
                             </div>
                             <div>
-                                <h3>Precios de Ruedas de Pizza (Junior, Medium y Familiar)</h3>
-                                <p>Configura los precios de venta para consumo en el negocio y para llevar.</p>
+                                <h3>Precios de Ruedas de Pizza (Juego y Web)</h3>
+                                <p>Configura los precios de las Ruedas Junior, Medium y Familiar para el juego y la web.</p>
                             </div>
                         </div>
-                        <button type="button" id="btn-save-rueda-prices" class="btn-primary-admin">
-                            <i class="fa-solid fa-floppy-disk"></i> Guardar Precios de Ruedas
+                        <button type="button" id="btn-save-ruedas-prices" class="btn-primary-admin">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar Ruedas
                         </button>
                     </div>
 
-                    <div class="rueda-prices-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                    <div class="rueda-prices-grid">
                         <!-- Rueda Junior -->
                         <div class="rueda-price-item">
                             <div class="rueda-item-head">
-                                <span class="rueda-size-badge">Rueda 1</span>
-                                <span class="rueda-size-name" style="color: var(--primary-color);">Rueda Junior</span>
+                                <span class="rueda-size-badge">4 Cortes &bull; Máx. 2 Sabores</span>
+                                <span class="rueda-size-name">Rueda Junior</span>
                             </div>
-                            <div style="display: flex; flex-direction: column; gap: 10px;">
-                                <div>
-                                    <label for="price-junior-local" style="font-size: 0.78rem; color: #bbb; display: flex; align-items: center; gap: 5px;">
-                                        <i class="fa-solid fa-store" style="color: var(--primary-color);"></i> En el Negocio (Local)
-                                    </label>
-                                    <div class="price-input-wrap">
-                                        <span class="price-prefix">$</span>
-                                        <input type="number" id="price-junior-local" class="rueda-input" min="0" step="500" placeholder="20000">
-                                        <span class="price-suffix">COP</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="price-junior-llevar" style="font-size: 0.78rem; color: #bbb; display: flex; align-items: center; gap: 5px;">
-                                        <i class="fa-solid fa-box" style="color: #00d2d3;"></i> Para Llevar
-                                    </label>
-                                    <div class="price-input-wrap">
-                                        <span class="price-prefix">$</span>
-                                        <input type="number" id="price-junior-llevar" class="rueda-input" min="0" step="500" placeholder="22000">
-                                        <span class="price-suffix">COP</span>
-                                    </div>
+                            <div>
+                                <label for="price-rueda-junior" style="font-size: 0.78rem; color: #bbb; display: flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-tag" style="color: var(--primary-color);"></i> Precio de venta
+                                </label>
+                                <div class="price-input-wrap">
+                                    <span class="price-prefix">$</span>
+                                    <input type="number" id="price-rueda-junior" class="rueda-input" min="0" step="500" placeholder="22000">
+                                    <span class="price-suffix">COP</span>
                                 </div>
                             </div>
                         </div>
@@ -255,29 +234,17 @@
                         <!-- Rueda Medium -->
                         <div class="rueda-price-item">
                             <div class="rueda-item-head">
-                                <span class="rueda-size-badge">Rueda 2</span>
-                                <span class="rueda-size-name" style="color: var(--primary-color);">Rueda Medium</span>
+                                <span class="rueda-size-badge">6 u 8 Cortes &bull; Máx. 2 Sabores</span>
+                                <span class="rueda-size-name">Rueda Medium</span>
                             </div>
-                            <div style="display: flex; flex-direction: column; gap: 10px;">
-                                <div>
-                                    <label for="price-medium-local" style="font-size: 0.78rem; color: #bbb; display: flex; align-items: center; gap: 5px;">
-                                        <i class="fa-solid fa-store" style="color: var(--primary-color);"></i> En el Negocio (Local)
-                                    </label>
-                                    <div class="price-input-wrap">
-                                        <span class="price-prefix">$</span>
-                                        <input type="number" id="price-medium-local" class="rueda-input" min="0" step="500" placeholder="32000">
-                                        <span class="price-suffix">COP</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="price-medium-llevar" style="font-size: 0.78rem; color: #bbb; display: flex; align-items: center; gap: 5px;">
-                                        <i class="fa-solid fa-box" style="color: #00d2d3;"></i> Para Llevar
-                                    </label>
-                                    <div class="price-input-wrap">
-                                        <span class="price-prefix">$</span>
-                                        <input type="number" id="price-medium-llevar" class="rueda-input" min="0" step="500" placeholder="34000">
-                                        <span class="price-suffix">COP</span>
-                                    </div>
+                            <div>
+                                <label for="price-rueda-medium" style="font-size: 0.78rem; color: #bbb; display: flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-tag" style="color: var(--primary-color);"></i> Precio de venta
+                                </label>
+                                <div class="price-input-wrap">
+                                    <span class="price-prefix">$</span>
+                                    <input type="number" id="price-rueda-medium" class="rueda-input" min="0" step="500" placeholder="34000">
+                                    <span class="price-suffix">COP</span>
                                 </div>
                             </div>
                         </div>
@@ -285,30 +252,59 @@
                         <!-- Rueda Familiar -->
                         <div class="rueda-price-item highlighted">
                             <div class="rueda-item-head">
-                                <span class="rueda-size-badge star"><i class="fa-solid fa-star"></i> Top Ventas</span>
+                                <span class="rueda-size-badge star"><i class="fa-solid fa-star"></i> Más Vendida</span>
                                 <span class="rueda-size-name" style="color: var(--primary-color);">Rueda Familiar</span>
                             </div>
-                            <div style="display: flex; flex-direction: column; gap: 10px;">
-                                <div>
-                                    <label for="price-familiar-local" style="font-size: 0.78rem; color: #bbb; display: flex; align-items: center; gap: 5px;">
-                                        <i class="fa-solid fa-store" style="color: var(--primary-color);"></i> En el Negocio (Local)
-                                    </label>
-                                    <div class="price-input-wrap">
-                                        <span class="price-prefix">$</span>
-                                        <input type="number" id="price-familiar-local" class="rueda-input" min="0" step="500" placeholder="45000">
-                                        <span class="price-suffix">COP</span>
-                                    </div>
+                            <div>
+                                <label for="price-rueda-familiar" style="font-size: 0.78rem; color: #bbb; display: flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-tag" style="color: var(--primary-color);"></i> Precio de venta
+                                </label>
+                                <div class="price-input-wrap">
+                                    <span class="price-prefix">$</span>
+                                    <input type="number" id="price-rueda-familiar" class="rueda-input" min="0" step="500" placeholder="48000">
+                                    <span class="price-suffix">COP</span>
                                 </div>
-                                <div>
-                                    <label for="price-familiar-llevar" style="font-size: 0.78rem; color: #bbb; display: flex; align-items: center; gap: 5px;">
-                                        <i class="fa-solid fa-box" style="color: #00d2d3;"></i> Para Llevar
-                                    </label>
-                                    <div class="price-input-wrap">
-                                        <span class="price-prefix">$</span>
-                                        <input type="number" id="price-familiar-llevar" class="rueda-input" min="0" step="500" placeholder="48000">
-                                        <span class="price-suffix">COP</span>
-                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Gestión Rápida: Precio de Porciones de Pizza -->
+                <div class="rueda-prices-card">
+                    <div class="rueda-prices-header">
+                        <div class="rueda-prices-title">
+                            <div class="rueda-icon-wrap">
+                                <i class="fa-solid fa-pizza-slice"></i>
+                            </div>
+                            <div>
+                                <h3>Precio de Porciones de Pizza</h3>
+                                <p>Cambia el precio de venta de todas las 10 porciones de pizza a la vez.</p>
+                            </div>
+                        </div>
+                        <button type="button" id="btn-save-porcion-price" class="btn-primary-admin">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar Precio
+                        </button>
+                    </div>
+
+                    <div class="rueda-prices-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                        <!-- Precio único de porciones -->
+                        <div class="rueda-price-item highlighted">
+                            <div class="rueda-item-head">
+                                <span class="rueda-size-badge star"><i class="fa-solid fa-star"></i> Precio Actual</span>
+                                <span class="rueda-size-name" style="color: var(--primary-color);">Porción de Pizza</span>
+                            </div>
+                            <div>
+                                <label for="price-porcion" style="font-size: 0.78rem; color: #bbb; display: flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-tag" style="color: var(--primary-color);"></i> Precio por porción
+                                </label>
+                                <div class="price-input-wrap">
+                                    <span class="price-prefix">$</span>
+                                    <input type="number" id="price-porcion" class="rueda-input" min="0" step="500" placeholder="9000">
+                                    <span class="price-suffix">COP</span>
                                 </div>
+                                <p style="font-size: 0.75rem; color: #777; margin-top: 8px;">
+                                    <i class="fa-solid fa-circle-info"></i> Se aplicará a todas las 10 porciones (Pepperoni, Hawaiana, Carnes, Pollo con Champiñones, etc.)
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -325,7 +321,6 @@
                         <div class="category-tabs">
                             <button class="tab-btn active" data-category="all">Todos</button>
                             <button class="tab-btn" data-category="pizzas"><i class="fa-solid fa-pizza-slice"></i> Porciones</button>
-                            <button class="tab-btn" data-category="ruedas"><i class="fa-solid fa-circle-dot"></i> Ruedas</button>
                             <button class="tab-btn" data-category="bebidas"><i class="fa-solid fa-bottle-water"></i> Bebidas</button>
                             <button class="tab-btn" data-category="encargos"><i class="fa-solid fa-box"></i> Encargos</button>
                         </div>
@@ -371,7 +366,6 @@
                             <label for="prod-category">Categoría Principal *</label>
                             <select id="prod-category" class="form-control" required style="padding-left: 1rem;">
                                 <option value="pizzas">Porciones de Pizza</option>
-                                <option value="ruedas">Ruedas de Pizza (Pizzas Completas)</option>
                                 <option value="bebidas">Bebidas</option>
                                 <option value="encargos">Encargos Especiales</option>
                             </select>

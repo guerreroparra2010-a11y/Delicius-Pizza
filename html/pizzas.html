@@ -116,9 +116,7 @@
 
             </div>
 
-
-
-            <!-- Banner Crea tu Pizza -->
+            <!-- Banner Crea tu Pizza (Juego) -->
 
             <div class="create-pizza-banner" style="margin: 0 auto 4rem auto; max-width: 1200px; padding: 0 20px;">
 
@@ -145,22 +143,6 @@
                     <i class="fa-solid fa-pizza-slice" style="position: absolute; font-size: 10rem; color: rgba(255,255,255,0.2); left: -10px; top: -20px; transform: rotate(15deg); z-index: 1;"></i>
 
                 </div>
-
-            </div>
-
-            <!-- Sección de Ruedas de Pizza (Pizzas Completas) -->
-
-            <div class="section-title" style="margin-top: 1rem; text-align: center;">
-
-                <h2>Ruedas de Pizza (Pizzas Completas)</h2>
-
-                <p>Nuestras pizzas enteras recién horneadas para compartir en familia y con amigos</p>
-
-            </div>
-
-            <div class="menu-grid" id="ruedas-grid">
-
-                <!-- Ruedas de pizza renderizadas dinámicamente -->
 
             </div>
 
@@ -318,13 +300,35 @@
 
                         <h3>Porción Carbonara</h3>
 
-                        <p>Exquisita salsa carbonara a la crema, champiñones y tocineta.</p>
+                        <p>Exquisita salsa carbonara a la crema, pollo y tocineta.</p>
 
                         <div class="price-action">
 
                             <span class="price">$9.000 (COP)</span>
 
                             <button class="btn-primary add-to-cart-btn" data-name="Porción Carbonara" data-price="9000">Agregar</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="menu-card">
+
+                    <div class="menu-card-img contain" style="background-image: url('../imagen/porcion-pollo-champinones.jpg')"></div>
+
+                    <div class="menu-card-content">
+
+                        <h3>Porción Pollo con Champiñones</h3>
+
+                        <p>Pollo, champiñón y abundante queso mozzarella fundido.</p>
+
+                        <div class="price-action">
+
+                            <span class="price">$9.000 (COP)</span>
+
+                            <button class="btn-primary add-to-cart-btn" data-name="Porción Pollo con Champiñones" data-price="9000" data-img="../imagen/porcion-pollo-champinones.jpg">Agregar</button>
 
                         </div>
 
@@ -510,286 +514,1746 @@
 
     <script src="../js/products-manager.js"></script>
 
-    <!-- Modal: Crea tu Rueda de Pizza Personalizada -->
-    <div id="custom-rueda-modal" style="
-        display: none; position: fixed; inset: 0; z-index: 99999;
-        background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(8px);
-        align-items: center; justify-content: center; padding: 1rem;
-        animation: ruedaFadeIn 0.3s ease;
-    ">
-        <div style="
-            background: linear-gradient(145deg, #1e1e24 0%, #141419 100%);
-            border: 1px solid rgba(255, 179, 0, 0.35);
-            border-radius: 24px; max-width: 560px; width: 100%;
-            max-height: 90vh; overflow-y: auto; padding: 2rem;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 30px rgba(255,179,0,0.15);
-            position: relative; animation: ruedaSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            color: #fff; font-family: 'Outfit', sans-serif;
-        ">
-            <button id="btn-close-rueda-modal" type="button" style="
-                position: absolute; top: 16px; right: 20px;
-                background: none; border: none; color: #aaa;
-                font-size: 28px; cursor: pointer; line-height: 1;
-                transition: color 0.2s;
-            " onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='#aaa'">&times;</button>
 
-            <div style="text-align: center; margin-bottom: 1.5rem;">
-                <div style="
-                    width: 58px; height: 58px; border-radius: 50%;
-                    background: linear-gradient(135deg, var(--primary-color) 0%, #ff8c00 100%);
-                    display: flex; align-items: center; justify-content: center;
-                    margin: 0 auto 12px; font-size: 1.8rem; color: #000;
-                    box-shadow: 0 6px 20px rgba(255,179,0,0.35);
-                ">
-                    <i class="fa-solid fa-pizza-slice"></i>
-                </div>
-                <h3 style="font-size: 1.8rem; font-family: var(--font-heading); color: #fff; margin: 0 0 6px;">¡Crea tu Rueda de Pizza!</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">Selecciona el tamaño y combina hasta 3 sabores a tu gusto.</p>
-            </div>
+    <!-- ============================================================
+         JUEGO INTERACTIVO: CREA TU RUEDA DE PIZZA
+    ============================================================ -->
+    <div id="pizza-game-modal" aria-modal="true" role="dialog" aria-label="Crea tu Rueda de Pizza">
 
-            <!-- Paso 1: Tamaño de la Rueda -->
-            <div style="margin-bottom: 1.5rem;">
-                <label style="display: block; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-color); margin-bottom: 0.8rem;">
-                    1. Elige el Tamaño
-                </label>
-                <div id="rueda-size-selector" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(115px, 1fr)); gap: 10px;">
-                    <!-- Se inyectan dinámicamente con precios actualizados -->
-                </div>
-            </div>
+      <!-- Overlay fondo -->
+      <div class="pgm-backdrop" id="pgm-backdrop"></div>
 
-            <!-- Paso 2: Sabores (hasta 3) -->
-            <div style="margin-bottom: 1.8rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                    <label style="font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-color); margin: 0;">
-                        2. Elige los Sabores
-                    </label>
-                    <span id="flavor-count-badge" style="font-size: 0.8rem; background: rgba(255,255,255,0.08); padding: 2px 10px; border-radius: 50px; color: #ccc;">Máx. 3 sabores</span>
-                </div>
-                <div id="rueda-flavors-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;">
-                    <!-- Checkbox chips de sabores -->
-                </div>
-            </div>
+      <!-- Panel principal -->
+      <div class="pgm-panel" id="pgm-panel">
 
-            <!-- Resumen y Acción -->
-            <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.2rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <span style="display: block; font-size: 0.85rem; color: var(--text-muted);">Total a Pagar:</span>
-                    <strong id="custom-rueda-total-price" style="font-size: 1.6rem; color: var(--primary-color); font-family: var(--font-heading);">$45.000 COP</strong>
-                </div>
-                <div style="text-align: right;">
-                    <span id="custom-rueda-summary-size" style="display: block; font-size: 0.85rem; color: #fff; font-weight: 600;">Rueda Familiar</span>
-                    <span id="custom-rueda-summary-flavors" style="display: block; font-size: 0.75rem; color: var(--text-muted);">Sin sabores seleccionados</span>
-                </div>
-            </div>
-
-            <button type="button" id="btn-add-custom-rueda-to-cart" class="btn-primary" style="
-                width: 100%; padding: 1rem; font-size: 1.1rem; font-weight: 700;
-                border: none; border-radius: 50px; cursor: pointer; text-transform: uppercase;
-                letter-spacing: 1.5px; box-shadow: 0 8px 25px rgba(255, 179, 0, 0.4);
-                display: flex; align-items: center; justify-content: center; gap: 10px;
-                transition: all 0.3s;
-            ">
-                <i class="fa-solid fa-cart-plus"></i> Agregar Rueda al Carrito
-            </button>
+        <!-- Header -->
+        <div class="pgm-header">
+          <div class="pgm-logo"><i class="fa-solid fa-pizza-slice"></i></div>
+          <div>
+            <h2 class="pgm-title">¡Crea tu Rueda de Pizza!</h2>
+            <p class="pgm-subtitle">Elige el tamaño, los cortes y tus sabores favoritos</p>
+          </div>
+          <button class="pgm-close" id="pgm-close" aria-label="Cerrar">&#x2715;</button>
         </div>
-    </div>
+
+        <!-- Steps indicator -->
+        <div class="pgm-steps">
+          <div class="pgm-step active" id="step-dot-1"><span>1</span><small>Tamaño</small></div>
+          <div class="pgm-step-line"></div>
+          <div class="pgm-step" id="step-dot-2"><span>2</span><small>Cortes</small></div>
+          <div class="pgm-step-line"></div>
+          <div class="pgm-step" id="step-dot-3"><span>3</span><small>Sabores</small></div>
+        </div>
+
+        <!-- Body -->
+        <div class="pgm-body">
+
+          <!-- Lado izquierdo: controles -->
+          <div class="pgm-controls" id="pgm-controls">
+
+            <!-- PASO 1: Tamaño -->
+            <div class="pgm-step-panel active" id="pgm-step-1">
+              <h3 class="pgm-step-heading"><i class="fa-solid fa-ruler"></i> Elige el Tamaño</h3>
+              <div class="pgm-size-grid">
+
+                <div class="pgm-size-card" data-size="junior" tabindex="0">
+                  <div class="pgm-size-icon pgm-size-junior"><i class="fa-solid fa-pizza-slice"></i></div>
+                  <div class="pgm-size-name">Junior</div>
+                  <div class="pgm-size-info">4 cortes &bull; máx. 2 sabores</div>
+                  <div class="pgm-size-price" id="price-junior">$22.000</div>
+                </div>
+
+                <div class="pgm-size-card" data-size="medium" tabindex="0">
+                  <div class="pgm-size-icon pgm-size-medium"><i class="fa-solid fa-pizza-slice"></i></div>
+                  <div class="pgm-size-name">Medium</div>
+                  <div class="pgm-size-info">6 u 8 cortes &bull; máx. 2 sabores</div>
+                  <div class="pgm-size-price" id="price-medium">$34.000</div>
+                </div>
+
+                <div class="pgm-size-card" data-size="familiar" tabindex="0">
+                  <div class="pgm-size-icon pgm-size-familiar"><i class="fa-solid fa-pizza-slice"></i></div>
+                  <div class="pgm-size-name">Familiar</div>
+                  <div class="pgm-size-info">8/10/12/16 cortes &bull; máx. 3 sabores</div>
+                  <div class="pgm-size-price" id="price-familiar">$48.000</div>
+                </div>
+
+              </div>
+              <button class="pgm-btn pgm-btn-next" id="pgm-next-1" disabled>Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+            <!-- PASO 2: Cortes -->
+            <div class="pgm-step-panel" id="pgm-step-2">
+              <h3 class="pgm-step-heading"><i class="fa-solid fa-cut"></i> ¿En cuántos pedazos?</h3>
+              <div class="pgm-cuts-grid" id="pgm-cuts-grid"></div>
+              <div class="pgm-nav">
+                <button class="pgm-btn pgm-btn-back" id="pgm-back-2"><i class="fa-solid fa-arrow-left"></i> Atrás</button>
+                <button class="pgm-btn pgm-btn-next" id="pgm-next-2" disabled>Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- PASO 3: Sabores -->
+            <div class="pgm-step-panel" id="pgm-step-3">
+              <h3 class="pgm-step-heading"><i class="fa-solid fa-list-check"></i> Elige tus Sabores y Cantidades</h3>
+              
+              <!-- Barra de asignación -->
+              <div class="pgm-alloc-bar">
+                <div class="pgm-alloc-stat">
+                  <span>Porciones asignadas:</span>
+                  <strong id="pgm-alloc-count">0 / 0</strong>
+                </div>
+                <div class="pgm-alloc-stat">
+                  <span>Sabores usados:</span>
+                  <strong id="pgm-alloc-flavors">0 / 0</strong>
+                </div>
+              </div>
+              <div class="pgm-alloc-progress-track">
+                <div class="pgm-alloc-progress-fill" id="pgm-alloc-progress"></div>
+              </div>
+
+              <p class="pgm-flavor-hint" id="pgm-flavor-hint"></p>
+              <div class="pgm-flavors-list" id="pgm-flavors-list"></div>
+              <div class="pgm-summary-box" id="pgm-summary-box">
+                <div class="pgm-summary-row">
+                  <span>Tamaño:</span><strong id="sum-size">—</strong>
+                </div>
+                <div class="pgm-summary-row">
+                  <span>Cortes:</span><strong id="sum-cuts">—</strong>
+                </div>
+                <div class="pgm-summary-row">
+                  <span>Sabores:</span><strong id="sum-flavors">—</strong>
+                </div>
+                <div class="pgm-summary-row pgm-total-row">
+                  <span>Total:</span><strong id="sum-price">$0</strong>
+                </div>
+              </div>
+              <div class="pgm-nav">
+                <button class="pgm-btn pgm-btn-back" id="pgm-back-3"><i class="fa-solid fa-arrow-left"></i> Atrás</button>
+                <button class="pgm-btn pgm-btn-cart" id="pgm-add-cart" disabled><i class="fa-solid fa-cart-plus"></i> Agregar al Carrito</button>
+              </div>
+            </div>
+
+          </div><!-- /pgm-controls -->
+
+          <!-- Lado derecho: preview canvas -->
+          <div class="pgm-preview">
+            <div class="pgm-canvas-wrapper">
+              <canvas id="pizza-canvas" width="320" height="320"></canvas>
+              <div class="pgm-canvas-label" id="pgm-canvas-label">Selecciona un tamaño</div>
+            </div>
+            <!-- Leyenda de colores -->
+            <div class="pgm-legend" id="pgm-legend"></div>
+          </div>
+
+        </div><!-- /pgm-body -->
+      </div><!-- /pgm-panel -->
+    </div><!-- /pizza-game-modal -->
+
+    <!-- ============ STYLES ============ -->
     <style>
-        @keyframes ruedaFadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes ruedaSlideUp { from { opacity: 0; transform: translateY(30px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        .rueda-size-option {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 12px; padding: 10px 8px; text-align: center;
-            cursor: pointer; transition: all 0.2s;
-        }
-        .rueda-size-option:hover {
-            border-color: rgba(255, 179, 0, 0.5);
-            background: rgba(255, 179, 0, 0.05);
-        }
-        .rueda-size-option.active {
-            border-color: var(--primary-color);
-            background: rgba(255, 179, 0, 0.15);
-            box-shadow: 0 0 15px rgba(255, 179, 0, 0.2);
-        }
-        .rueda-flavor-chip {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px; padding: 8px 12px; font-size: 0.88rem;
-            cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;
-        }
-        .rueda-flavor-chip:hover {
-            border-color: rgba(255, 179, 0, 0.4);
-        }
-        .rueda-flavor-chip.selected {
-            border-color: var(--primary-color);
-            background: rgba(255, 179, 0, 0.15);
-            color: #fff; font-weight: 600;
-        }
+      /* Root del modal */
+      #pizza-game-modal {
+        display: none;
+        position: fixed; inset: 0; z-index: 99999;
+        align-items: center; justify-content: center;
+      }
+      #pizza-game-modal.open { display: flex; }
+
+      .pgm-backdrop {
+        position: absolute; inset: 0;
+        background: rgba(5,5,10,0.88);
+        backdrop-filter: blur(10px);
+      }
+
+      .pgm-panel {
+        position: relative; z-index: 1;
+        background: linear-gradient(160deg,#1a1a22 0%,#111118 100%);
+        border: 1px solid rgba(255,179,0,0.3);
+        border-radius: 24px;
+        width: min(96vw, 960px);
+        max-height: 92vh;
+        overflow-y: auto;
+        padding: 2rem;
+        box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 40px rgba(255,179,0,0.08);
+        animation: pgmSlideIn 0.4s cubic-bezier(0.16,1,0.3,1);
+        font-family: 'Outfit', sans-serif;
+        color: #fff;
+      }
+
+      @keyframes pgmSlideIn {
+        from { opacity:0; transform: translateY(40px) scale(0.95); }
+        to   { opacity:1; transform: translateY(0) scale(1); }
+      }
+
+      /* Header */
+      .pgm-header {
+        display: flex; align-items: center; gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+      }
+      .pgm-logo {
+        width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
+        background: linear-gradient(135deg,#ffb300,#ff6f00);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.5rem; color: #000;
+        box-shadow: 0 4px 20px rgba(255,179,0,0.4);
+      }
+      .pgm-title { font-size: 1.6rem; font-weight: 800; margin: 0; color: #fff; }
+      .pgm-subtitle { font-size: 0.85rem; color: #888; margin: 0; }
+      .pgm-close {
+        margin-left: auto; background: none; border: none; color: #666;
+        font-size: 1.4rem; cursor: pointer; padding: 4px 8px;
+        border-radius: 8px; transition: all 0.2s;
+      }
+      .pgm-close:hover { background: rgba(255,255,255,0.06); color: #ffb300; }
+
+      /* Steps indicator */
+      .pgm-steps {
+        display: flex; align-items: center; gap: 0;
+        margin-bottom: 1.8rem;
+      }
+      .pgm-step {
+        display: flex; flex-direction: column; align-items: center; gap: 4px;
+        flex-shrink: 0;
+      }
+      .pgm-step span {
+        width: 34px; height: 34px; border-radius: 50%;
+        background: rgba(255,255,255,0.06);
+        border: 2px solid rgba(255,255,255,0.12);
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 700; font-size: 0.9rem; color: #666;
+        transition: all 0.3s;
+      }
+      .pgm-step small { font-size: 0.7rem; color: #555; transition: color 0.3s; }
+      .pgm-step.active span { background: #ffb300; border-color: #ffb300; color: #000; box-shadow: 0 0 16px rgba(255,179,0,0.5); }
+      .pgm-step.active small { color: #ffb300; }
+      .pgm-step.done span { background: rgba(255,179,0,0.2); border-color: #ffb300; color: #ffb300; }
+      .pgm-step.done small { color: #ffb300; }
+      .pgm-step-line { flex: 1; height: 2px; background: rgba(255,255,255,0.08); margin: 0 8px; margin-bottom: 18px; transition: background 0.3s; }
+      .pgm-step-line.done { background: #ffb300; }
+
+      /* Body layout */
+      .pgm-body {
+        display: grid;
+        grid-template-columns: 1fr 320px;
+        gap: 2rem;
+        align-items: start;
+      }
+      @media (max-width: 700px) {
+        .pgm-body { grid-template-columns: 1fr; }
+        .pgm-preview { order: -1; }
+      }
+
+      /* Step panels */
+      .pgm-step-panel { display: none; }
+      .pgm-step-panel.active { display: block; animation: pgmFadeUp 0.3s ease; }
+      @keyframes pgmFadeUp {
+        from { opacity:0; transform: translateY(14px); }
+        to   { opacity:1; transform: translateY(0); }
+      }
+      .pgm-step-heading {
+        font-size: 1.1rem; font-weight: 700; margin: 0 0 1.2rem;
+        color: #ffb300; display: flex; align-items: center; gap: 8px;
+      }
+
+      /* Size cards */
+      .pgm-size-grid {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+        margin-bottom: 1.5rem;
+      }
+      @media (max-width: 500px) { .pgm-size-grid { grid-template-columns: 1fr; } }
+      .pgm-size-card {
+        background: rgba(255,255,255,0.03);
+        border: 2px solid rgba(255,255,255,0.1);
+        border-radius: 16px; padding: 1.2rem 0.8rem;
+        text-align: center; cursor: pointer;
+        transition: all 0.25s; outline: none;
+      }
+      .pgm-size-card:hover { border-color: rgba(255,179,0,0.4); background: rgba(255,179,0,0.05); transform: translateY(-2px); }
+      .pgm-size-card.selected {
+        border-color: #ffb300;
+        background: rgba(255,179,0,0.12);
+        box-shadow: 0 0 20px rgba(255,179,0,0.2);
+        transform: translateY(-2px);
+      }
+      .pgm-size-icon {
+        width: 60px; height: 60px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 10px; font-size: 1.6rem;
+        transition: transform 0.3s;
+      }
+      .pgm-size-card:hover .pgm-size-icon,
+      .pgm-size-card.selected .pgm-size-icon { transform: rotate(-10deg) scale(1.1); }
+      .pgm-size-junior  { background: linear-gradient(135deg,#e91e63,#c2185b); color:#fff; }
+      .pgm-size-medium  { background: linear-gradient(135deg,#7c4dff,#5c35cc); color:#fff; }
+      .pgm-size-familiar{ background: linear-gradient(135deg,#ff6f00,#ffb300); color:#000; }
+      .pgm-size-name { font-weight: 800; font-size: 1.05rem; margin-bottom: 4px; }
+      .pgm-size-info { font-size: 0.72rem; color: #888; margin-bottom: 8px; line-height: 1.4; }
+      .pgm-size-price { font-size: 1rem; font-weight: 700; color: #ffb300; }
+
+      /* Cut buttons */
+      .pgm-cuts-grid {
+        display: flex; flex-wrap: wrap; gap: 10px;
+        margin-bottom: 1.5rem;
+      }
+      .pgm-cut-btn {
+        background: rgba(255,255,255,0.04);
+        border: 2px solid rgba(255,255,255,0.12);
+        border-radius: 50%; width: 64px; height: 64px;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        cursor: pointer; transition: all 0.2s; color: #fff;
+        font-weight: 700; font-size: 1.1rem; outline: none;
+      }
+      .pgm-cut-btn small { font-size: 0.6rem; color: #777; font-weight: 400; }
+      .pgm-cut-btn:hover { border-color: rgba(255,179,0,0.5); background: rgba(255,179,0,0.06); }
+      .pgm-cut-btn.selected { border-color: #ffb300; background: rgba(255,179,0,0.15); color: #ffb300; box-shadow: 0 0 14px rgba(255,179,0,0.25); }
+
+      /* Allocation Bar */
+      .pgm-alloc-bar {
+        display: flex; justify-content: space-between; align-items: center;
+        background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 12px; padding: 0.6rem 0.9rem; margin-bottom: 0.5rem;
+      }
+      .pgm-alloc-stat { font-size: 0.8rem; color: #aaa; display: flex; align-items: center; gap: 6px; }
+      .pgm-alloc-stat strong { color: #fff; font-size: 0.95rem; }
+      .pgm-alloc-progress-track {
+        height: 6px; background: rgba(255,255,255,0.08); border-radius: 4px;
+        margin-bottom: 0.8rem; overflow: hidden;
+      }
+      .pgm-alloc-progress-fill {
+        height: 100%; width: 0%; background: linear-gradient(90deg, #ffb300, #ffffff);
+        border-radius: 4px; transition: width 0.25s ease;
+      }
+
+      /* Flavor list with quantity stepper */
+      .pgm-flavor-hint { font-size: 0.82rem; color: #aaa; margin-bottom: 0.8rem; line-height: 1.4; }
+      .pgm-flavors-list {
+        display: flex; flex-direction: column; gap: 8px;
+        max-height: 285px; overflow-y: auto; padding-right: 4px;
+        margin-bottom: 1.2rem;
+      }
+      .pgm-flavors-list::-webkit-scrollbar { width: 5px; }
+      .pgm-flavors-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); border-radius: 4px; }
+      .pgm-flavors-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.22); border-radius: 4px; }
+
+      .pgm-flavor-row {
+        display: flex; align-items: center; justify-content: space-between;
+        background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09);
+        border-radius: 12px; padding: 8px 12px; transition: all 0.2s ease;
+      }
+      .pgm-flavor-row:hover {
+        background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.2);
+      }
+      .pgm-flavor-row.has-qty {
+        background: rgba(255,255,255,0.12); border-color: #ffffff;
+        box-shadow: 0 0 14px rgba(255,255,255,0.18);
+      }
+      .pgm-fl-left {
+        display: flex; align-items: center; gap: 10px; min-width: 0;
+      }
+      .pgm-fl-emoji { font-size: 1.6rem; flex-shrink: 0; }
+      .pgm-fl-info { display: flex; flex-direction: column; min-width: 0; }
+      .pgm-fl-name { font-size: 0.88rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .pgm-fl-desc { font-size: 0.72rem; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+      .pgm-fl-stepper {
+        display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+      }
+      .pgm-step-btn {
+        width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
+        background: rgba(255,255,255,0.08); color: #fff; font-size: 0.85rem;
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        transition: all 0.15s; outline: none;
+      }
+      .pgm-step-btn:not(:disabled):hover {
+        background: #ffffff; color: #000; border-color: #ffffff; transform: scale(1.1);
+      }
+      .pgm-step-btn:disabled {
+        opacity: 0.25; cursor: not-allowed;
+      }
+      .pgm-step-qty {
+        min-width: 30px; text-align: center; font-weight: 800; font-size: 1rem;
+        color: #fff; padding: 2px 6px; border-radius: 6px;
+      }
+      .pgm-flavor-row.has-qty .pgm-step-qty {
+        color: #000; background: #ffffff;
+      }
+
+      /* Summary box */
+      .pgm-summary-box {
+        background: rgba(0,0,0,0.35);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 14px; padding: 1rem; margin-bottom: 1.2rem;
+      }
+      .pgm-summary-row {
+        display: flex; justify-content: space-between;
+        font-size: 0.85rem; padding: 4px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        color: #aaa;
+      }
+      .pgm-summary-row:last-child { border-bottom: none; }
+      .pgm-summary-row strong { color: #fff; }
+      .pgm-total-row { margin-top: 6px; font-size: 0.95rem; }
+      .pgm-total-row strong { color: #ffb300; font-size: 1.1rem; }
+
+      /* Nav buttons */
+      .pgm-nav { display: flex; gap: 10px; }
+      .pgm-btn {
+        padding: 0.7rem 1.4rem; border: none; border-radius: 50px;
+        font-weight: 700; font-size: 0.9rem; cursor: pointer;
+        display: flex; align-items: center; gap: 8px;
+        transition: all 0.25s; text-transform: uppercase; letter-spacing: 0.8px;
+      }
+      .pgm-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+      .pgm-btn-next  { background: linear-gradient(135deg,#ffb300,#ff6f00); color:#000; box-shadow: 0 6px 20px rgba(255,179,0,0.35); }
+      .pgm-btn-next:not(:disabled):hover  { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,179,0,0.5); }
+      .pgm-btn-back  { background: rgba(255,255,255,0.07); color:#ccc; }
+      .pgm-btn-back:hover  { background: rgba(255,255,255,0.12); }
+      .pgm-btn-cart  { flex:1; background: linear-gradient(135deg,#ffb300,#ff6f00); color:#000; justify-content: center; box-shadow: 0 6px 20px rgba(255,179,0,0.3); }
+      .pgm-btn-cart:not(:disabled):hover  { transform: translateY(-2px); }
+
+      /* Canvas preview */
+      .pgm-preview { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+      .pgm-canvas-wrapper { position: relative; }
+      #pizza-canvas {
+        border-radius: 50%;
+        box-shadow: 0 0 40px rgba(255,179,0,0.15), 0 10px 40px rgba(0,0,0,0.5);
+        display: block;
+        max-width: 100%;
+      }
+      .pgm-canvas-label {
+        text-align: center; margin-top: 8px;
+        font-size: 0.82rem; color: #666;
+      }
+      .pgm-legend {
+        display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+        width: 100%;
+      }
+      .pgm-legend-item {
+        display: flex; align-items: center; gap: 5px;
+        font-size: 0.75rem; color: #ccc;
+        background: rgba(255,255,255,0.05);
+        border-radius: 20px; padding: 3px 10px;
+      }
+      .pgm-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
     </style>
 
+    <!-- ============ SCRIPT ============ -->
     <script>
-        // Renderizar Ruedas y Porciones dinámicamente desde el gestor de productos
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.ProductsManager) {
-                window.ProductsManager.renderRuedas('#ruedas-grid');
-                window.ProductsManager.renderPizzas('#pizzas-grid');
-            }
+    (function() {
+      /* ── Datos ─────────────────────────────────────────────── */
+      const SIZES = {
+        junior:   { label: 'Junior',   cuts: [4],            maxFlavors: 2, priceKey: 'junior' },
+        medium:   { label: 'Medium',   cuts: [6, 8],         maxFlavors: 2, priceKey: 'medium' },
+        familiar: { label: 'Familiar', cuts: [8,10,12,16],   maxFlavors: 3, priceKey: 'familiar' }
+      };
 
-            // --- LÓGICA DEL MODAL "CREA TU RUEDA DE PIZZA" ---
-            const btnOpenModal = document.getElementById('btn-open-custom-rueda');
-            const modal = document.getElementById('custom-rueda-modal');
-            const btnCloseModal = document.getElementById('btn-close-rueda-modal');
-            const sizeSelector = document.getElementById('rueda-size-selector');
-            const flavorsGrid = document.getElementById('rueda-flavors-grid');
-            const totalPriceEl = document.getElementById('custom-rueda-total-price');
-            const summarySizeEl = document.getElementById('custom-rueda-summary-size');
-            const summaryFlavorsEl = document.getElementById('custom-rueda-summary-flavors');
-            const btnAddToCart = document.getElementById('btn-add-custom-rueda-to-cart');
+      const FLAVORS = [
+        { name: 'Pepperoni',  emoji: '🍕', desc: 'Mozzarella premium y abundante pepperoni curado' },
+        { name: 'Hawaiana',   emoji: '🍍', desc: 'Jamón seleccionado y piña dulce sobre base de queso fundido' },
+        { name: 'Carnes',     emoji: '🥩', desc: 'Tocineta, pepperoni, jamón y carne molida con sazón de la casa' },
+        { name: 'Mexicana',   emoji: '🌶️', desc: 'Carne molida, frijol, jalapeños selectos y maíz tierno tostado' },
+        { name: 'Ranchera',   emoji: '🤠', desc: 'Salchicha ranchera, maíz tierno, tocineta crujiente y salsa BBQ especial' },
+        { name: 'Tropical',   emoji: '🍒', desc: 'Jamón premium, piña dulce, cerezas y queso gratinado' },
+        { name: 'Carbonara',  emoji: '🥓', desc: 'Exquisita salsa carbonara a la crema, pollo y tocineta' },
+        { name: 'Pollo con Champiñones', emoji: '🍄', desc: 'Pollo, champiñón y queso mozzarella fundido' },
+        { name: 'Napolitana', emoji: '🍅', desc: 'Tomate natural, albahaca de huerto, orégano y aceite de oliva' },
+        { name: 'Criolla',    emoji: '🫘', desc: 'Carne desmechada, maíz tierno tostado, cebolla y cilantro fresco' }
+      ];
 
-            const FLAVORS = [
-                'Pepperoni', 'Hawaiana', 'Carnes', 'Mexicana', 
-                'Ranchera', 'Tropical', 'Carbonara', 'Napolitana', 'Criolla'
-            ];
+      /* ── Estado ────────────────────────────────────────────── */
+      let selSize           = null;   // 'junior' | 'medium' | 'familiar'
+      let selCuts           = null;   // número
+      let flavorQuantities  = {};     // { [flavorIndex]: number }
+      let currentStep       = 1;
 
-            let selectedSizeKey = 'familiar';
-            let selectedFlavors = ['Pepperoni', 'Hawaiana'];
+      /* ── Referencias DOM ───────────────────────────────────── */
+      const modal        = document.getElementById('pizza-game-modal');
+      const backdrop     = document.getElementById('pgm-backdrop');
+      const closeBtn     = document.getElementById('pgm-close');
+      const next1        = document.getElementById('pgm-next-1');
+      const back2        = document.getElementById('pgm-back-2');
+      const next2        = document.getElementById('pgm-next-2');
+      const back3        = document.getElementById('pgm-back-3');
+      const addCartBtn   = document.getElementById('pgm-add-cart');
+      const cutsGrid     = document.getElementById('pgm-cuts-grid');
+      const flavorsList  = document.getElementById('pgm-flavors-list');
+      const flavorHint   = document.getElementById('pgm-flavor-hint');
+      const legend       = document.getElementById('pgm-legend');
+      const canvasLabel  = document.getElementById('pgm-canvas-label');
+      const canvas       = document.getElementById('pizza-canvas');
+      const ctx          = canvas.getContext('2d');
+      const allocCount   = document.getElementById('pgm-alloc-count');
+      const allocFlavors = document.getElementById('pgm-alloc-flavors');
+      const allocProgress= document.getElementById('pgm-alloc-progress');
 
-            const renderSizeOptions = () => {
-                if (!sizeSelector || !window.ProductsManager) return;
-                const prices = window.ProductsManager.getRuedaPrices();
-                const sizes = [
-                    { key: 'personal', name: 'Personal', porc: '4 Porc.', price: prices.personal?.price || 18000 },
-                    { key: 'mediana',  name: 'Mediana',  porc: '6 Porc.', price: prices.mediana?.price || 32000 },
-                    { key: 'familiar', name: 'Familiar', porc: '8 Porc.', price: prices.familiar?.price || 45000 },
-                    { key: 'gigante',  name: 'Gigante',  porc: '12 Porc.', price: prices.gigante?.price || 58000 }
-                ];
+      /* ── Helpers ───────────────────────────────────────────── */
+      const defaultPrices = { junior: 22000, medium: 34000, familiar: 48000 };
 
-                sizeSelector.innerHTML = sizes.map(s => `
-                    <div class="rueda-size-option ${s.key === selectedSizeKey ? 'active' : ''}" data-size-key="${s.key}" data-price="${s.price}" data-name="${s.name}">
-                        <div style="font-size: 0.72rem; color: var(--text-muted);">${s.porc}</div>
-                        <div style="font-weight: 700; font-size: 0.95rem; margin: 2px 0;">${s.name}</div>
-                        <div style="color: var(--primary-color); font-weight: 600; font-size: 0.85rem;">$${Number(s.price).toLocaleString('es-CO')}</div>
-                    </div>
-                `).join('');
+      function getPrice(key) {
+        if (window.ProductsManager) {
+          const p = window.ProductsManager.getRuedaPrices();
+          return p[key]?.price || p[key]?.priceLlevar || defaultPrices[key];
+        }
+        return defaultPrices[key];
+      }
 
-                sizeSelector.querySelectorAll('.rueda-size-option').forEach(opt => {
-                    opt.addEventListener('click', () => {
-                        selectedSizeKey = opt.getAttribute('data-size-key');
-                        renderSizeOptions();
-                        updateSummary();
-                    });
-                });
-            };
+      function fmtCOP(n) {
+        return '$' + Number(n).toLocaleString('es-CO') + ' COP';
+      }
 
-            const renderFlavors = () => {
-                if (!flavorsGrid) return;
-                flavorsGrid.innerHTML = FLAVORS.map(flavor => {
-                    const isSelected = selectedFlavors.includes(flavor);
-                    return `
-                        <div class="rueda-flavor-chip ${isSelected ? 'selected' : ''}" data-flavor="${flavor}">
-                            <i class="fa-solid ${isSelected ? 'fa-check' : 'fa-pizza-slice'}" style="font-size: 0.75rem; color: ${isSelected ? 'var(--primary-color)' : '#777'}"></i>
-                            <span>${flavor}</span>
-                        </div>
-                    `;
-                }).join('');
+      function getTotalAssigned() {
+        return Object.values(flavorQuantities).reduce((sum, q) => sum + q, 0);
+      }
 
-                flavorsGrid.querySelectorAll('.rueda-flavor-chip').forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        const flavor = chip.getAttribute('data-flavor');
-                        if (selectedFlavors.includes(flavor)) {
-                            selectedFlavors = selectedFlavors.filter(f => f !== flavor);
-                        } else {
-                            if (selectedFlavors.length >= 3) {
-                                selectedFlavors.shift(); // Reemplazar el más antiguo si ya van 3
-                            }
-                            selectedFlavors.push(flavor);
-                        }
-                        renderFlavors();
-                        updateSummary();
-                    });
-                });
-            };
+      function getActiveFlavors() {
+        return Object.keys(flavorQuantities)
+          .map(Number)
+          .filter(idx => (flavorQuantities[idx] || 0) > 0);
+      }
 
-            const updateSummary = () => {
-                const prices = window.ProductsManager.getRuedaPrices();
-                const curPrice = prices[selectedSizeKey]?.price || 45000;
-                const sizeNames = {
-                    personal: 'Rueda Personal (4 Porciones)',
-                    mediana: 'Rueda Mediana (6 Porciones)',
-                    familiar: 'Rueda Familiar (8 Porciones)',
-                    gigante: 'Rueda Gigante (12 Porciones)'
-                };
+      /* ── Canvas ────────────────────────────────────────────── */
+      function drawPizza() {
+        const W = canvas.width, H = canvas.height;
+        const cx = W / 2, cy = H / 2;
+        const R  = W / 2 - 6;
+        ctx.clearRect(0, 0, W, H);
 
-                if (totalPriceEl) totalPriceEl.textContent = `$${Number(curPrice).toLocaleString('es-CO')} COP`;
-                if (summarySizeEl) summarySizeEl.textContent = sizeNames[selectedSizeKey] || 'Rueda Familiar';
-                if (summaryFlavorsEl) {
-                    summaryFlavorsEl.textContent = selectedFlavors.length > 0 
-                        ? `Sabores: ${selectedFlavors.join(' + ')}` 
-                        : 'Sin sabores seleccionados';
-                }
-            };
+        if (!selSize) {
+          // Placeholder inicial
+          ctx.beginPath();
+          ctx.arc(cx, cy, R, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,255,255,0.04)';
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(255,179,0,0.2)';
+          ctx.lineWidth = 3;
+          ctx.setLineDash([8, 6]);
+          ctx.stroke();
+          ctx.setLineDash([]);
+          ctx.font = '80px serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.globalAlpha = 0.18;
+          ctx.fillStyle = '#fff';
+          ctx.fillText('🍕', cx, cy);
+          ctx.globalAlpha = 1;
+          return;
+        }
 
-            if (btnOpenModal && modal) {
-                btnOpenModal.addEventListener('click', () => {
-                    renderSizeOptions();
-                    renderFlavors();
-                    updateSummary();
-                    modal.style.display = 'flex';
-                });
-            }
+        const cuts = selCuts || SIZES[selSize].cuts[0];
+        const anglePerSlice = (2 * Math.PI) / cuts;
+        const startOffset = -Math.PI / 2;
 
-            if (btnCloseModal && modal) {
-                btnCloseModal.addEventListener('click', () => {
-                    modal.style.display = 'none';
-                });
-            }
+        const basePizzaColors = [
+          '#dca946','#d29f3d','#deb158','#c9963a',
+          '#dca946','#d29f3d','#deb158','#c9963a',
+          '#dca946','#d29f3d','#deb158','#c9963a',
+          '#dca946','#d29f3d','#deb158','#c9963a'
+        ];
 
-            if (modal) {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) modal.style.display = 'none';
-                });
-            }
-
-            if (btnAddToCart) {
-                btnAddToCart.addEventListener('click', () => {
-                    if (selectedFlavors.length === 0) {
-                        alert('Por favor selecciona al menos un sabor para tu rueda de pizza.');
-                        return;
-                    }
-
-                    const prices = window.ProductsManager.getRuedaPrices();
-                    const curPrice = prices[selectedSizeKey]?.price || 45000;
-                    const sizeNames = {
-                        personal: 'Rueda Personal (4 Porc.)',
-                        mediana: 'Rueda Mediana (6 Porc.)',
-                        familiar: 'Rueda Familiar (8 Porc.)',
-                        gigante: 'Rueda Gigante (12 Porc.)'
-                    };
-
-                    const productName = `${sizeNames[selectedSizeKey]} - Sabores: ${selectedFlavors.join(' / ')}`;
-                    const imgPath = '../imagen/rueda-de-pizza-familiar.jpg';
-
-                    // Crear un botón fantasma para aprovechar la lógica completa de main.js
-                    const fakeBtn = document.createElement('button');
-                    fakeBtn.className = 'add-to-cart-btn';
-                    fakeBtn.setAttribute('data-name', productName);
-                    fakeBtn.setAttribute('data-price', curPrice);
-                    fakeBtn.setAttribute('data-img', imgPath);
-                    document.body.appendChild(fakeBtn);
-                    fakeBtn.click();
-                    fakeBtn.remove();
-
-                    if (modal) modal.style.display = 'none';
-                });
-            }
+        // Mapear porciones asignadas a rebanadas continuas
+        const assignedSliceFlavors = [];
+        getActiveFlavors().forEach(flIdx => {
+          const qty = flavorQuantities[flIdx];
+          for (let q = 0; q < qty; q++) {
+            assignedSliceFlavors.push(FLAVORS[flIdx]);
+          }
         });
+
+        for (let i = 0; i < cuts; i++) {
+          const startAngle = startOffset + i * anglePerSlice;
+          const endAngle   = startAngle + anglePerSlice;
+          const midAngle   = startAngle + anglePerSlice / 2;
+
+          const currentFlavor = assignedSliceFlavors[i] || null;
+          let sliceColor;
+
+          if (currentFlavor) {
+            // Cuando se eligen sabores, la porción toma color queso mozzarella fundido
+            sliceColor = '#fff2c2';
+          } else {
+            // Porción aún sin asignar: color queso horneado base
+            sliceColor = basePizzaColors[i % basePizzaColors.length];
+          }
+
+          // Dibujar rebanada
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.arc(cx, cy, R, startAngle, endAngle);
+          ctx.closePath();
+          ctx.fillStyle = sliceColor;
+          ctx.fill();
+
+          // Textura / ingredientes dentro de la porción
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.arc(cx, cy, R, startAngle, endAngle);
+          ctx.closePath();
+          ctx.clip();
+
+          if (currentFlavor) {
+            // Textura suave de queso con toquecitos de orégano
+            for (let d = 0; d < 3; d++) {
+              const dist = R * (0.32 + d * 0.22);
+              const dAng = midAngle + (d % 2 === 0 ? 0.08 : -0.08);
+              const dx = cx + dist * Math.cos(dAng);
+              const dy = cy + dist * Math.sin(dAng);
+              ctx.beginPath();
+              ctx.arc(dx, dy, 2, 0, Math.PI * 2);
+              ctx.fillStyle = 'rgba(120, 140, 70, 0.22)';
+              ctx.fill();
+            }
+
+            // --- DISEÑOS EXCLUSIVOS POR SABOR ---
+            if (currentFlavor.name === 'Pepperoni') {
+              // Círculos rojos como si fueran pepperoni (solo a esta porción)
+              const pepR = cuts <= 4 ? 11 : (cuts <= 6 ? 9.5 : (cuts <= 8 ? 8 : (cuts <= 12 ? 6.5 : 5)));
+              const pepPositions = [
+                { r: 0.35, off: 0 },
+                { r: 0.52, off: -0.55 },
+                { r: 0.55, off: 0.55 },
+                { r: 0.72, off: -0.45 },
+                { r: 0.74, off: 0.45 },
+                { r: 0.86, off: 0 },
+                { r: 0.88, off: -0.65 },
+                { r: 0.88, off: 0.65 }
+              ];
+              pepPositions.forEach(p => {
+                const maxOff = (p.r) * (anglePerSlice * 0.38);
+                const a = midAngle + p.off * maxOff;
+                const px = cx + (R * p.r) * Math.cos(a);
+                const py = cy + (R * p.r) * Math.sin(a);
+
+                ctx.beginPath();
+                ctx.arc(px, py, pepR, 0, Math.PI * 2);
+                ctx.fillStyle = '#d32f2f'; // Rojo pepperoni
+                ctx.fill();
+                ctx.strokeStyle = '#9a1010';
+                ctx.lineWidth = 1.2;
+                ctx.stroke();
+
+                // Puntos de textura / especias en el pepperoni
+                ctx.fillStyle = '#ff8a80';
+                ctx.beginPath();
+                ctx.arc(px - pepR * 0.3, py - pepR * 0.2, pepR * 0.15, 0, Math.PI * 2);
+                ctx.arc(px + pepR * 0.25, py + pepR * 0.25, pepR * 0.15, 0, Math.PI * 2);
+                ctx.fill();
+              });
+
+              // Orégano espolvoreado en la porción de pepperoni
+              for (let o = 0; o < 26; o++) {
+                const r = 0.25 + (o / 26) * 0.66;
+                const norm = Math.sin(o * 3.4);
+                const maxOff = r * (anglePerSlice * 0.39);
+                const a = midAngle + norm * maxOff;
+                const ox = cx + (R * r) * Math.cos(a);
+                const oy = cy + (R * r) * Math.sin(a);
+                ctx.beginPath();
+                ctx.arc(ox, oy, 1.2 + (o % 3) * 0.5, 0, Math.PI * 2);
+                ctx.fillStyle = o % 2 === 0 ? 'rgba(50, 95, 25, 0.75)' : 'rgba(35, 75, 18, 0.6)';
+                ctx.fill();
+              }
+
+            } else if (currentFlavor.name === 'Hawaiana') {
+              // 1. Cuadritos de jamón seleccionado
+              const sqSize = cuts <= 4 ? 12 : (cuts <= 6 ? 10 : (cuts <= 8 ? 8.5 : 7));
+              const hamPositions = [
+                { r: 0.28, off: -0.3 },
+                { r: 0.38, off: 0.4 },
+                { r: 0.50, off: -0.5 },
+                { r: 0.60, off: 0.3 },
+                { r: 0.72, off: -0.4 },
+                { r: 0.75, off: 0.5 },
+                { r: 0.86, off: -0.2 },
+                { r: 0.88, off: 0.6 }
+              ];
+              hamPositions.forEach((p, idx) => {
+                const maxOff = (p.r) * (anglePerSlice * 0.38);
+                const a = midAngle + p.off * maxOff;
+                const hx = cx + (R * p.r) * Math.cos(a);
+                const hy = cy + (R * p.r) * Math.sin(a);
+                const rot = (idx * 0.6) % Math.PI;
+
+                ctx.save();
+                ctx.translate(hx, hy);
+                ctx.rotate(rot);
+                ctx.fillStyle = '#f48fb1'; // Rosado jamón
+                ctx.fillRect(-sqSize / 2, -sqSize / 2, sqSize, sqSize);
+                ctx.strokeStyle = '#e91e63';
+                ctx.lineWidth = 1.1;
+                ctx.strokeRect(-sqSize / 2, -sqSize / 2, sqSize, sqSize);
+                ctx.restore();
+              });
+
+              // 2. Trozos jugosos de piña dulce dorada
+              const pinePositions = [
+                { r: 0.32, off: 0.35 },
+                { r: 0.44, off: -0.2 },
+                { r: 0.54, off: 0.45 },
+                { r: 0.66, off: -0.5 },
+                { r: 0.78, off: 0.15 },
+                { r: 0.85, off: -0.55 },
+                { r: 0.90, off: 0.25 }
+              ];
+              const pSize = cuts <= 4 ? 13 : (cuts <= 6 ? 11 : (cuts <= 8 ? 9.5 : 8));
+              pinePositions.forEach((p, idx) => {
+                const maxOff = (p.r) * (anglePerSlice * 0.38);
+                const a = midAngle + p.off * maxOff;
+                const px = cx + (R * p.r) * Math.cos(a);
+                const py = cy + (R * p.r) * Math.sin(a);
+                const rot = (idx * 1.1) % (Math.PI * 2);
+
+                ctx.save();
+                ctx.translate(px, py);
+                ctx.rotate(rot);
+                // Triángulo / cuña de piña
+                ctx.beginPath();
+                ctx.moveTo(0, -pSize * 0.6);
+                ctx.lineTo(pSize * 0.6, pSize * 0.45);
+                ctx.lineTo(-pSize * 0.6, pSize * 0.45);
+                ctx.closePath();
+                ctx.fillStyle = idx % 2 === 0 ? '#ffd54f' : '#ffca28'; // Amarillo piña jugosa
+                ctx.fill();
+                ctx.strokeStyle = '#f57f17';
+                ctx.lineWidth = 1.1;
+                ctx.stroke();
+
+                // Detalle fibroso de la piña
+                ctx.beginPath();
+                ctx.moveTo(0, -pSize * 0.3);
+                ctx.lineTo(0, pSize * 0.3);
+                ctx.strokeStyle = '#fff59d';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                ctx.restore();
+              });
+
+            } else if (currentFlavor.name === 'Mexicana') {
+              // 1. Frijoles seleccionados (forma de frijolito oscuro definido)
+              const beanCount = cuts <= 6 ? 12 : (cuts <= 10 ? 9 : 7);
+              for (let b = 0; b < beanCount; b++) {
+                const r = 0.26 + (b / beanCount) * 0.66;
+                const norm = Math.sin(b * 2.7);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const bx = cx + (R * r) * Math.cos(a);
+                const by = cy + (R * r) * Math.sin(a);
+                const rot = (b * 1.5) % Math.PI;
+
+                ctx.save();
+                ctx.translate(bx, by);
+                ctx.rotate(rot);
+                ctx.beginPath();
+                ctx.ellipse(0, 0, 4.5, 2.8, 0, 0, Math.PI * 2);
+                ctx.fillStyle = '#3e2723'; // Frijol negro/rojo
+                ctx.fill();
+                ctx.strokeStyle = '#271410';
+                ctx.lineWidth = 0.9;
+                ctx.stroke();
+                // Brillo suave de frijol
+                ctx.beginPath();
+                ctx.arc(-1.2, -0.8, 1, 0, Math.PI * 2);
+                ctx.fillStyle = '#6d4c41';
+                ctx.fill();
+                ctx.restore();
+              }
+
+              // 2. Carne molida sazonada de la casa
+              const meatCount = cuts <= 6 ? 15 : (cuts <= 10 ? 11 : 8);
+              for (let m = 0; m < meatCount; m++) {
+                const r = 0.24 + (m / meatCount) * 0.68;
+                const norm = Math.cos(m * 3.1);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const mx = cx + (R * r) * Math.cos(a);
+                const my = cy + (R * r) * Math.sin(a);
+                const mR = cuts <= 6 ? 3.2 : 2.5;
+
+                ctx.beginPath();
+                ctx.arc(mx, my, mR, 0, Math.PI * 2);
+                ctx.fillStyle = m % 2 === 0 ? '#5d4037' : '#4e342e';
+                ctx.fill();
+                ctx.strokeStyle = '#3e2723';
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+              }
+
+              // 3. Rodajas de jalapeños verdes selectos (con centro hueco y semillitas)
+              const jalCount = cuts <= 6 ? 7 : (cuts <= 10 ? 5 : 4);
+              const jalR = cuts <= 6 ? 5.5 : 4.5;
+              for (let j = 0; j < jalCount; j++) {
+                const r = 0.30 + (j / jalCount) * 0.62;
+                const norm = Math.sin(j * 2.3 + 1.2);
+                const maxOff = r * (anglePerSlice * 0.37);
+                const a = midAngle + norm * maxOff;
+                const jx = cx + (R * r) * Math.cos(a);
+                const jy = cy + (R * r) * Math.sin(a);
+
+                ctx.beginPath();
+                ctx.arc(jx, jy, jalR, 0, Math.PI * 2);
+                ctx.fillStyle = '#2e7d32'; // Verde jalapeño
+                ctx.fill();
+                ctx.strokeStyle = '#1b5e20';
+                ctx.lineWidth = 1.2;
+                ctx.stroke();
+
+                // Anillo interior
+                ctx.beginPath();
+                ctx.arc(jx, jy, jalR * 0.55, 0, Math.PI * 2);
+                ctx.fillStyle = '#fff2c2'; // Centro de queso
+                ctx.fill();
+                ctx.strokeStyle = '#43a047';
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+
+                // Semillitas de jalapeño
+                ctx.beginPath();
+                ctx.arc(jx - 1, jy, 0.8, 0, Math.PI * 2);
+                ctx.arc(jx + 1, jy, 0.8, 0, Math.PI * 2);
+                ctx.fillStyle = '#fff9c4';
+                ctx.fill();
+              }
+
+              // 4. Maíz tierno tostado
+              const cornCount = cuts <= 6 ? 16 : (cuts <= 10 ? 12 : 9);
+              for (let c = 0; c < cornCount; c++) {
+                const r = 0.22 + (c / cornCount) * 0.70;
+                const norm = Math.cos(c * 2.9);
+                const maxOff = r * (anglePerSlice * 0.39);
+                const a = midAngle + norm * maxOff;
+                const cxp = cx + (R * r) * Math.cos(a);
+                const cyp = cy + (R * r) * Math.sin(a);
+
+                ctx.beginPath();
+                ctx.ellipse(cxp, cyp, 3.2, 2.4, c * 0.6, 0, Math.PI * 2);
+                ctx.fillStyle = '#fbc02d'; // Amarillo maíz tierno
+                ctx.fill();
+                ctx.strokeStyle = '#f57f17';
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+              }
+
+            } else if (currentFlavor.name === 'Carnes') {
+              // 1. Mini rodajas de pepperoni curado
+              const pepCount = cuts <= 6 ? 5 : (cuts <= 10 ? 4 : 3);
+              const pepR = cuts <= 6 ? 6.5 : 5.0;
+              for (let p = 0; p < pepCount; p++) {
+                const r = 0.30 + (p / pepCount) * 0.60;
+                const norm = Math.sin(p * 2.5);
+                const maxOff = r * (anglePerSlice * 0.36);
+                const a = midAngle + norm * maxOff;
+                const px = cx + (R * r) * Math.cos(a);
+                const py = cy + (R * r) * Math.sin(a);
+
+                ctx.beginPath();
+                ctx.arc(px, py, pepR, 0, Math.PI * 2);
+                ctx.fillStyle = '#d32f2f'; // Rojo pepperoni
+                ctx.fill();
+                ctx.strokeStyle = '#9a1010';
+                ctx.lineWidth = 1.1;
+                ctx.stroke();
+              }
+
+              // 2. Cuadritos de jamón seleccionado
+              const hamCount = cuts <= 6 ? 7 : (cuts <= 10 ? 5 : 4);
+              const hSize = cuts <= 6 ? 8.5 : 7.0;
+              for (let h = 0; h < hamCount; h++) {
+                const r = 0.28 + (h / hamCount) * 0.64;
+                const norm = Math.cos(h * 2.8 + 0.5);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const hx = cx + (R * r) * Math.cos(a);
+                const hy = cy + (R * r) * Math.sin(a);
+
+                ctx.save();
+                ctx.translate(hx, hy);
+                ctx.rotate((h * 0.7) % Math.PI);
+                ctx.fillStyle = '#f48fb1'; // Rosado jamón
+                ctx.fillRect(-hSize / 2, -hSize / 2, hSize, hSize);
+                ctx.strokeStyle = '#e91e63';
+                ctx.lineWidth = 1.0;
+                ctx.strokeRect(-hSize / 2, -hSize / 2, hSize, hSize);
+                ctx.restore();
+              }
+
+              // 3. Tiras crujientes de tocineta
+              const baconCount = cuts <= 6 ? 9 : (cuts <= 10 ? 7 : 5);
+              for (let b = 0; b < baconCount; b++) {
+                const r = 0.25 + (b / baconCount) * 0.68;
+                const norm = Math.sin(b * 3.2);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const bx = cx + (R * r) * Math.cos(a);
+                const by = cy + (R * r) * Math.sin(a);
+                const rot = (b * 1.2) % Math.PI;
+                const len = cuts <= 6 ? 8.0 : 6.5;
+
+                ctx.save();
+                ctx.translate(bx, by);
+                ctx.rotate(rot);
+                ctx.fillStyle = b % 2 === 0 ? '#871a1a' : '#a93226';
+                ctx.fillRect(-len / 2, -1.2, len, 2.4);
+                ctx.fillStyle = '#f5b7b1';
+                ctx.fillRect(-len * 0.2, -1.2, len * 0.4, 1.0);
+                ctx.restore();
+              }
+
+              // 4. Carne molida sazonada de la casa
+              const meatCount = cuts <= 6 ? 12 : (cuts <= 10 ? 9 : 7);
+              for (let m = 0; m < meatCount; m++) {
+                const r = 0.24 + (m / meatCount) * 0.70;
+                const norm = Math.cos(m * 2.2);
+                const maxOff = r * (anglePerSlice * 0.39);
+                const a = midAngle + norm * maxOff;
+                const mx = cx + (R * r) * Math.cos(a);
+                const my = cy + (R * r) * Math.sin(a);
+
+                ctx.beginPath();
+                ctx.arc(mx, my, (m % 2 === 0 ? 3.0 : 2.2), 0, Math.PI * 2);
+                ctx.fillStyle = '#5d4037';
+                ctx.fill();
+              }
+
+              // 5. Orégano espolvoreado
+              for (let o = 0; o < 18; o++) {
+                const r = 0.25 + (o / 18) * 0.66;
+                const norm = Math.sin(o * 3.1);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const ox = cx + (R * r) * Math.cos(a);
+                const oy = cy + (R * r) * Math.sin(a);
+                ctx.beginPath();
+                ctx.arc(ox, oy, 1.1, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(50, 95, 25, 0.7)';
+                ctx.fill();
+              }
+
+            } else if (currentFlavor.name === 'Ranchera') {
+              // 1. Rodajas de salchicha ranchera ahumada
+              const sCount = cuts <= 6 ? 9 : (cuts <= 10 ? 7 : 5);
+              const sR = cuts <= 6 ? 6.5 : (cuts <= 10 ? 5.5 : 4.5);
+              for (let s = 0; s < sCount; s++) {
+                const r = 0.28 + (s / sCount) * 0.64;
+                const norm = Math.sin(s * 2.4);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const sx = cx + (R * r) * Math.cos(a);
+                const sy = cy + (R * r) * Math.sin(a);
+
+                ctx.beginPath();
+                ctx.arc(sx, sy, sR, 0, Math.PI * 2);
+                ctx.fillStyle = '#ad1457'; // Salchicha ranchera ahumada
+                ctx.fill();
+                ctx.strokeStyle = '#6a1b9a';
+                ctx.lineWidth = 1.1;
+                ctx.stroke();
+
+                // Núcleo más rosado de la salchicha
+                ctx.beginPath();
+                ctx.arc(sx, sy, sR * 0.45, 0, Math.PI * 2);
+                ctx.fillStyle = '#d81b60';
+                ctx.fill();
+              }
+
+              // 2. Maíz tierno (granos dorados)
+              const mCount = cuts <= 6 ? 20 : (cuts <= 10 ? 15 : 11);
+              for (let mz = 0; mz < mCount; mz++) {
+                const r = 0.23 + (mz / mCount) * 0.69;
+                const norm = Math.cos(mz * 2.7);
+                const maxOff = r * (anglePerSlice * 0.39);
+                const a = midAngle + norm * maxOff;
+                const mx = cx + (R * r) * Math.cos(a);
+                const my = cy + (R * r) * Math.sin(a);
+
+                ctx.beginPath();
+                ctx.ellipse(mx, my, 3.2, 2.4, mz * 0.5, 0, Math.PI * 2);
+                ctx.fillStyle = '#fbc02d'; // Amarillo maíz tierno
+                ctx.fill();
+                ctx.strokeStyle = '#f57f17';
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+              }
+
+              // 3. Tocineta crujiente picada
+              const bCount = cuts <= 6 ? 10 : (cuts <= 10 ? 8 : 6);
+              for (let b = 0; b < bCount; b++) {
+                const r = 0.26 + (b / bCount) * 0.65;
+                const norm = Math.sin(b * 3.3 + 0.5);
+                const maxOff = r * (anglePerSlice * 0.37);
+                const a = midAngle + norm * maxOff;
+                const bx = cx + (R * r) * Math.cos(a);
+                const by = cy + (R * r) * Math.sin(a);
+                const rot = (b * 1.3) % Math.PI;
+                const len = cuts <= 6 ? 7.5 : 6.0;
+
+                ctx.save();
+                ctx.translate(bx, by);
+                ctx.rotate(rot);
+                ctx.fillStyle = '#a93226';
+                ctx.fillRect(-len / 2, -1.1, len, 2.2);
+                ctx.fillStyle = '#f5b7b1';
+                ctx.fillRect(-len * 0.2, -1.1, len * 0.35, 1.0);
+                ctx.restore();
+              }
+
+              // 4. Hilos de salsa BBQ especial (curvas oscuras brillantes)
+              const bbRays = [0.35, 0.55, 0.75];
+              bbRays.forEach((r, idx) => {
+                const aStart = midAngle - (anglePerSlice * 0.28);
+                const aEnd = midAngle + (anglePerSlice * 0.28);
+                const x1 = cx + (R * r) * Math.cos(aStart);
+                const y1 = cy + (R * r) * Math.sin(aStart);
+                const xm = cx + (R * (r + 0.05)) * Math.cos(midAngle);
+                const ym = cy + (R * (r + 0.05)) * Math.sin(midAngle);
+                const x2 = cx + (R * r) * Math.cos(aEnd);
+                const y2 = cy + (R * r) * Math.sin(aEnd);
+
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.quadraticCurveTo(xm, ym, x2, y2);
+                ctx.strokeStyle = '#3e1507'; // Salsa BBQ brillante
+                ctx.lineWidth = cuts <= 6 ? 2.6 : 2.0;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+
+                // Destello de salsa BBQ
+                ctx.beginPath();
+                ctx.moveTo(x1 + 1, y1);
+                ctx.quadraticCurveTo(xm, ym - 0.5, x2 - 1, y2);
+                ctx.strokeStyle = '#6d260e';
+                ctx.lineWidth = 1.0;
+                ctx.stroke();
+              });
+
+            } else if (currentFlavor.name === 'Carbonara') {
+              // Base más brillante y cremosa
+              ctx.fillStyle = '#fffde8';
+              ctx.fill();
+
+              // Hebras de pollo tierno
+              const chickenCount = cuts <= 6 ? 14 : (cuts <= 10 ? 11 : 8);
+              for (let ck = 0; ck < chickenCount; ck++) {
+                const r = 0.23 + (ck / chickenCount) * 0.68;
+                const norm = Math.cos(ck * 2.5);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const chx = cx + (R * r) * Math.cos(a);
+                const chy = cy + (R * r) * Math.sin(a);
+                const rot = (ck * 1.4) % Math.PI;
+                const len = cuts <= 6 ? 9.0 : (cuts <= 10 ? 7.5 : 5.8);
+
+                ctx.save();
+                ctx.translate(chx, chy);
+                ctx.rotate(rot);
+                ctx.beginPath();
+                ctx.moveTo(-len / 2, -1);
+                ctx.quadraticCurveTo(0, (ck % 2 === 0 ? 1.5 : -1.5), len / 2, 0.5);
+                ctx.strokeStyle = '#dfc09f';
+                ctx.lineWidth = cuts <= 6 ? 2.6 : 2.0;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(-len * 0.25, 0);
+                ctx.lineTo(len * 0.25, 0);
+                ctx.strokeStyle = '#c69255';
+                ctx.lineWidth = 1.2;
+                ctx.stroke();
+                ctx.restore();
+              }
+
+              // Palitos de tocino picado (muchos palitos)
+              const baconCount = 28;
+              for (let b = 0; b < baconCount; b++) {
+                const r = 0.24 + (b / baconCount) * 0.68;
+                const norm = Math.sin(b * 2.8);
+                const maxOff = r * (anglePerSlice * 0.40);
+                const a = midAngle + norm * maxOff;
+                const bx = cx + (R * r) * Math.cos(a);
+                const by = cy + (R * r) * Math.sin(a);
+                const rot = (b * 1.1) % Math.PI;
+                const len = cuts <= 6 ? 8.5 : (cuts <= 10 ? 7 : 5.5);
+                const wid = cuts <= 6 ? 2.6 : (cuts <= 10 ? 2.2 : 1.8);
+
+                ctx.save();
+                ctx.translate(bx, by);
+                ctx.rotate(rot);
+                // Palito de tocino crujiente
+                ctx.fillStyle = b % 3 === 0 ? '#871a1a' : (b % 2 === 0 ? '#a93226' : '#c0392b');
+                ctx.fillRect(-len / 2, -wid / 2, len, wid);
+                // Veta dorada de carne/grasa
+                ctx.fillStyle = '#f5b7b1';
+                ctx.fillRect(-len * 0.3, -wid / 2, len * 0.4, wid * 0.4);
+                ctx.restore();
+              }
+
+            } else if (currentFlavor.name === 'Pollo con Champiñones') {
+              // 1. Abundantes hebras de pollo desmechado tierno
+              const chickenCount = cuts <= 6 ? 16 : (cuts <= 10 ? 13 : 10);
+              for (let ck = 0; ck < chickenCount; ck++) {
+                const r = 0.22 + (ck / chickenCount) * 0.70;
+                const norm = Math.sin(ck * 2.4);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const chx = cx + (R * r) * Math.cos(a);
+                const chy = cy + (R * r) * Math.sin(a);
+                const rot = (ck * 1.3) % Math.PI;
+                const len = cuts <= 6 ? 10.5 : (cuts <= 10 ? 8.5 : 6.8);
+
+                ctx.save();
+                ctx.translate(chx, chy);
+                ctx.rotate(rot);
+                // Fibra de pechuga de pollo desmechada
+                ctx.beginPath();
+                ctx.moveTo(-len / 2, -1.2);
+                ctx.quadraticCurveTo(0, (ck % 2 === 0 ? 1.8 : -1.8), len / 2, 0.8);
+                ctx.strokeStyle = '#e2cbb2';
+                ctx.lineWidth = cuts <= 6 ? 3.0 : 2.4;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+                // Dorado de pechuga
+                ctx.beginPath();
+                ctx.moveTo(-len * 0.3, 0);
+                ctx.lineTo(len * 0.3, 0);
+                ctx.strokeStyle = '#b87c4c';
+                ctx.lineWidth = 1.4;
+                ctx.stroke();
+                ctx.restore();
+              }
+
+              // 2. Rodajas de champiñones frescos laminados (sombrerito + tallo)
+              const mushCount = cuts <= 6 ? 12 : (cuts <= 10 ? 9 : 7);
+              for (let m = 0; m < mushCount; m++) {
+                const r = 0.26 + (m / mushCount) * 0.65;
+                const norm = Math.cos(m * 2.8);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const mx = cx + (R * r) * Math.cos(a);
+                const my = cy + (R * r) * Math.sin(a);
+                const rot = (m * 1.7) % (Math.PI * 2);
+                const mScale = cuts <= 6 ? 1.0 : (cuts <= 10 ? 0.85 : 0.7);
+
+                ctx.save();
+                ctx.translate(mx, my);
+                ctx.rotate(rot);
+                ctx.scale(mScale, mScale);
+
+                // Tallito del champiñón
+                ctx.beginPath();
+                ctx.rect(-1.8, 0, 3.6, 4.5);
+                ctx.fillStyle = '#efebe9';
+                ctx.fill();
+                ctx.strokeStyle = '#8d6e63';
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+
+                // Sombrerito (media luna abovedada)
+                ctx.beginPath();
+                ctx.arc(0, 0, 5.2, Math.PI, 0, false);
+                ctx.closePath();
+                ctx.fillStyle = m % 2 === 0 ? '#6d4c41' : '#795548';
+                ctx.fill();
+                ctx.strokeStyle = '#4e342e';
+                ctx.lineWidth = 0.9;
+                ctx.stroke();
+
+                // Láminas / branquias interiores del champiñón
+                ctx.beginPath();
+                ctx.arc(0, 0, 3.8, Math.PI * 1.05, Math.PI * 1.95, false);
+                ctx.strokeStyle = '#d7ccc8';
+                ctx.lineWidth = 1.0;
+                ctx.stroke();
+
+                ctx.restore();
+              }
+
+              // 3. Hilos y cobertura de queso mozzarella fundido y gratinado (como en la porción real)
+              const cheeseStrands = cuts <= 6 ? 16 : (cuts <= 10 ? 12 : 9);
+              for (let cs = 0; cs < cheeseStrands; cs++) {
+                const r = 0.22 + (cs / cheeseStrands) * 0.70;
+                const norm = Math.sin(cs * 2.9);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const cx1 = cx + (R * r) * Math.cos(a - 0.04);
+                const cy1 = cy + (R * r) * Math.sin(a - 0.04);
+                const cx2 = cx + (R * r) * Math.cos(a + 0.04);
+                const cy2 = cy + (R * r) * Math.sin(a + 0.04);
+                const cMidX = cx + (R * (r + 0.02)) * Math.cos(a);
+                const cMidY = cy + (R * (r + 0.02)) * Math.sin(a);
+
+                ctx.beginPath();
+                ctx.moveTo(cx1, cy1);
+                ctx.quadraticCurveTo(cMidX, cMidY, cx2, cy2);
+                ctx.strokeStyle = cs % 2 === 0 ? 'rgba(255, 253, 230, 0.95)' : 'rgba(255, 248, 200, 0.9)';
+                ctx.lineWidth = cuts <= 6 ? 2.5 : 2.0;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+              }
+
+            } else if (currentFlavor.name === 'Napolitana') {
+              // 1. Rodajas de tomate natural fresco y jugoso
+              const tomCount = cuts <= 6 ? 6 : (cuts <= 10 ? 5 : 4);
+              const tomR = cuts <= 6 ? 8.5 : (cuts <= 10 ? 7.0 : 5.8);
+              for (let t = 0; t < tomCount; t++) {
+                const r = 0.30 + (t / tomCount) * 0.60;
+                const norm = Math.sin(t * 2.4);
+                const maxOff = r * (anglePerSlice * 0.36);
+                const a = midAngle + norm * maxOff;
+                const tx = cx + (R * r) * Math.cos(a);
+                const ty = cy + (R * r) * Math.sin(a);
+
+                // Rodaja exterior de tomate
+                ctx.beginPath();
+                ctx.arc(tx, ty, tomR, 0, Math.PI * 2);
+                ctx.fillStyle = '#d32f2f'; // Rojo tomate
+                ctx.fill();
+                ctx.strokeStyle = '#b71c1c';
+                ctx.lineWidth = 1.2;
+                ctx.stroke();
+
+                // Pulpa interior jugosa
+                ctx.beginPath();
+                ctx.arc(tx, ty, tomR * 0.6, 0, Math.PI * 2);
+                ctx.fillStyle = '#e53935';
+                ctx.fill();
+
+                // Semillitas amarillas en el centro
+                ctx.beginPath();
+                ctx.arc(tx - tomR * 0.25, ty - tomR * 0.15, 0.9, 0, Math.PI * 2);
+                ctx.arc(tx + tomR * 0.25, ty + tomR * 0.15, 0.9, 0, Math.PI * 2);
+                ctx.arc(tx, ty + tomR * 0.25, 0.9, 0, Math.PI * 2);
+                ctx.fillStyle = '#fff9c4';
+                ctx.fill();
+              }
+
+              // 2. Hojas de albahaca fresca de nuestro huerto
+              const basilCount = cuts <= 6 ? 7 : (cuts <= 10 ? 5 : 4);
+              for (let b = 0; b < basilCount; b++) {
+                const r = 0.26 + (b / basilCount) * 0.64;
+                const norm = Math.cos(b * 2.8 + 0.6);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const bx = cx + (R * r) * Math.cos(a);
+                const by = cy + (R * r) * Math.sin(a);
+                const rot = (b * 1.4) % (Math.PI * 2);
+                const bLen = cuts <= 6 ? 7.5 : 6.0;
+
+                ctx.save();
+                ctx.translate(bx, by);
+                ctx.rotate(rot);
+                ctx.beginPath();
+                ctx.ellipse(0, 0, bLen, bLen * 0.5, 0, 0, Math.PI * 2);
+                ctx.fillStyle = '#2e7d32'; // Verde albahaca fresca
+                ctx.fill();
+                ctx.strokeStyle = '#1b5e20';
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+
+                // Nervadura central de la hoja
+                ctx.beginPath();
+                ctx.moveTo(-bLen * 0.7, 0);
+                ctx.lineTo(bLen * 0.7, 0);
+                ctx.strokeStyle = '#81c784';
+                ctx.lineWidth = 0.7;
+                ctx.stroke();
+                ctx.restore();
+              }
+
+              // 3. Orégano aromático espolvoreado
+              for (let o = 0; o < 26; o++) {
+                const r = 0.22 + (o / 26) * 0.70;
+                const norm = Math.sin(o * 3.5);
+                const maxOff = r * (anglePerSlice * 0.40);
+                const a = midAngle + norm * maxOff;
+                const ox = cx + (R * r) * Math.cos(a);
+                const oy = cy + (R * r) * Math.sin(a);
+                ctx.beginPath();
+                ctx.arc(ox, oy, 1.2, 0, Math.PI * 2);
+                ctx.fillStyle = o % 2 === 0 ? 'rgba(45, 95, 25, 0.8)' : 'rgba(30, 75, 18, 0.65)';
+                ctx.fill();
+              }
+
+              // 4. Toques de aceite de oliva virgen
+              for (let ol = 0; ol < 6; ol++) {
+                const r = 0.28 + (ol / 6) * 0.60;
+                const norm = Math.cos(ol * 3.1);
+                const maxOff = r * (anglePerSlice * 0.35);
+                const a = midAngle + norm * maxOff;
+                const olx = cx + (R * r) * Math.cos(a);
+                const oly = cy + (R * r) * Math.sin(a);
+                ctx.beginPath();
+                ctx.arc(olx, oly, 2.0, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 235, 59, 0.35)';
+                ctx.fill();
+              }
+
+            } else if (currentFlavor.name === 'Tropical') {
+              // 1. Cuadritos de jamón premium
+              const hamCount = cuts <= 6 ? 8 : (cuts <= 10 ? 6 : 5);
+              const hSize = cuts <= 6 ? 9.0 : 7.5;
+              for (let h = 0; h < hamCount; h++) {
+                const r = 0.26 + (h / hamCount) * 0.64;
+                const norm = Math.sin(h * 2.6);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const hx = cx + (R * r) * Math.cos(a);
+                const hy = cy + (R * r) * Math.sin(a);
+
+                ctx.save();
+                ctx.translate(hx, hy);
+                ctx.rotate((h * 0.6) % Math.PI);
+                ctx.fillStyle = '#f48fb1'; // Rosado jamón premium
+                ctx.fillRect(-hSize / 2, -hSize / 2, hSize, hSize);
+                ctx.strokeStyle = '#e91e63';
+                ctx.lineWidth = 1.1;
+                ctx.strokeRect(-hSize / 2, -hSize / 2, hSize, hSize);
+                ctx.restore();
+              }
+
+              // 2. Trozos de piña dulce dorada
+              const pineCount = cuts <= 6 ? 8 : (cuts <= 10 ? 6 : 5);
+              const pSize = cuts <= 6 ? 10.0 : 8.5;
+              for (let p = 0; p < pineCount; p++) {
+                const r = 0.28 + (p / pineCount) * 0.64;
+                const norm = Math.cos(p * 2.7 + 0.5);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const px = cx + (R * r) * Math.cos(a);
+                const py = cy + (R * r) * Math.sin(a);
+
+                ctx.save();
+                ctx.translate(px, py);
+                ctx.rotate((p * 1.1) % (Math.PI * 2));
+                ctx.beginPath();
+                ctx.moveTo(0, -pSize * 0.55);
+                ctx.lineTo(pSize * 0.55, pSize * 0.4);
+                ctx.lineTo(-pSize * 0.55, pSize * 0.4);
+                ctx.closePath();
+                ctx.fillStyle = '#ffd54f'; // Piña dulce
+                ctx.fill();
+                ctx.strokeStyle = '#f57f17';
+                ctx.lineWidth = 1.0;
+                ctx.stroke();
+                ctx.restore();
+              }
+
+              // 3. Cerezas rojas glaseadas brillantes
+              const cherryCount = cuts <= 6 ? 9 : (cuts <= 10 ? 7 : 5);
+              const cherryR = cuts <= 6 ? 5.2 : (cuts <= 10 ? 4.2 : 3.4);
+              for (let cr = 0; cr < cherryCount; cr++) {
+                const r = 0.25 + (cr / cherryCount) * 0.66;
+                const norm = Math.sin(cr * 2.85 + 1.1);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const chx = cx + (R * r) * Math.cos(a);
+                const chy = cy + (R * r) * Math.sin(a);
+
+                ctx.beginPath();
+                ctx.arc(chx, chy, cherryR, 0, Math.PI * 2);
+                ctx.fillStyle = '#c2185b'; // Rojo cereza glaseada
+                ctx.fill();
+                ctx.strokeStyle = '#880e4f';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Destello brillante de la cereza
+                ctx.beginPath();
+                ctx.arc(chx - cherryR * 0.3, chy - cherryR * 0.3, cherryR * 0.28, 0, Math.PI * 2);
+                ctx.fillStyle = '#ff80ab';
+                ctx.fill();
+              }
+
+              // 4. Toques de queso gratinado fundido
+              for (let g = 0; g < 7; g++) {
+                const r = 0.24 + (g / 7) * 0.68;
+                const norm = Math.cos(g * 3.3);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const gx = cx + (R * r) * Math.cos(a);
+                const gy = cy + (R * r) * Math.sin(a);
+
+                ctx.beginPath();
+                ctx.arc(gx, gy, 3.5, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 213, 79, 0.45)'; // Gratinado dorado
+                ctx.fill();
+              }
+
+            } else if (currentFlavor.name === 'Criolla') {
+              // 1. Carne desmechada tradicional
+              for (let cr = 0; cr < 14; cr++) {
+                const r = 0.26 + (cr * 0.048);
+                const norm = Math.cos(cr * 2.2);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const crx = cx + (R * r) * Math.cos(a);
+                const cry = cy + (R * r) * Math.sin(a);
+                ctx.beginPath();
+                ctx.moveTo(crx - 4.5, cry - 1.5);
+                ctx.lineTo(crx + 4.5, cry + 1.5);
+                ctx.strokeStyle = '#5d4037';
+                ctx.lineWidth = 2.6;
+                ctx.stroke();
+              }
+
+              // 2. Julianas de cebolla fresca
+              const onionCount = cuts <= 6 ? 8 : (cuts <= 10 ? 6 : 4);
+              for (let on = 0; on < onionCount; on++) {
+                const r = 0.28 + (on / onionCount) * 0.62;
+                const norm = Math.sin(on * 2.8 + 0.4);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const onx = cx + (R * r) * Math.cos(a);
+                const ony = cy + (R * r) * Math.sin(a);
+                const rot = (on * 1.3) % Math.PI;
+
+                ctx.save();
+                ctx.translate(onx, ony);
+                ctx.rotate(rot);
+                ctx.beginPath();
+                ctx.arc(0, 0, 5, Math.PI * 0.2, Math.PI * 0.8, false);
+                ctx.strokeStyle = '#ba68c8'; // Cebolla morada
+                ctx.lineWidth = 1.3;
+                ctx.stroke();
+                ctx.restore();
+              }
+
+              // 3. Maíz tierno tostado (abundantes granitos)
+              for (let mz = 0; mz < 32; mz++) {
+                const r = 0.22 + (mz / 32) * 0.70;
+                const norm = Math.sin(mz * 1.95);
+                const maxOff = r * (anglePerSlice * 0.40);
+                const a = midAngle + norm * maxOff;
+                const mx = cx + (R * r) * Math.cos(a);
+                const my = cy + (R * r) * Math.sin(a);
+                ctx.beginPath();
+                ctx.ellipse(mx, my, 3.4, 2.5, mz * 0.7, 0, Math.PI * 2);
+                ctx.fillStyle = mz % 4 === 0 ? '#fff176' : '#fbc02d';
+                ctx.fill();
+                ctx.strokeStyle = '#f57f17';
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+              }
+
+              // 4. Cilantro fresco picado
+              for (let cl = 0; cl < 16; cl++) {
+                const r = 0.26 + (cl / 16) * 0.65;
+                const norm = Math.cos(cl * 3.3);
+                const maxOff = r * (anglePerSlice * 0.38);
+                const a = midAngle + norm * maxOff;
+                const clx = cx + (R * r) * Math.cos(a);
+                const cly = cy + (R * r) * Math.sin(a);
+                ctx.beginPath();
+                ctx.arc(clx, cly, 1.3, 0, Math.PI * 2);
+                ctx.fillStyle = '#2e7d32'; // Verde cilantro fresco
+                ctx.fill();
+              }
+            }
+          } else {
+            // Textura dorada estándar antes de seleccionar sabor
+            for (let d = 0; d < 4; d++) {
+              const dist = R * (0.35 + d * 0.15);
+              const dAng = midAngle + (d % 2 === 0 ? 0.1 : -0.1);
+              const dx = cx + dist * Math.cos(dAng);
+              const dy = cy + dist * Math.sin(dAng);
+              ctx.beginPath();
+              ctx.arc(dx, dy, 5, 0, Math.PI * 2);
+              ctx.fillStyle = 'rgba(0,0,0,0.12)';
+              ctx.fill();
+            }
+          }
+          ctx.restore();
+
+          // Borde de la rebanada
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.arc(cx, cy, R, startAngle, endAngle);
+          ctx.closePath();
+          ctx.strokeStyle = currentFlavor ? 'rgba(0,0,0,0.2)' : 'rgba(0,0,0,0.35)';
+          ctx.lineWidth = 1.8;
+          ctx.stroke();
+        }
+
+        // Borde exterior / corteza horneada
+        ctx.beginPath();
+        ctx.arc(cx, cy, R, 0, Math.PI * 2);
+        ctx.strokeStyle = '#9c5a1a';
+        ctx.lineWidth = 11;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, R - 5.5, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(80, 35, 10, 0.35)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Líneas de corte de cada porción
+        for (let i = 0; i < cuts; i++) {
+          const angle = startOffset + i * anglePerSlice;
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.lineTo(cx + R * Math.cos(angle), cy + R * Math.sin(angle));
+          ctx.strokeStyle = assignedSliceFlavors[i] ? 'rgba(40,40,40,0.3)' : 'rgba(255,255,255,0.35)';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        }
+
+        // Punto central
+        ctx.beginPath();
+        ctx.arc(cx, cy, 9, 0, Math.PI * 2);
+        ctx.fillStyle = '#5c2d0c';
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Anillo de brillo exterior
+        const grad = ctx.createRadialGradient(cx, cy, R - 8, cx, cy, R + 10);
+        grad.addColorStop(0, 'transparent');
+        grad.addColorStop(1, 'rgba(255,179,0,0.08)');
+        ctx.beginPath();
+        ctx.arc(cx, cy, R + 10, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+
+      function updateLegend() {
+        legend.innerHTML = '';
+        const activeF = getActiveFlavors();
+        if (activeF.length === 0) return;
+        activeF.forEach(idx => {
+          const fl = FLAVORS[idx];
+          const qty = flavorQuantities[idx];
+          const item = document.createElement('div');
+          item.className = 'pgm-legend-item';
+          item.innerHTML = `<div class="pgm-legend-dot" style="background:#fff2c2; border:1px solid #d4ba68; box-shadow:0 0 6px rgba(255,242,194,0.6);"></div>${fl.emoji} ${fl.name}: <strong style="color:#fff; margin-left:3px;">${qty} porc.</strong>`;
+          legend.appendChild(item);
+        });
+      }
+
+      /* ── Step 1: Size ─────────────────────────────────────── */
+      document.querySelectorAll('.pgm-size-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.pgm-size-card').forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          selSize          = card.dataset.size;
+          selCuts          = null;
+          flavorQuantities = {};
+          next1.disabled   = false;
+          drawPizza();
+          canvasLabel.textContent = SIZES[selSize].label + ' — elige cortes';
+        });
+        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') card.click(); });
+      });
+
+      next1.addEventListener('click', () => goStep(2));
+
+      /* ── Step 2: Cuts ─────────────────────────────────────── */
+      function buildCuts() {
+        cutsGrid.innerHTML = '';
+        SIZES[selSize].cuts.forEach(n => {
+          const btn = document.createElement('button');
+          btn.className = 'pgm-cut-btn';
+          btn.innerHTML = `${n}<small>piezas</small>`;
+          btn.dataset.cuts = n;
+          if (selCuts === n) btn.classList.add('selected');
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.pgm-cut-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selCuts = n;
+            flavorQuantities = {}; // Reiniciar asignaciones al cambiar cortes
+            next2.disabled = false;
+            drawPizza();
+            canvasLabel.textContent = SIZES[selSize].label + ` — ${n} piezas`;
+          });
+          cutsGrid.appendChild(btn);
+        });
+        next2.disabled = !selCuts;
+      }
+
+      back2.addEventListener('click', () => goStep(1));
+      next2.addEventListener('click', () => goStep(3));
+
+      /* ── Step 3: Flavors List with Quantity Stepper ───────── */
+      function buildFlavorsList() {
+        const cuts = selCuts || SIZES[selSize].cuts[0];
+        const maxF = SIZES[selSize].maxFlavors;
+        const totalAssigned = getTotalAssigned();
+        const activeF = getActiveFlavors();
+        const remaining = cuts - totalAssigned;
+
+        // Actualizar barra de asignación
+        if (allocCount) allocCount.textContent = `${totalAssigned} / ${cuts}`;
+        if (allocFlavors) allocFlavors.textContent = `${activeF.length} / ${maxF}`;
+        const pct = Math.min(100, Math.round((totalAssigned / cuts) * 100));
+        if (allocProgress) allocProgress.style.width = `${pct}%`;
+
+        // Hint explicativo
+        if (remaining > 0) {
+          flavorHint.innerHTML = `Faltan <strong style="color:#ffb300;">${remaining}</strong> porción(es) por asignar. Puedes elegir hasta <strong>${maxF}</strong> sabores diferentes.`;
+        } else {
+          flavorHint.innerHTML = `<span style="color:#66bb6a; font-weight:700;"><i class="fa-solid fa-check-circle"></i> ¡Rueda completa (${cuts} porciones)! Lista para ordenar.</span>`;
+        }
+
+        flavorsList.innerHTML = '';
+
+        FLAVORS.forEach((fl, idx) => {
+          const qty = flavorQuantities[idx] || 0;
+          const isChosen = qty > 0;
+          const canAdd = (totalAssigned < cuts) && (isChosen || activeF.length < maxF);
+
+          const row = document.createElement('div');
+          row.className = 'pgm-flavor-row' + (isChosen ? ' has-qty' : '');
+
+          row.innerHTML = `
+            <div class="pgm-fl-left">
+              <span class="pgm-fl-emoji">${fl.emoji}</span>
+              <div class="pgm-fl-info">
+                <span class="pgm-fl-name">Porción ${fl.name}</span>
+                <small class="pgm-fl-desc">${fl.desc}</small>
+              </div>
+            </div>
+            <div class="pgm-fl-stepper">
+              <button type="button" class="pgm-step-btn pgm-step-minus" ${qty === 0 ? 'disabled' : ''} aria-label="Disminuir"><i class="fa-solid fa-minus"></i></button>
+              <span class="pgm-step-qty">${qty}</span>
+              <button type="button" class="pgm-step-btn pgm-step-plus" ${!canAdd ? 'disabled' : ''} aria-label="Aumentar"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          `;
+
+          const minusBtn = row.querySelector('.pgm-step-minus');
+          const plusBtn  = row.querySelector('.pgm-step-plus');
+
+          minusBtn.addEventListener('click', () => {
+            if (qty > 0) {
+              if (qty === 1) delete flavorQuantities[idx];
+              else flavorQuantities[idx]--;
+              buildFlavorsList();
+              updateSummary();
+              updateLegend();
+              drawPizza();
+            }
+          });
+
+          plusBtn.addEventListener('click', () => {
+            if (canAdd) {
+              flavorQuantities[idx] = (flavorQuantities[idx] || 0) + 1;
+              buildFlavorsList();
+              updateSummary();
+              updateLegend();
+              drawPizza();
+            }
+          });
+
+          flavorsList.appendChild(row);
+        });
+      }
+
+      function updateSummary() {
+        const price = getPrice(SIZES[selSize].priceKey);
+        const cuts = selCuts || SIZES[selSize].cuts[0];
+        const totalAssigned = getTotalAssigned();
+        const activeF = getActiveFlavors();
+
+        document.getElementById('sum-size').textContent    = SIZES[selSize].label;
+        document.getElementById('sum-cuts').textContent    = cuts ? cuts + ' piezas' : '—';
+        document.getElementById('sum-flavors').textContent = activeF.length > 0
+          ? activeF.map(i => `${flavorQuantities[i]}x ${FLAVORS[i].name}`).join(' + ') : '—';
+        document.getElementById('sum-price').textContent   = fmtCOP(price);
+
+        // Habilitar botón solo cuando se completen todas las porciones
+        addCartBtn.disabled = totalAssigned !== cuts;
+      }
+
+      back3.addEventListener('click', () => goStep(2));
+
+      addCartBtn.addEventListener('click', () => {
+        const cuts = selCuts;
+        const totalAssigned = getTotalAssigned();
+        if (totalAssigned !== cuts) return;
+
+        const price = getPrice(SIZES[selSize].priceKey);
+        const sizeLabel = SIZES[selSize].label;
+        const activeF = getActiveFlavors();
+        const flavorDetails = activeF.map(i => `${flavorQuantities[i]}x ${FLAVORS[i].name}`).join(' / ');
+        const name = `Rueda ${sizeLabel} (${cuts} piezas) — ${flavorDetails}`;
+
+        const fakeBtn = document.createElement('button');
+        fakeBtn.className = 'add-to-cart-btn';
+        fakeBtn.dataset.name  = name;
+        fakeBtn.dataset.price = price;
+        fakeBtn.dataset.img   = '../imagen/rueda-de-pizza-familiar.jpg';
+        document.body.appendChild(fakeBtn);
+        fakeBtn.click();
+        fakeBtn.remove();
+        closeModal();
+      });
+
+      /* ── Step navigation ──────────────────────────────────── */
+      function goStep(n) {
+        document.querySelectorAll('.pgm-step-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(`pgm-step-${n}`).classList.add('active');
+
+        [1,2,3].forEach(i => {
+          const dot = document.getElementById(`step-dot-${i}`);
+          dot.classList.remove('active','done');
+          if (i < n)  dot.classList.add('done');
+          if (i === n) dot.classList.add('active');
+        });
+
+        const lines = document.querySelectorAll('.pgm-step-line');
+        lines.forEach((l, i) => {
+          l.classList.toggle('done', i + 1 < n);
+        });
+
+        if (n === 2) buildCuts();
+        if (n === 3) { buildFlavorsList(); updateSummary(); }
+        currentStep = n;
+      }
+
+      /* ── Open / Close ─────────────────────────────────────── */
+      function openModal() {
+        if (window.ProductsManager) {
+          const prices = window.ProductsManager.getRuedaPrices();
+          document.getElementById('price-junior').textContent   = fmtCOP(prices.junior?.price || prices.junior?.priceLlevar || 22000);
+          document.getElementById('price-medium').textContent   = fmtCOP(prices.medium?.price || prices.medium?.priceLlevar || 34000);
+          document.getElementById('price-familiar').textContent = fmtCOP(prices.familiar?.price || prices.familiar?.priceLlevar || 48000);
+        }
+        selSize          = null;
+        selCuts          = null;
+        flavorQuantities = {};
+        document.querySelectorAll('.pgm-size-card').forEach(c => c.classList.remove('selected'));
+        next1.disabled = true;
+        goStep(1);
+        drawPizza();
+        canvasLabel.textContent = 'Selecciona un tamaño';
+        legend.innerHTML = '';
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      const openBtn = document.getElementById('btn-open-custom-rueda');
+      if (openBtn) openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+      /* ── Render Porciones ─────────────────────────────────── */
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.ProductsManager) window.ProductsManager.renderPizzas('#pizzas-grid');
+      });
+    })();
     </script>
 
     <script src="../js/main.js"></script>
+
 
 </body>
 
 
 
 </html>
-

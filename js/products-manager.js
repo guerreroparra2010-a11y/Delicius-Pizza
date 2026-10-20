@@ -71,8 +71,18 @@ const DEFAULT_PRODUCTS = [
         category: "pizzas",
         subcategory: "porciones",
         price: 9000,
-        description: "Exquisita salsa carbonara a la crema, champiñones y tocineta.",
+        description: "Exquisita salsa carbonara a la crema, pollo y tocineta.",
         image: "imagen/porcion-carbonara.jpg"
+    },
+    {
+        id: "pizza-10",
+        name: "Porción Pollo con Champiñones",
+        category: "pizzas",
+        subcategory: "porciones",
+        price: 9000,
+        description: "Pollo, champiñón y abundante queso mozzarella fundido.",
+        image: "imagen/porcion-pollo-champinones.jpg",
+        badge: "Popular"
     },
     {
         id: "pizza-8",
@@ -93,7 +103,6 @@ const DEFAULT_PRODUCTS = [
         image: "imagen/porcion-criolla.jpg",
         badge: "Auténtica"
     },
-
 
     // --- ENCARGOS ESPECIALES ---
     {
@@ -534,6 +543,55 @@ const ProductsManager = {
                 return [...DEFAULT_PRODUCTS];
             }
 
+            // Migración: asegurar que Carbonara tenga pollo y no champiñón, e incluir Pollo con Champiñones
+            let migrated = false;
+            const carb = parsed.find(p => p.name === 'Porción Carbonara' || p.id === 'pizza-7');
+            if (carb && carb.description && carb.description.includes('champiñon')) {
+                carb.description = "Exquisita salsa carbonara a la crema, pollo y tocineta.";
+                migrated = true;
+            }
+            const polloChamp = parsed.find(p => 
+                (p.name && p.name.toLowerCase().includes('pollo con champiñ')) || 
+                p.id === 'pizza-10'
+            );
+            if (polloChamp) {
+                if (polloChamp.description !== "Pollo, champiñón y abundante queso mozzarella fundido." || polloChamp.image !== "imagen/porcion-pollo-champinones.jpg") {
+                    polloChamp.description = "Pollo, champiñón y abundante queso mozzarella fundido.";
+                    polloChamp.image = "imagen/porcion-pollo-champinones.jpg";
+                    migrated = true;
+                }
+            } else {
+                const carbIdx = parsed.findIndex(p => p.name === 'Porción Carbonara' || p.id === 'pizza-7');
+                const newProd = {
+                    id: "pizza-10",
+                    name: "Porción Pollo con Champiñones",
+                    category: "pizzas",
+                    subcategory: "porciones",
+                    price: 9000,
+                    description: "Pollo, champiñón y abundante queso mozzarella fundido.",
+                    image: "imagen/porcion-pollo-champinones.jpg",
+                    badge: "Popular"
+                };
+                if (carbIdx !== -1) {
+                    parsed.splice(carbIdx + 1, 0, newProd);
+                } else {
+                    parsed.push(newProd);
+                }
+                migrated = true;
+            }
+
+            // Limpieza: Las Ruedas no van como tarjetas de productos en el catálogo
+            // (Son exclusivas del juego interactivo y su precio se gestiona arriba)
+            const countBefore = parsed.length;
+            parsed = parsed.filter(p => p.category !== 'ruedas' && !String(p.id).startsWith('rueda-'));
+            if (parsed.length !== countBefore) {
+                migrated = true;
+            }
+
+            if (migrated) {
+                try { localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed)); } catch (err) {}
+            }
+
             return parsed;
         } catch (e) {
             console.error("Error al leer productos de localStorage:", e);
@@ -613,6 +671,20 @@ const ProductsManager = {
             image: updatedData.image || products[index].image,
             badge: updatedData.badge !== undefined ? updatedData.badge.trim() : products[index].badge
         };
+
+        // Sincronizar con RUEDA_PRICES_KEY si se modifica una Rueda
+        if (String(id).startsWith('rueda-')) {
+            const key = String(id).replace('rueda-', '');
+            const currentRuedaPrices = this.getRuedaPrices();
+            if (currentRuedaPrices[key]) {
+                currentRuedaPrices[key].price = products[index].price;
+                currentRuedaPrices[key].priceLlevar = products[index].price;
+                try {
+                    localStorage.setItem(RUEDA_PRICES_KEY, JSON.stringify(currentRuedaPrices));
+                    window.dispatchEvent(new CustomEvent('delicius_rueda_prices_updated', { detail: currentRuedaPrices }));
+                } catch(e) {}
+            }
+        }
 
         this.saveAll(products);
         return products[index];
