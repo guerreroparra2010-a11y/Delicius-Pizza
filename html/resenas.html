@@ -152,9 +152,7 @@
 }
 </script >
 
-	<meta charset="utf-8">
 
-	<title>IED Hernan Venegas Carrillo</title>
 
     <meta name="viewport" content="width=device-width,user-scalable=no,  initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
@@ -1157,67 +1155,10 @@ body {
         box-sizing: border-box; /* Incluir padding en el ancho */
     }
 
-    .menu.active {
-        left: 0; /* Muestra el menú */
+    
+    
     }
-
-    .menu ul {
-        padding: 0;
-        margin: 0;
-        flex-direction: column;
-        display: block;
-    }
-
-    .menu li {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .menu li a {
-        padding: 15px 20px;
-        font-size: 16px;
-        display: block;
-        color: #000;
-        text-decoration: none;
-        transition: background 0.3s ease;
-    }
-
-    .menu li a:hover {
-        background: #f0f0f0;
-    }
-
-    .menu li.sub-menu > a {
-        position: relative;
-    }
-
-    .menu li.sub-menu > a:after {
-        content: '+';
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        transition: transform 0.3s ease;
-    }
-
-    .menu li.sub-menu.active > a:after {
-        content: '-';
-    }
-
-    .menu li.sub-menu ul {
-        display: none;
-        background: #f8f8f8;
-        padding-left: 20px;
-    }
-
-    .menu li.sub-menu.active ul {
-        display: block;
-    }
-
-    .menu li.sub-menu ul li a {
-        padding-left: 40px;
-    }
+    
 
     /* Asegura que el contenido principal no esté oculto por la cabecera fija */
     main {
@@ -1319,131 +1260,11 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM totalmente cargado'); // Mensaje para verificar si DOMContentLoaded se dispara
     navbar.style.transition = 'transform 0.3s ease-in-out';
 
-    // Menú toggle (para móvil)
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menuOptions = document.querySelector('.menu-options');
-    if (menuToggle && menuOptions) {
-        menuToggle.addEventListener('click', () => {
-            menuOptions.classList.toggle('hidden');
         });
-    }
+  
 
-    // Manejo del menú desplegable
-    const subMenus = document.querySelectorAll('.sub-menu');
-    
-    subMenus.forEach(subMenu => {
-        const link = subMenu.querySelector('a');
-        const dropdown = subMenu.querySelector('ul');
-        
-        // Función para mostrar el menú
-        function showMenu() {
-            dropdown.style.opacity = '1';
-            dropdown.style.visibility = 'visible';
-            dropdown.style.transform = 'translateY(0)';
-        }
-        
-        // Función para ocultar el menú
-        function hideMenu() {
-            dropdown.style.opacity = '0';
-            dropdown.style.visibility = 'hidden';
-            dropdown.style.transform = 'translateY(10px)';
-        }
-        
-        // Mostrar menú al hacer hover
-        subMenu.addEventListener('mouseenter', showMenu);
-        
-        // Ocultar menú al quitar el mouse
-        subMenu.addEventListener('mouseleave', hideMenu);
-        
-        // Toggle al hacer clic en móvil
-        if (window.innerWidth <= 900) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const isVisible = dropdown.style.display === 'block';
-                dropdown.style.display = isVisible ? 'none' : 'block';
-            });
-        }
-    });
-    
-    // Cerrar menús al redimensionar
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 900) {
-            subMenus.forEach(subMenu => {
-                const dropdown = subMenu.querySelector('ul');
-                dropdown.style.display = '';
-            });
-        }
-    });
-
-// Manejo del menú móvil
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.menu');
-    const subMenus = document.querySelectorAll('.sub-menu');
-    const body = document.body;
-
-    // Función para cerrar el menú
-    function closeMenu() {
-        menu.classList.remove('active');
-        menuToggle.classList.remove('active');
-        body.style.overflow = '';
-    }
-
-    // Función para abrir el menú
-    function openMenu() {
-        menu.classList.add('active');
-        menuToggle.classList.add('active');
-        body.style.overflow = 'hidden';
-    }
-
-    // Toggle del menú
-    menuToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        if (menu.classList.contains('active')) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
-    });
-
-    // Manejar submenús en móvil
-    subMenus.forEach(subMenu => {
-        const link = subMenu.querySelector('a');
-        link.addEventListener('click', function(e) {
-            if (window.innerWidth <= 900) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Cerrar otros submenús
-                subMenus.forEach(otherSubMenu => {
-                    if (otherSubMenu !== subMenu) {
-                        otherSubMenu.classList.remove('active');
-                    }
                 });
                 
-                subMenu.classList.toggle('active');
-            }
-        });
-    });
-
-    // Cerrar menú al hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (menu.classList.contains('active') && 
-            !menu.contains(e.target) && 
-            !menuToggle.contains(e.target)) {
-            closeMenu();
-        }
-    });
-
-    // Cerrar menú al cambiar el tamaño de la ventana
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 900) {
-            closeMenu();
-            subMenus.forEach(subMenu => {
-                subMenu.classList.remove('active');
-            });
-        }
-    });
 
 	</script>	
 
