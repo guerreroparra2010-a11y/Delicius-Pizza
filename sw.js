@@ -1,5 +1,5 @@
 // Service Worker para Delicius Pizza (Capacidad PWA multiplataforma)
-const CACHE_NAME = 'delicius-pizza-v7';
+const CACHE_NAME = 'delicius-pizza-v8';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -20,6 +20,9 @@ const ASSETS_TO_CACHE = [
   './js/products-manager.js',
   './js/admin.js',
   './js/pqr.js',
+  './imagen/rueda-de-pizza-familiar.jpg',
+  './imagen/pzz.jpg',
+  './imagen/764d1009-25b6-477b-96ec-b14b24e8337d.jpg',
   './manifest.json'
 ];
 

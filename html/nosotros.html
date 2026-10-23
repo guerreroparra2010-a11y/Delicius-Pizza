@@ -140,7 +140,47 @@
 
             <div class="about-image" style="display: flex; justify-content: center; align-items: center;">
 
-                <video src="../imagen/whatsapp-video-2026-05-05-at-52256-pm.mp4" autoplay muted loop playsinline style="width: 100%; max-width: 350px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); object-fit: cover; border: 4px solid var(--primary-color); pointer-events: none;"></video>
+                <!-- Video remasterizado - sin controles ni interacción -->
+                <div class="video-remaster-wrapper" style="
+                    position: relative;
+                    width: 100%;
+                    max-width: 420px;
+                    border-radius: 20px;
+                    overflow: hidden;
+                    box-shadow: 0 20px 45px rgba(0,0,0,0.7);
+                    border: 4px solid var(--primary-color, #e63946);
+                    pointer-events: none;
+                    user-select: none;
+                ">
+                    <video
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        disablepictureinpicture
+                        controlslist="nodownload nofullscreen noremoteplayback"
+                        style="
+                            width: 100%;
+                            display: block;
+                            border-radius: 16px;
+                            filter: contrast(1.08) saturate(1.2) brightness(1.05);
+                            pointer-events: none;
+                            user-select: none;
+                        "
+                        oncontextmenu="return false;"
+                    >
+                        <source src="../imagen/WhatsApp Video 2026-10-23 at 12.26.10 PM.mp4" type="video/mp4">
+                    </video>
+                    <!-- Capa invisible para bloquear toda interacción del usuario -->
+                    <div style="
+                        position: absolute;
+                        inset: 0;
+                        z-index: 10;
+                        pointer-events: all;
+                        cursor: default;
+                        background: transparent;
+                    "></div>
+                </div>
 
             </div>
 
