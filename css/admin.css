@@ -1,0 +1,1070 @@
+/* ==========================================================================
+   Delicius Pizza - Estilos del Panel de Administración (admin.css)
+   Sigue estrictamente la paleta de colores y diseño original de la web.
+   ========================================================================== */
+
+/* --- Contenedor Principal de Administración --- */
+.admin-page {
+    min-height: 100vh;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- VISTA 1: LOGIN ADMINISTRATIVO --- */
+.admin-login-wrapper {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1.5rem 3rem 1.5rem;
+    position: relative;
+    background: radial-gradient(circle at 50% 20%, rgba(255, 179, 0, 0.08) 0%, transparent 60%);
+}
+
+.login-card {
+    background: rgba(30, 30, 30, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 179, 0, 0.25);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 179, 0, 0.1);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 179, 0, 0.12);
+    color: var(--primary-color);
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 179, 0, 0.2);
+}
+
+.login-header h2 {
+    font-size: 2rem;
+    font-family: var(--font-heading);
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.login-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.form-group {
+    margin-bottom: 1.4rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #f0f0f0;
+}
+
+.input-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon-wrapper i.field-icon {
+    position: absolute;
+    left: 1rem;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.95rem 1rem 0.95rem 2.8rem;
+    background: rgba(18, 18, 18, 0.8);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    font-family: var(--font-main);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(255, 179, 0, 0.3);
+    background: rgba(18, 18, 18, 0.95);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0.2rem;
+    transition: color 0.2s;
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+.login-error {
+    background: rgba(230, 57, 70, 0.15);
+    border: 1px solid var(--secondary-color);
+    color: #ff8b94;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+.btn-login-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: #000;
+    font-weight: 800;
+    font-size: 1.05rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 179, 0, 0.35);
+}
+
+.btn-login-submit:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 179, 0, 0.5);
+}
+
+.login-footer-links {
+    margin-top: 1.8rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.login-footer-links a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.login-footer-links a:hover {
+    color: #fff;
+}
+
+/* --- VISTA 2: DASHBOARD ADMINISTRATIVO --- */
+.admin-dashboard-view {
+    padding-top: 100px;
+    padding-bottom: 4rem;
+    min-height: 100vh;
+    display: none;
+}
+
+.admin-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Top bar del Dashboard */
+.admin-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-welcome h2 {
+    font-size: 1.8rem;
+    font-family: var(--font-heading);
+    margin-bottom: 0.25rem;
+}
+
+.admin-welcome p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.admin-user-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 179, 0, 0.1);
+    border: 1px solid rgba(255, 179, 0, 0.25);
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.admin-topbar-actions {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.btn-admin-action {
+    padding: 0.65rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-admin-outline {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-admin-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-admin-logout {
+    background: rgba(230, 57, 70, 0.15);
+    color: #ff6b6b;
+    border: 1px solid rgba(230, 57, 70, 0.3);
+}
+
+.btn-admin-logout:hover {
+    background: var(--secondary-color);
+    color: #fff;
+    border-color: var(--secondary-color);
+}
+
+/* Tarjetas de Métricas KPI */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.kpi-card {
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 179, 0, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.kpi-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background: rgba(255, 179, 0, 0.15);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.kpi-info h3 {
+    font-size: 1.8rem;
+    font-family: var(--font-heading);
+    color: #fff;
+    margin-bottom: 0.1rem;
+}
+
+.kpi-info p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Barra de Herramientas y Filtros */
+.admin-toolbar {
+    background: rgba(30, 30, 30, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 18px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+@media (min-width: 992px) {
+    .admin-toolbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.search-filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex: 1;
+}
+
+.admin-search-box {
+    position: relative;
+    min-width: 260px;
+    flex: 1;
+}
+
+.admin-search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.admin-search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.6rem;
+    background: rgba(18, 18, 18, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50px;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.admin-search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 12px rgba(255, 179, 0, 0.3);
+}
+
+.category-tabs {
+    display: flex;
+    gap: 0.4rem;
+    background: rgba(18, 18, 18, 0.6);
+    padding: 0.3rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow-x: auto;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    color: #fff;
+}
+
+.tab-btn.active {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 2px 8px rgba(255, 179, 0, 0.4);
+}
+
+.admin-actions-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.btn-primary-admin {
+    background: var(--primary-color);
+    color: #000;
+    font-weight: 700;
+    padding: 0.75rem 1.4rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 179, 0, 0.3);
+}
+
+.btn-primary-admin:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 179, 0, 0.45);
+}
+
+/* Grid de Productos en Admin */
+.admin-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 1.8rem;
+}
+
+.admin-product-card {
+    background: rgba(30, 30, 30, 0.65);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.admin-product-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 179, 0, 0.35);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 179, 0, 0.1);
+}
+
+.admin-card-img-wrap {
+    height: 190px;
+    position: relative;
+    background-color: #1a1a1a;
+    overflow: hidden;
+}
+
+.admin-card-img {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.5s ease;
+}
+
+.admin-product-card:hover .admin-card-img {
+    transform: scale(1.08);
+}
+
+.admin-category-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(18, 18, 18, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--primary-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.admin-special-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--primary-color);
+    color: #000;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.admin-card-body {
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.admin-card-title {
+    font-size: 1.25rem;
+    font-family: var(--font-heading);
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.admin-card-desc {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.admin-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-price {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.admin-card-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-card-edit {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 179, 0, 0.15);
+    color: var(--primary-color);
+    border: 1px solid rgba(255, 179, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-card-edit:hover {
+    background: var(--primary-color);
+    color: #000;
+    transform: scale(1.1);
+}
+
+.btn-card-delete {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(230, 57, 70, 0.15);
+    color: #ff6b6b;
+    border: 1px solid rgba(230, 57, 70, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-card-delete:hover {
+    background: var(--secondary-color);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Empty State */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 1rem;
+    background: rgba(30, 30, 30, 0.3);
+    border-radius: 20px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.empty-state i {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.empty-state h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+/* --- MODAL DE PRODUCTO (CREAR / EDITAR) --- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10050;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-container {
+    background: #1e1e1e;
+    border: 1px solid rgba(255, 179, 0, 0.3);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 179, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-header h3 i {
+    color: var(--primary-color);
+}
+
+.btn-close-modal {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-close-modal:hover {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 2rem;
+    max-height: calc(85vh - 140px);
+    overflow-y: auto;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 576px) {
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.image-preview-wrapper {
+    margin-top: 0.8rem;
+    border: 2px dashed rgba(255, 179, 0, 0.3);
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+    background: rgba(18, 18, 18, 0.6);
+}
+
+.preview-img-container {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 0.8rem auto;
+    border-radius: 12px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.image-options-toggle {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 0.8rem;
+}
+
+.image-options-toggle button {
+    flex: 1;
+    padding: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.image-options-toggle button.active {
+    background: rgba(255, 179, 0, 0.15);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.modal-footer {
+    padding: 1.2rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+}
+
+/* Modales de Confirmación */
+.confirm-box {
+    text-align: center;
+    padding: 2.5rem 2rem;
+}
+
+.confirm-icon {
+    font-size: 3.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.2rem;
+}
+
+.confirm-box h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.confirm-box p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* --- TOAST NOTIFICATIONS --- */
+.admin-toast-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 10090;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.admin-toast {
+    background: #1e1e1e;
+    color: #fff;
+    border-left: 4px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 1rem 1.4rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 280px;
+    max-width: 400px;
+    font-size: 0.95rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
+}
+
+.admin-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.admin-toast.toast-success {
+    border-left-color: #2ec4b6;
+}
+
+.admin-toast.toast-success i {
+    color: #2ec4b6;
+}
+
+.admin-toast.toast-error {
+    border-left-color: var(--secondary-color);
+}
+
+.admin-toast.toast-error i {
+    color: var(--secondary-color);
+}
+
+.admin-toast.toast-warning {
+    border-left-color: var(--primary-color);
+}
+
+.admin-toast.toast-warning i {
+    color: var(--primary-color);
+}
+
+/* --- TARJETA DE GESTIÓN RÁPIDA: PRECIOS DE RUEDAS DE PIZZA --- */
+.rueda-prices-card {
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.75) 0%, rgba(20, 20, 20, 0.9) 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 179, 0, 0.3);
+    border-radius: 20px;
+    padding: 1.8rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 179, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.rueda-prices-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), #ff6b6b, var(--primary-color));
+}
+
+.rueda-prices-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rueda-prices-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.rueda-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #ff8c00 100%);
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(255, 179, 0, 0.3);
+}
+
+.rueda-prices-title h3 {
+    font-size: 1.3rem;
+    font-family: var(--font-heading);
+    color: #fff;
+    margin-bottom: 0.2rem;
+}
+
+.rueda-prices-title p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin: 0;
+}
+
+.rueda-prices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+}
+
+.rueda-price-item {
+    background: rgba(18, 18, 18, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.2rem 1.2rem 1rem 1.2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.rueda-price-item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 179, 0, 0.35);
+    background: rgba(25, 25, 25, 0.8);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.rueda-price-item.highlighted {
+    border-color: rgba(255, 179, 0, 0.45);
+    background: linear-gradient(145deg, rgba(255, 179, 0, 0.08) 0%, rgba(20, 20, 20, 0.7) 100%);
+}
+
+.rueda-item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.rueda-size-badge {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ddd;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rueda-size-badge.star {
+    background: var(--primary-color);
+    color: #000;
+    font-weight: 700;
+    border: none;
+}
+
+.rueda-size-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.rueda-price-item label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.price-input-wrap {
+    display: flex;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0 0.8rem;
+    transition: all 0.25s ease;
+}
+
+.price-input-wrap:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 179, 0, 0.3);
+}
+
+.price-prefix {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-right: 4px;
+}
+
+.price-suffix {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+.rueda-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 0.7rem 0.2rem;
+    outline: none;
+    font-family: inherit;
+}
+
