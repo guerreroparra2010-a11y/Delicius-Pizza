@@ -444,6 +444,7 @@ const DEFAULT_PRODUCTS = [
 
 const STORAGE_KEY = 'delicius_products';
 const RUEDA_PRICES_KEY = 'delicius_rueda_prices';
+const CATALOG_VERSION = 'delicius_remaster_v2026_1';
 
 const DEFAULT_RUEDA_PRICES = {
     junior:   { id: "rueda-junior",   name: "Rueda Junior",   badge: "Junior",   priceLocal: 20000, priceLlevar: 22000, price: 22000 },
@@ -460,8 +461,9 @@ const ProductsManager = {
         if (path.startsWith('data:') || path.startsWith('http://') || path.startsWith('https://')) {
             return path;
         }
-        const isInHtmlFolder = window.location.pathname.includes('/html/') || window.location.pathname.endsWith('/html');
         const cleanPath = path.replace(/^(\.\.\/|\.\/)+/, '');
+        const pathLower = (window.location.pathname || '').toLowerCase();
+        const isInHtmlFolder = pathLower.includes('/html/') || pathLower.endsWith('/html');
         return isInHtmlFolder ? `../${cleanPath}` : cleanPath;
     },
 
@@ -577,6 +579,20 @@ const ProductsManager = {
                 } else {
                     parsed.push(newProd);
                 }
+                migrated = true;
+            }
+
+            // Sincronización de catálogo: asegura que las imágenes remasterizadas se apliquen
+            // incluso si el usuario ya tenía productos guardados en localStorage
+            if (localStorage.getItem('delicius_cat_ver') !== CATALOG_VERSION) {
+                DEFAULT_PRODUCTS.forEach(defProd => {
+                    const match = parsed.find(p => p.id === defProd.id);
+                    if (match) {
+                        match.image = defProd.image;
+                        if (defProd.description) match.description = defProd.description;
+                    }
+                });
+                localStorage.setItem('delicius_cat_ver', CATALOG_VERSION);
                 migrated = true;
             }
 
@@ -717,13 +733,17 @@ const ProductsManager = {
      */
     createCardHTML(product) {
         const imgPath = this.resolveImagePath(product.image);
+        const clean = (product.image || '').replace(/^(\.\.\/|\.\/)+/, '');
+        const altPath = imgPath.startsWith('../') ? clean : `../${clean}`;
         const formattedPrice = Number(product.price).toLocaleString('es-CO');
         const badgeHTML = product.badge ? `<div class="menu-card-badge" style="position: absolute; top: 12px; right: 12px; background: var(--primary-color); color: #000; font-weight: 700; font-size: 0.75rem; padding: 4px 10px; border-radius: 50px; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">${product.badge}</div>` : '';
 
         return `
             <div class="menu-card" data-product-id="${product.id}" style="position: relative;">
                 ${badgeHTML}
-                <div class="menu-card-img contain" style="background-image: url('${imgPath}')"></div>
+                <div class="menu-card-img contain" style="background-image: url('${imgPath}')">
+                    <img src="${imgPath}" alt="${product.name}" style="display:none;" onerror="if(!this.dataset.err){this.dataset.err=1; this.parentElement.style.backgroundImage='url(${altPath})';}">
+                </div>
                 <div class="menu-card-content">
                     <h3>${product.name}</h3>
                     ${product.description ? `<p>${product.description}</p>` : ''}
